@@ -1,110 +1,129 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>大家的日本語 第1課 練習</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>第2課：單字朗讀練習</title>
   <style>
     body {
-      font-family: "Arial", sans-serif;
-      background-color: #ffeef2;
-      padding: 20px;
-      text-align: center;
+      font-family: 'Arial', 'Hiragino Kaku Gothic ProN', sans-serif;
+      background-color: #fff0f5;
+      color: #333;
+      padding: 2rem;
     }
     h1 {
-      color: #d66fa8;
+      text-align: center;
+      color: #d26fa0;
+      font-size: 2rem;
+      margin-bottom: 1rem;
     }
-    .word-box {
-      margin: 10px auto;
-      padding: 10px;
-      background: white;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
       border-radius: 12px;
-      box-shadow: 0 0 5px #ccc;
-      width: 90%;
-      max-width: 500px;
+      overflow: hidden;
+      box-shadow: 0 0 12px #e3a5c7;
     }
-    button {
-      margin: 8px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 12px;
-      background-color: #f7a9c4;
-      color: white;
-      font-size: 16px;
+    th, td {
+      padding: 0.8rem;
+      text-align: left;
+      border-bottom: 1px solid #f0cde3;
+    }
+    th {
+      background-color: #f8d8e9;
+      color: #c04583;
+    }
+    td.jp:hover {
       cursor: pointer;
+      background-color: #ffeaf5;
     }
-    button:hover {
-      background-color: #e68cb1;
+    .button-home {
+      margin-top: 2rem;
+      display: block;
+      text-align: center;
     }
-    #quiz-section {
-      margin-top: 30px;
-    }
-    .result {
+    .button-home a {
+      background-color: #ffaad4;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      text-decoration: none;
+      border-radius: 20px;
       font-weight: bold;
-      font-size: 18px;
-      margin-top: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .button-home a:hover {
+      background-color: #f98fc3;
     }
   </style>
 </head>
 <body>
-  <h1>📘 大家的日本語 第1課 練習</h1>
-  <div id="quiz-section">
-    <div class="word-box" id="question-box">
-      <div id="question">問題會出現在這裡</div>
-    </div>
-    <input type="text" id="answer" placeholder="請輸入答案">
-    <br>
-    <button onclick="submitAnswer()">送出</button>
-    <button onclick="speakQuestion()">🔊 朗讀</button>
-    <button onclick="nextQuestion()">下一題</button>
-    <div class="result" id="result"></div>
-    <div id="score"></div>
+  <h1>📘 第2課：單字＋例句朗讀練習</h1>
+  <table>
+    <tr>
+      <th>單字（日文）</th>
+      <th>中文意思</th>
+      <th>例句（日文）</th>
+      <th>中文翻譯</th>
+    </tr>
+   ocab_data = [
+    ("これ", "這個", "これは ほんです。", "這是書。"),
+    ("それ", "那個", "それは じしょです。", "那是字典。"),
+    ("あれ", "那個（遠方）", "あれは わたしの かさです。", "那是我的傘。"),
+    ("この～", "這～", "このほんは おもしろいです。", "這本書很有趣。"),
+    ("その～", "那～", "そのざっしは むずかしいです。", "那本雜誌很難。"),
+    ("あの～", "那～（遠方）", "あのひとは せんせいです。", "那位是老師。"),
+    ("ほん（本）", "書", "これは わたしの ほんです。", "這是我的書。"),
+    ("じしょ（辞書）", "字典", "じしょを かいます。", "買字典。"),
+    ("ざっし（雑誌）", "雜誌", "ざっしを よみます。", "讀雜誌。"),
+    ("しんぶん（新聞）", "報紙", "しんぶんを よみます。", "看報紙。"),
+    ("ノート", "筆記本", "ノートに かきます。", "寫在筆記本上。"),
+    ("てちょう（手帳）", "記事本", "てちょうを つかいます。", "使用記事本。"),
+    ("めいし（名刺）", "名片", "めいしを もらいました。", "收到了名片。"),
+    ("カード", "卡片", "カードで はらいます。", "用卡片付款。"),
+    ("えんぴつ（鉛筆）", "鉛筆", "えんぴつで かきます。", "用鉛筆寫。"),
+    ("ボールペン", "原子筆", "ボールペンで かきます。", "用原子筆寫。"),
+    ("シャープペンシル", "自動鉛筆", "シャープペンシルを つかいます。", "使用自動鉛筆。"),
+    ("かぎ（鍵）", "鑰匙", "かぎを なくしました。", "弄丟鑰匙了。"),
+    ("かさ（傘）", "傘", "かさを もっています。", "有帶傘。"),
+    ("かばん", "包包、書包", "かばんの なかに じしょが あります。", "包包裡有字典。"),
+    ("［カセット］テープ", "錄音帶", "テープを ききます。", "聽錄音帶。"),
+    ("テープレコーダー", "錄音機", "テープレコーダーは ふるいです。", "錄音機很舊。"),
+    ("テレビ", "電視", "テレビを みます。", "看電視。"),
+    ("ラジオ", "收音機", "ラジオを ききます。", "聽收音機。"),
+    ("カメラ", "相機", "カメラで しゃしんを とります。", "用相機拍照。"),
+    ("コンピューター", "電腦", "コンピューターを つかいます。", "使用電腦。"),
+    ("じどうしゃ（自動車）", "汽車", "じどうしゃで いきます。", "搭車去。"),
+    ("つくえ（机）", "桌子", "つくえの うえに ざっしが あります。", "桌上有雜誌。"),
+    ("いす（椅子）", "椅子", "いすに すわります。", "坐在椅子上。"),
+    ("チョコレート", "巧克力", "チョコレートを たべます。", "吃巧克力。"),
+    ("コーヒー", "咖啡", "コーヒーを のみます。", "喝咖啡。"),
+    ("えいご（英語）", "英語", "えいごを はなします。", "說英文。"),
+    ("にほんご（日本語）", "日語", "にほんごを べんきょうします。", "學日文。"),
+    ("～ご（～語）", "～語言", "ちゅうごくごを はなします。", "說中文。"),
+    ("なん（何）", "什麼", "これは なんですか。", "這是什麼？"),
+    ("そう", "是", "そうです。", "是的。"),
+    ("ちがいます", "不是", "いいえ、ちがいます。", "不，不是。"),
+    ("あのう", "嗯…", "あのう、しつもんが あります。", "嗯…我有個問題。"),
+    ("そうですか", "是這樣啊", "そうですか。", "原來如此。"),
+    ("あのう、ほんのきもちです。", "那個，只是小意思", "あのう、ほんのきもちです。", "那個，只是小意思。"),
+    ("どうぞ", "請…", "どうぞ、おはいりください。", "請進來。"),
+    ("どうも", "謝了", "どうも。", "謝謝。"),
+    ("［どうも］ありがとうございます。", "非常謝謝您。", "どうも ありがとうございます。", "非常感謝您。"),
+    ("これから おせわに なります。", "今後請多指教", "これから おせわに なります。", "今後請多多關照。"),
+    ("こちらこそ よろしく。", "我才要請您多關照", "こちらこそ よろしく おねがいします。", "我才要請您多多關照。")
+]
+  </table>
+  <div class="button-home">
+    <a href="index.html">回首頁 🏠</a>
   </div>
-  <button onclick="goHome()">🏠 回主畫面</button>
-
   <script>
-    const words = [
-      { jp: "これ", zh: "這個", ex: "これは ほんです。", zhEx: "這是書。" },
-      { jp: "それ", zh: "那個", ex: "それは じしょです。", zhEx: "那是字典。" },
-      { jp: "あれ", zh: "那個（遠方）", ex: "あれは わたしの かさです。", zhEx: "那是我的傘。" },
-      { jp: "このほんは おもしろいです。", zh: "這本書很有趣。" },
-      { jp: "そのざっしは むずかしいです。", zh: "那本雜誌很難。" },
-      { jp: "あのひとは せんせいです。", zh: "那位是老師。" },
-      { jp: "ほん", zh: "書", ex: "これは わたしの ほんです。", zhEx: "這是我的書。" },
-      { jp: "じしょ", zh: "字典", ex: "じしょを かいます。", zhEx: "買字典。" },
-      { jp: "ざっし", zh: "雜誌", ex: "ざっしを よみます。", zhEx: "讀雜誌。" },
-      { jp: "しんぶん", zh: "報紙", ex: "しんぶんを よみます。", zhEx: "看報紙。" },
-      { jp: "ノート", zh: "筆記本", ex: "ノートに かきます。", zhEx: "寫在筆記本上。" },
-      { jp: "てちょう", zh: "記事本", ex: "てちょうを つかいます。", zhEx: "使用記事本。" },
-      { jp: "めいし", zh: "名片", ex: "めいしを もらいました。", zhEx: "收到了名片。" },
-      { jp: "カード", zh: "卡片", ex: "カードで はらいます。", zhEx: "用卡片付款。" },
-      { jp: "えんぴつ", zh: "鉛筆", ex: "えんぴつで かきます。", zhEx: "用鉛筆寫。" },
-      { jp: "ボールペン", zh: "原子筆", ex: "ボールペンで かきます。", zhEx: "用原子筆寫。" },
-      { jp: "シャープペンシル", zh: "自動鉛筆", ex: "シャープペンシルを つかいます。", zhEx: "使用自動鉛筆。" },
-      { jp: "かぎ", zh: "鑰匙", ex: "かぎを なくしました。", zhEx: "弄丟鑰匙了。" },
-      { jp: "かさ", zh: "傘", ex: "かさを もっています。", zhEx: "有帶傘。" },
-      { jp: "かばん", zh: "包包", ex: "かばんの なかに じしょが あります。", zhEx: "包包裡有字典。" },
-      { jp: "テレビ", zh: "電視", ex: "テレビを みます。", zhEx: "看電視。" },
-      { jp: "ラジオ", zh: "收音機", ex: "ラジオを ききます。", zhEx: "聽收音機。" },
-      { jp: "カメラ", zh: "相機", ex: "カメラで しゃしんを とります。", zhEx: "用相機拍照。" },
-      { jp: "コンピューター", zh: "電腦", ex: "コンピューターを つかいます。", zhEx: "使用電腦。" },
-      { jp: "つくえ", zh: "桌子", ex: "つくえの うえに ざっしが あります。", zhEx: "桌上有雜誌。" },
-      { jp: "いす", zh: "椅子", ex: "いすに すわります。", zhEx: "坐在椅子上。" },
-    ];
-
-    let current = {};
-    let score = 0;
-    let total = 0;
-
-    function nextQuestion() {
-      document.getElementById("result").textContent = "";
-      document.getElementById("answer").value = "";
-
-      current = words[Math.floor(Math.random() * words.length)];
-      const showJP = Math.random() > 0.5;
-
-      document.getElementById("question").textContent = showJP ? current.jp : current.zh;
-      current.expected = showJP ? current.zh : current.jp;
+    function speakJP(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'ja-JP';
+      speechSynthesis.speak(utterance);
     }
+  </script>
+</body>
+</html>
 
-    function submitAnswer() {
-      const userAns = document.getElementById("answer").value.trim();
