@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>大家的日本語 第1課 練習</title>
+  <style>
+    body {
+      font-family: "Arial", sans-serif;
+      background-color: #ffeef2;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #d66fa8;
+    }
+    .word-box {
+      margin: 10px auto;
+      padding: 10px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 0 5px #ccc;
+      width: 90%;
+      max-width: 500px;
+    }
+    button {
+      margin: 8px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 12px;
+      background-color: #f7a9c4;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e68cb1;
+    }
+    #quiz-section {
+      margin-top: 30px;
+    }
+    .result {
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>📘 大家的日本語 第1課 練習</h1>
+  <div id="quiz-section">
+    <div class="word-box" id="question-box">
+      <div id="question">問題會出現在這裡</div>
+    </div>
+    <input type="text" id="answer" placeholder="請輸入答案">
+    <br>
+    <button onclick="submitAnswer()">送出</button>
+    <button onclick="speakQuestion()">🔊 朗讀</button>
+    <button onclick="nextQuestion()">下一題</button>
+    <div class="result" id="result"></div>
+    <div id="score"></div>
+  </div>
+  <button onclick="goHome()">🏠 回主畫面</button>
+
+  <script>
+    const words = [
+      { jp: "これ", zh: "這個", ex: "これは ほんです。", zhEx: "這是書。" },
+      { jp: "それ", zh: "那個", ex: "それは じしょです。", zhEx: "那是字典。" },
+      { jp: "あれ", zh: "那個（遠方）", ex: "あれは わたしの かさです。", zhEx: "那是我的傘。" },
+      { jp: "このほんは おもしろいです。", zh: "這本書很有趣。" },
+      { jp: "そのざっしは むずかしいです。", zh: "那本雜誌很難。" },
+      { jp: "あのひとは せんせいです。", zh: "那位是老師。" },
+      { jp: "ほん", zh: "書", ex: "これは わたしの ほんです。", zhEx: "這是我的書。" },
+      { jp: "じしょ", zh: "字典", ex: "じしょを かいます。", zhEx: "買字典。" },
+      { jp: "ざっし", zh: "雜誌", ex: "ざっしを よみます。", zhEx: "讀雜誌。" },
+      { jp: "しんぶん", zh: "報紙", ex: "しんぶんを よみます。", zhEx: "看報紙。" },
+      { jp: "ノート", zh: "筆記本", ex: "ノートに かきます。", zhEx: "寫在筆記本上。" },
+      { jp: "てちょう", zh: "記事本", ex: "てちょうを つかいます。", zhEx: "使用記事本。" },
+      { jp: "めいし", zh: "名片", ex: "めいしを もらいました。", zhEx: "收到了名片。" },
+      { jp: "カード", zh: "卡片", ex: "カードで はらいます。", zhEx: "用卡片付款。" },
+      { jp: "えんぴつ", zh: "鉛筆", ex: "えんぴつで かきます。", zhEx: "用鉛筆寫。" },
+      { jp: "ボールペン", zh: "原子筆", ex: "ボールペンで かきます。", zhEx: "用原子筆寫。" },
+      { jp: "シャープペンシル", zh: "自動鉛筆", ex: "シャープペンシルを つかいます。", zhEx: "使用自動鉛筆。" },
+      { jp: "かぎ", zh: "鑰匙", ex: "かぎを なくしました。", zhEx: "弄丟鑰匙了。" },
+      { jp: "かさ", zh: "傘", ex: "かさを もっています。", zhEx: "有帶傘。" },
+      { jp: "かばん", zh: "包包", ex: "かばんの なかに じしょが あります。", zhEx: "包包裡有字典。" },
+      { jp: "テレビ", zh: "電視", ex: "テレビを みます。", zhEx: "看電視。" },
+      { jp: "ラジオ", zh: "收音機", ex: "ラジオを ききます。", zhEx: "聽收音機。" },
+      { jp: "カメラ", zh: "相機", ex: "カメラで しゃしんを とります。", zhEx: "用相機拍照。" },
+      { jp: "コンピューター", zh: "電腦", ex: "コンピューターを つかいます。", zhEx: "使用電腦。" },
+      { jp: "つくえ", zh: "桌子", ex: "つくえの うえに ざっしが あります。", zhEx: "桌上有雜誌。" },
+      { jp: "いす", zh: "椅子", ex: "いすに すわります。", zhEx: "坐在椅子上。" },
+    ];
+
+    let current = {};
+    let score = 0;
+    let total = 0;
+
+    function nextQuestion() {
+      document.getElementById("result").textContent = "";
+      document.getElementById("answer").value = "";
+
+      current = words[Math.floor(Math.random() * words.length)];
+      const showJP = Math.random() > 0.5;
+
+      document.getElementById("question").textContent = showJP ? current.jp : current.zh;
+      current.expected = showJP ? current.zh : current.jp;
+    }
+
+    function submitAnswer() {
+      const userAns = document.getElementById("answer").value.trim();
