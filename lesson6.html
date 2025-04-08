@@ -110,11 +110,23 @@
   </div>
 
   <script>
-    function speakJP(text) {
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'ja-JP';
-      speechSynthesis.speak(utterance);
+  function speakJP(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'ja-JP';
+
+    // 嘗試找出一個日文語音
+    const voices = speechSynthesis.getVoices();
+    const jpVoice = voices.find(voice => voice.lang === 'ja-JP');
+    if (jpVoice) {
+      utterance.voice = jpVoice;
     }
-  </script>
+
+    speechSynthesis.speak(utterance);
+  }
+
+  // 為了處理某些瀏覽器第一次載入時沒有 voices 的情況
+  window.speechSynthesis.onvoiceschanged = () => {};
+</script>
+
 </body>
 </html>
