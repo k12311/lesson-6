@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>第6課：單字朗讀練習</title>
+  <style>
+    body {
+      font-family: 'Arial', 'Hiragino Kaku Gothic ProN', '游ゴシック', sans-serif;
+      background-color: #fff0f5;
+      color: #333;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      color: #d26fa0;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 12px #e3a5c7;
+    }
+    th, td {
+      padding: 0.8rem;
+      text-align: left;
+      border-bottom: 1px solid #f0cde3;
+    }
+    th {
+      background-color: #f8d8e9;
+      color: #c04583;
+    }
+    td.jp:hover {
+      cursor: pointer;
+      background-color: #ffeaf5;
+    }
+    .button-home {
+      margin-top: 2rem;
+      display: block;
+      text-align: center;
+    }
+    .button-home a {
+      background-color: #ffaad4;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      text-decoration: none;
+      border-radius: 20px;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .button-home a:hover {
+      background-color: #f98fc3;
+    }
+  </style>
+</head>
+<body>
+  <h1>📘 第6課：單字＋例句朗讀練習</h1>
+  <table>
+    <tr>
+      <th>單字（日文）</th>
+      <th>中文意思</th>
+      <th>例句（日文）</th>
+      <th>中文翻譯</th>
+    </tr>
+
+    <!-- 🔊 第6課單字＋例句 -->
+    <tr><td class="jp" onclick="speakJP('たべます')">たべます（食べます）</td><td>吃</td><td class="jp" onclick="speakJP('パンをたべます')">パンをたべます。</td><td>吃麵包。</td></tr>
+    <tr><td class="jp" onclick="speakJP('のみます')">のみます（飲みます）</td><td>喝</td><td class="jp" onclick="speakJP('みずをのみます')">みずをのみます。</td><td>喝水。</td></tr>
+    <tr><td class="jp" onclick="speakJP('すいます')">すいます（吸います）</td><td>吸（菸）</td><td class="jp" onclick="speakJP('たばこをすいます')">たばこをすいます。</td><td>抽菸。</td></tr>
+    <tr><td class="jp" onclick="speakJP('みます')">みます（見ます）</td><td>看</td><td class="jp" onclick="speakJP('テレビをみます')">テレビをみます。</td><td>看電視。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ききます')">ききます（聞きます）</td><td>聽</td><td class="jp" onclick="speakJP('おんがくをききます')">おんがくをききます。</td><td>聽音樂。</td></tr>
+    <tr><td class="jp" onclick="speakJP('よみます')">よみます（読みます）</td><td>讀</td><td class="jp" onclick="speakJP('ざっしをよみます')">ざっしをよみます。</td><td>讀雜誌。</td></tr>
+    <tr><td class="jp" onclick="speakJP('かきます')">かきます（書きます）</td><td>寫</td><td class="jp" onclick="speakJP('てがみをかきます')">てがみをかきます。</td><td>寫信。</td></tr>
+    <tr><td class="jp" onclick="speakJP('かいます')">かいます（買います）</td><td>買</td><td class="jp" onclick="speakJP('にくをかいます')">にくをかいます。</td><td>買肉。</td></tr>
+    <tr><td class="jp" onclick="speakJP('とります')">とります（撮ります）</td><td>拍（照）</td><td class="jp" onclick="speakJP('しゃしんをとります')">しゃしんをとります。</td><td>拍照片。</td></tr>
+    <tr><td class="jp" onclick="speakJP('します')">します</td><td>做</td><td class="jp" onclick="speakJP('スポーツをします')">スポーツをします。</td><td>做運動。</td></tr>
+    <tr><td class="jp" onclick="speakJP('あいます')">あいます（会います）</td><td>見面</td><td class="jp" onclick="speakJP('ともだちにあいます')">ともだちにあいます。</td><td>和朋友見面。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ごはん')">ごはん（ご飯）</td><td>飯、餐</td><td class="jp" onclick="speakJP('ごはんをたべます')">ごはんをたべます。</td><td>吃飯。</td></tr>
+    <tr><td class="jp" onclick="speakJP('あさごはん')">あさごはん（朝ご飯）</td><td>早餐</td><td class="jp" onclick="speakJP('あさごはんをたべます')">あさごはんをたべます。</td><td>吃早餐。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ひるごはん')">ひるごはん（昼ご飯）</td><td>午餐</td><td class="jp" onclick="speakJP('ひるごはんをたべます')">ひるごはんをたべます。</td><td>吃午餐。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ばんごはん')">ばんごはん（晩ご飯）</td><td>晚餐</td><td class="jp" onclick="speakJP('ばんごはんをたべます')">ばんごはんをたべます。</td><td>吃晚餐。</td></tr>
+    <tr><td class="jp" onclick="speakJP('パン')">パン</td><td>麵包</td><td class="jp" onclick="speakJP('パンをかいます')">パンをかいます。</td><td>買麵包。</td></tr>
+    <tr><td class="jp" onclick="speakJP('たまご')">たまご（卵）</td><td>蛋</td><td class="jp" onclick="speakJP('たまごをたべます')">たまごをたべます。</td><td>吃雞蛋。</td></tr>
+    <tr><td class="jp" onclick="speakJP('にく')">にく（肉）</td><td>肉</td><td class="jp" onclick="speakJP('にくをかいます')">にくをかいます。</td><td>買肉。</td></tr>
+    <tr><td class="jp" onclick="speakJP('さかな')">さかな（魚）</td><td>魚</td><td class="jp" onclick="speakJP('さかなをたべます')">さかなをたべます。</td><td>吃魚。</td></tr>
+    <tr><td class="jp" onclick="speakJP('やさい')">やさい（野菜）</td><td>蔬菜</td><td class="jp" onclick="speakJP('やさいをたべます')">やさいをたべます。</td><td>吃蔬菜。</td></tr>
+    <tr><td class="jp" onclick="speakJP('くだもの')">くだもの（果物）</td><td>水果</td><td class="jp" onclick="speakJP('くだものをかいます')">くだものをかいます。</td><td>買水果。</td></tr>
+    <tr><td class="jp" onclick="speakJP('みず')">みず（水）</td><td>水</td><td class="jp" onclick="speakJP('みずをのみます')">みずをのみます。</td><td>喝水。</td></tr>
+    <tr><td class="jp" onclick="speakJP('おちゃ')">おちゃ（お茶）</td><td>茶</td><td class="jp" onclick="speakJP('おちゃをのみます')">おちゃをのみます。</td><td>喝茶。</td></tr>
+    <tr><td class="jp" onclick="speakJP('こうちゃ')">こうちゃ（紅茶）</td><td>紅茶</td><td class="jp" onclick="speakJP('こうちゃをのみます')">こうちゃをのみます。</td><td>喝紅茶。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ぎゅうにゅう')">ぎゅうにゅう（牛乳）</td><td>牛奶</td><td class="jp" onclick="speakJP('ぎゅうにゅうをのみます')">ぎゅうにゅうをのみます。</td><td>喝牛奶。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ジュース')">ジュース</td><td>果汁</td><td class="jp" onclick="speakJP('ジュースをのみます')">ジュースをのみます。</td><td>喝果汁。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ビール')">ビール</td><td>啤酒</td><td class="jp" onclick="speakJP('ビールをのみます')">ビールをのみます。</td><td>喝啤酒。</td></tr>
+    <tr><td class="jp" onclick="speakJP('おさけ')">おさけ（お酒）</td><td>酒</td><td class="jp" onclick="speakJP('おさけをのみます')">おさけをのみます。</td><td>喝酒。</td></tr>
+    <tr><td class="jp" onclick="speakJP('てがみ')">てがみ（手紙）</td><td>信</td><td class="jp" onclick="speakJP('てがみをかきます')">てがみをかきます。</td><td>寫信。</td></tr>
+    <tr><td class="jp" onclick="speakJP('レポート')">レポート</td><td>報告</td><td class="jp" onclick="speakJP('レポートをかきます')">レポートをかきます。</td><td>寫報告。</td></tr>
+    <tr><td class="jp" onclick="speakJP('しゃしん')">しゃしん（写真）</td><td>照片</td><td class="jp" onclick="speakJP('しゃしんをとります')">しゃしんをとります。</td><td>拍照片。</td></tr>
+    <tr><td class="jp" onclick="speakJP('みせ')">みせ（店）</td><td>商店</td><td class="jp" onclick="speakJP('みせでパンをかいます')">みせでパンをかいます。</td><td>在店裡買麵包。</td></tr>
+    <tr><td class="jp" onclick="speakJP('にわ')">にわ（庭）</td><td>庭院</td><td class="jp" onclick="speakJP('にわをさんぽします')">にわをさんぽします。</td><td>在庭院散步。</td></tr>
+    <tr><td class="jp" onclick="speakJP('しゅくだい')">しゅくだい（宿題）</td><td>作業</td><td class="jp" onclick="speakJP('しゅくだいをします')">しゅくだいをします。</td><td>做作業。</td></tr>
+    <tr><td class="jp" onclick="speakJP('おはなみ')">おはなみ（お花見）</td><td>賞花</td><td class="jp" onclick="speakJP('おはなみをします')">おはなみをします。</td><td>去賞花。</td></tr>
+  </table>
+
+  <div class="button-home">
+    <a href="index.html">回首頁 🏠</a>
+  </div>
+
+  <script>
+    function speakJP(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'ja-JP';
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+</body>
+</html>
