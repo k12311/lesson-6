@@ -1,1 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>第7課：單字朗讀練習</title>
+  <style>
+    body {
+      font-family: 'Arial', 'Hiragino Kaku Gothic ProN', '游ゴシック', sans-serif;
+      background-color: #fff0f5;
+      color: #333;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      color: #d26fa0;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 12px #e3a5c7;
+    }
+    th, td {
+      padding: 0.8rem;
+      text-align: left;
+      border-bottom: 1px solid #f0cde3;
+    }
+    th {
+      background-color: #f8d8e9;
+      color: #c04583;
+    }
+    td.jp:hover {
+      cursor: pointer;
+      background-color: #ffeaf5;
+    }
+    .button-home {
+      margin-top: 2rem;
+      display: block;
+      text-align: center;
+    }
+    .button-home a {
+      background-color: #ffaad4;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      text-decoration: none;
+      border-radius: 20px;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .button-home a:hover {
+      background-color: #f98fc3;
+    }
+  </style>
+</head>
+<body>
+  <h1>📘 第7課：單字＋例句朗讀練習</h1>
+  <table>
+    <tr>
+  <th>單字（日文）</th>
+  <th>中文意思</th>
+  <th>例句（日文）</th>
+  <th>中文翻譯</th>
+</tr>
 
+<tr><td class="jp" onclick="speakJP('あげます')">あげます</td><td>給（他人）</td><td class="jp" onclick="speakJP('わたしは ともだちに はなを あげます')">わたしは ともだちに はなを あげます。</td><td>我送花給朋友。</td></tr>
+<tr><td class="jp" onclick="speakJP('もらいます')">もらいます</td><td>收到</td><td class="jp" onclick="speakJP('わたしは せんせいに じしょを もらいました')">わたしは せんせいに じしょを もらいました。</td><td>我從老師那裡收到字典。</td></tr>
+<tr><td class="jp" onclick="speakJP('かします')">かします（貸します）</td><td>借出</td><td class="jp" onclick="speakJP('たなかさんに おかねを かします')">たなかさんに おかねを かします。</td><td>借錢給田中先生。</td></tr>
+<tr><td class="jp" onclick="speakJP('かります')">かります（借ります）</td><td>借入</td><td class="jp" onclick="speakJP('たなかさんに ほんを かります')">たなかさんに ほんを かります。</td><td>向田中先生借書。</td></tr>
+<tr><td class="jp" onclick="speakJP('おしえます')">おしえます（教えます）</td><td>教</td><td class="jp" onclick="speakJP('せんせいは にほんごを おしえます')">せんせいは にほんごを おしえます。</td><td>老師教日文。</td></tr>
+<tr><td class="jp" onclick="speakJP('ならいます')">ならいます（習います）</td><td>學習</td><td class="jp" onclick="speakJP('わたしは にほんごを ならいます')">わたしは にほんごを ならいます。</td><td>我學日文。</td></tr>
+<tr><td class="jp" onclick="speakJP('かけます')">かけます（電話を～）</td><td>打（電話）</td><td class="jp" onclick="speakJP('いもうとに でんわを かけます')">いもうとに でんわを かけます。</td><td>打電話給妹妹。</td></tr>
+<tr><td class="jp" onclick="speakJP('て')">て（手）</td><td>手</td><td class="jp" onclick="speakJP('てで かきます')">てで かきます。</td><td>用手寫。</td></tr>
+<tr><td class="jp" onclick="speakJP('はし')">はし</td><td>筷子</td><td class="jp" onclick="speakJP('はしで ごはんを たべます')">はしで ごはんを たべます。</td><td>用筷子吃飯。</td></tr>
+<tr><td class="jp" onclick="speakJP('スプーン')">スプーン</td><td>湯匙</td><td class="jp" onclick="speakJP('スプーンで スープを のみます')">スプーンで スープを のみます。</td><td>用湯匙喝湯。</td></tr>
+<tr><td class="jp" onclick="speakJP('フォーク')">フォーク</td><td>叉子</td><td class="jp" onclick="speakJP('フォークで パスタを たべます')">フォークで パスタを たべます。</td><td>用叉子吃義大利麵。</td></tr>
+<tr><td class="jp" onclick="speakJP('はさみ')">はさみ</td><td>剪刀</td><td class="jp" onclick="speakJP('はさみで かみを きります')">はさみで かみを きります。</td><td>用剪刀剪紙。</td></tr>
+<tr><td class="jp" onclick="speakJP('ファックス')">ファックス</td><td>傳真</td><td class="jp" onclick="speakJP('しりょうを ファックスで おくります')">しりょうを ファックスで おくります。</td><td>用傳真機傳資料。</td></tr>
+<tr><td class="jp" onclick="speakJP('ワープロ')">ワープロ</td><td>文字處理機</td><td class="jp" onclick="speakJP('ワープロで レポートを つくります')">ワープロで レポートを つくります。</td><td>用文字處理機寫報告。</td></tr>
+<tr><td class="jp" onclick="speakJP('パソコン')">パソコン</td><td>電腦</td><td class="jp" onclick="speakJP('パソコンで メールを おくります')">パソコンで メールを おくります。</td><td>用電腦寄信。</td></tr>
+<tr><td class="jp" onclick="speakJP('パンチ')">パンチ</td><td>打孔機</td><td class="jp" onclick="speakJP('しょるいを パンチで あなを あけます')">しょるいを パンチで あなを あけます。</td><td>用打孔機打洞。</td></tr>
+<tr><td class="jp" onclick="speakJP('けしゴム')">けしゴム</td><td>橡皮擦</td><td class="jp" onclick="speakJP('けしゴムで まちがいを けします')">けしゴムで まちがいを けします。</td><td>用橡皮擦擦掉錯誤。</td></tr>
+<tr><td class="jp" onclick="speakJP('プレゼント')">プレゼント</td><td>禮物</td><td class="jp" onclick="speakJP('ともだちに プレゼントを あげました')">ともだちに プレゼントを あげました。</td><td>送朋友禮物。</td></tr>
+<tr><td class="jp" onclick="speakJP('にもつ')">にもつ（荷物）</td><td>行李</td><td class="jp" onclick="speakJP('にもつを でんしゃに のせます')">にもつを でんしゃに のせます。</td><td>把行李放上電車。</td></tr>
+<tr><td class="jp" onclick="speakJP('おかね')">おかね（お金）</td><td>錢</td><td class="jp" onclick="speakJP('ぎんこうで おかねを おろします')">ぎんこうで おかねを おろします。</td><td>在銀行提款。</td></tr>
+<tr><td class="jp" onclick="speakJP('きっぷ')">きっぷ（切符）</td><td>票</td><td class="jp" onclick="speakJP('えきで きっぷを かいます')">えきで きっぷを かいます。</td><td>在車站買票。</td></tr>
+<tr><td class="jp" onclick="speakJP('クリスマス')">クリスマス</td><td>聖誕節</td><td class="jp" onclick="speakJP('クリスマスに プレゼントを おくります')">クリスマスに プレゼントを おくります。</td><td>聖誕節送禮物。</td></tr>
+<tr><td class="jp" onclick="speakJP('ちち')">ちち（父）</td><td>（我）父親</td><td class="jp" onclick="speakJP('ちちは こうこうの せんせいです')">ちちは こうこうの せんせいです。</td><td>我爸爸是高中老師。</td></tr>
+<tr><td class="jp" onclick="speakJP('はは')">はは（母）</td><td>（我）母親</td><td class="jp" onclick="speakJP('ははは びょういんで はたらいています')">ははは びょういんで はたらいています。</td><td>我媽媽在醫院工作。</td></tr>
+<tr><td class="jp" onclick="speakJP('おとうさん')">おとうさん（お父さん）</td><td>父親（敬語）</td><td class="jp" onclick="speakJP('おとうさんは どちらですか')">おとうさんは どちらですか。</td><td>你父親是哪一位？</td></tr>
+<tr><td class="jp" onclick="speakJP('おかあさん')">おかあさん（お母さん）</td><td>母親（敬語）</td><td class="jp" onclick="speakJP('おかあさんは なんさいですか')">おかあさんは なんさいですか。</td><td>你母親幾歲？</td></tr>
+
+
+  <div class="button-home">
+    <a href="index.html">回首頁 🏠</a>
+  </div>
+
+  <script>
+  function speakJP(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'ja-JP';
+
+    // 嘗試找出一個日文語音
+    const voices = speechSynthesis.getVoices();
+    const jpVoice = voices.find(voice => voice.lang === 'ja-JP');
+    if (jpVoice) {
+      utterance.voice = jpVoice;
+    }
+
+    speechSynthesis.speak(utterance);
+  }
+
+  // 為了處理某些瀏覽器第一次載入時沒有 voices 的情況
+  window.speechSynthesis.onvoiceschanged = () => {};
+</script>
+
+</body>
+</html>
