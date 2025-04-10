@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>第1課：單字朗讀練習</title>
+  <title>第3課：單字朗讀練習</title>
   <style>
     body {
       font-family: 'Arial', 'Hiragino Kaku Gothic ProN', sans-serif;
@@ -58,37 +58,55 @@
   </style>
 </head>
 <body>
-  <h1>📘 第1課：單字＋例句朗讀練習</h1>
+  <h1>📘 第3課：單字＋例句朗讀練習</h1>
   <table>
-    <tr>
-      <th>單字（日文）</th>
-      <th>中文意思</th>
-      <th>例句（日文）</th>
-      <th>中文翻譯</th>
-    </tr>
+   <tr>
+  <th>單字（日文）</th>
+  <th>中文意思</th>
+  <th>例句（日文）</th>
+  <th>中文翻譯</th>
+</tr>
 
-    <!-- 🔊 以下是第1課單字＋例句 -->
-    <tr><td class="jp" onclick="speakJP('わたし')">わたし</td><td>我</td><td class="jp" onclick="speakJP('わたしは がくせいです')">わたしは がくせいです。</td><td>我是學生。</td></tr>
-    <tr><td class="jp" onclick="speakJP('あなた')">あなた</td><td>你</td><td class="jp" onclick="speakJP('あなたは せんせいですか')">あなたは せんせいですか。</td><td>你是老師嗎？</td></tr>
-    <tr><td class="jp" onclick="speakJP('あのひと')">あのひと（あの人）</td><td>那個人、他、她</td><td class="jp" onclick="speakJP('あのひとは いしゃです')">あのひとは いしゃです。</td><td>那個人是醫生。</td></tr>
-    <tr><td class="jp" onclick="speakJP('みなさん')">みなさん</td><td>各位、大家</td><td class="jp" onclick="speakJP('みなさん、こんにちは')">みなさん、こんにちは。</td><td>各位好。</td></tr>
-    <tr><td class="jp" onclick="speakJP('～さん')">～さん</td><td>～先生、～小姐</td><td class="jp" onclick="speakJP('たなかさんは せんせいです')">たなかさんは せんせいです。</td><td>田中先生是老師。</td></tr>
-    <tr><td class="jp" onclick="speakJP('～ちゃん')">～ちゃん</td><td>～（用於小孩）</td><td class="jp" onclick="speakJP('さくらちゃんは こどもです')">さくらちゃんは こどもです。</td><td>小櫻是小孩。</td></tr>
-    <tr><td class="jp" onclick="speakJP('～くん')">～くん</td><td>～君（用於男孩）</td><td class="jp" onclick="speakJP('たろうくんは がくせいです')">たろうくんは がくせいです。</td><td>太郎是學生。</td></tr>
-    <tr><td class="jp" onclick="speakJP('～じん')">～じん</td><td>～人（表國籍）</td><td class="jp" onclick="speakJP('わたしは にほんじんです')">わたしは にほんじんです。</td><td>我是日本人。</td></tr>
-    <tr><td class="jp" onclick="speakJP('せんせい')">せんせい（先生）</td><td>老師</td><td class="jp" onclick="speakJP('せんせいは にほんごのせんせいです')">せんせいは にほんごのせんせいです。</td><td>老師是日文老師。</td></tr>
-    <tr><td class="jp" onclick="speakJP('きょうし')">きょうし（教師）</td><td>教師</td><td class="jp" onclick="speakJP('わたしは きょうしです')">わたしは きょうしです。</td><td>我是教師。</td></tr>
-    <tr><td class="jp" onclick="speakJP('がくせい')">がくせい（学生）</td><td>學生</td><td class="jp" onclick="speakJP('わたしは がくせいです')">わたしは がくせいです。</td><td>我是學生。</td></tr>
-    <tr><td class="jp" onclick="speakJP('かいしゃいん')">かいしゃいん（会社員）</td><td>公司職員</td><td class="jp" onclick="speakJP('たなかさんは かいしゃいんです')">たなかさんは かいしゃいんです。</td><td>田中先生是公司職員。</td></tr>
-    <tr><td class="jp" onclick="speakJP('しゃいん')">しゃいん（社員）</td><td>～公司的職員</td><td class="jp" onclick="speakJP('IMCのしゃいんです')">IMCのしゃいんです。</td><td>我是 IMC 的職員。</td></tr>
-    <tr><td class="jp" onclick="speakJP('ぎんこういん')">ぎんこういん（銀行員）</td><td>銀行職員</td><td class="jp" onclick="speakJP('わたしは ぎんこういんです')">わたしは ぎんこういんです。</td><td>我是銀行職員。</td></tr>
-    <tr><td class="jp" onclick="speakJP('いしゃ')">いしゃ（医者）</td><td>醫生</td><td class="jp" onclick="speakJP('あのひとは いしゃです')">あのひとは いしゃです。</td><td>那個人是醫生。</td></tr>
-    <tr><td class="jp" onclick="speakJP('けんきゅうしゃ')">けんきゅうしゃ（研究者）</td><td>研究人員</td><td class="jp" onclick="speakJP('わたしは けんきゅうしゃです')">わたしは けんきゅうしゃです。</td><td>我是研究人員。</td></tr>
-    <tr><td class="jp" onclick="speakJP('エンジニア')">エンジニア</td><td>工程師</td><td class="jp" onclick="speakJP('わたしは エンジニアです')">わたしは エンジニアです。</td><td>我是工程師。</td></tr>
-    <tr><td class="jp" onclick="speakJP('だいがく')">だいがく（大学）</td><td>大學</td><td class="jp" onclick="speakJP('ABCだいがくの がくせいです')">ABCだいがくの がくせいです。</td><td>我是ABC大學的學生。</td></tr>
-    <tr><td class="jp" onclick="speakJP('びょういん')">びょういん（病院）</td><td>醫院</td><td class="jp" onclick="speakJP('びょういんのいしゃです')">びょういんのいしゃです。</td><td>我是醫院的醫生。</td></tr>
-    <tr><td class="jp" onclick="speakJP('だれ')">だれ（どなた）</td><td>誰（哪位）</td><td class="jp" onclick="speakJP('あのひとは どなたですか')">あのひとは どなたですか。</td><td>那位是誰？</td></tr>
-    <!-- ✨ 你可依此格式繼續加入剩下單字 ✨ -->
+<tr><td class="jp" onclick="speakJP('ここ')">ここ</td><td>這裡</td><td class="jp" onclick="speakJP('ここは きょうしつです')">ここは きょうしつです。</td><td>這裡是教室。</td></tr>
+<tr><td class="jp" onclick="speakJP('そこ')">そこ</td><td>那裡（近對方）</td><td class="jp" onclick="speakJP('そこは しょくどうです')">そこは しょくどうです。</td><td>那裡是餐廳。</td></tr>
+<tr><td class="jp" onclick="speakJP('あそこ')">あそこ</td><td>那裡（遠雙方）</td><td class="jp" onclick="speakJP('あそこは かいぎしつです')">あそこは かいぎしつです。</td><td>那裡是會議室。</td></tr>
+<tr><td class="jp" onclick="speakJP('どこ')">どこ</td><td>哪裡</td><td class="jp" onclick="speakJP('トイレは どこですか')">トイレは どこですか。</td><td>洗手間在哪裡？</td></tr>
+<tr><td class="jp" onclick="speakJP('こちら')">こちら</td><td>這邊（禮貌）</td><td class="jp" onclick="speakJP('こちらは じむしょです')">こちらは じむしょです。</td><td>這邊是辦公室。</td></tr>
+<tr><td class="jp" onclick="speakJP('そちら')">そちら</td><td>那邊（禮貌）</td><td class="jp" onclick="speakJP('そちらは ロビーです')">そちらは ロビーです。</td><td>那邊是大廳。</td></tr>
+<tr><td class="jp" onclick="speakJP('あちら')">あちら</td><td>那邊（禮貌）</td><td class="jp" onclick="speakJP('あちらは かいぎしつです')">あちらは かいぎしつです。</td><td>那邊是會議室。</td></tr>
+<tr><td class="jp" onclick="speakJP('どちら')">どちら</td><td>哪邊（禮貌）</td><td class="jp" onclick="speakJP('トイレは どちらですか')">トイレは どちらですか。</td><td>洗手間在哪邊？</td></tr>
+<tr><td class="jp" onclick="speakJP('きょうしつ')">きょうしつ</td><td>教室</td><td class="jp" onclick="speakJP('ここは きょうしつです')">ここは きょうしつです。</td><td>這裡是教室。</td></tr>
+<tr><td class="jp" onclick="speakJP('しょくどう')">しょくどう</td><td>食堂</td><td class="jp" onclick="speakJP('そこは しょくどうです')">そこは しょくどうです。</td><td>那裡是食堂。</td></tr>
+<tr><td class="jp" onclick="speakJP('じむしょ')">じむしょ</td><td>辦公室</td><td class="jp" onclick="speakJP('こちらは じむしょです')">こちらは じむしょです。</td><td>這邊是辦公室。</td></tr>
+<tr><td class="jp" onclick="speakJP('かいぎしつ')">かいぎしつ</td><td>會議室</td><td class="jp" onclick="speakJP('あそこは かいぎしつです')">あそこは かいぎしつです。</td><td>那邊是會議室。</td></tr>
+<tr><td class="jp" onclick="speakJP('うけつけ')">うけつけ</td><td>接待處</td><td class="jp" onclick="speakJP('うけつけは 1かいです')">うけつけは 1かいです。</td><td>接待處在一樓。</td></tr>
+<tr><td class="jp" onclick="speakJP('ロビー')">ロビー</td><td>大廳</td><td class="jp" onclick="speakJP('そちらは ロビーです')">そちらは ロビーです。</td><td>那邊是大廳。</td></tr>
+<tr><td class="jp" onclick="speakJP('へや')">へや</td><td>房間</td><td class="jp" onclick="speakJP('ここは わたしのへやです')">ここは わたしのへやです。</td><td>這裡是我的房間。</td></tr>
+<tr><td class="jp" onclick="speakJP('トイレ')">トイレ</td><td>洗手間</td><td class="jp" onclick="speakJP('トイレは どこですか')">トイレは どこですか。</td><td>洗手間在哪裡？</td></tr>
+<tr><td class="jp" onclick="speakJP('かいだん')">かいだん</td><td>樓梯</td><td class="jp" onclick="speakJP('かいだんは あそこです')">かいだんは あそこです。</td><td>樓梯在那邊。</td></tr>
+<tr><td class="jp" onclick="speakJP('エレベーター')">エレベーター</td><td>電梯</td><td class="jp" onclick="speakJP('エレベーターは こちらです')">エレベーターは こちらです。</td><td>電梯在這邊。</td></tr>
+<tr><td class="jp" onclick="speakJP('エスカレーター')">エスカレーター</td><td>手扶梯</td><td class="jp" onclick="speakJP('エスカレーターは そちらです')">エスカレーターは そちらです。</td><td>手扶梯在那邊。</td></tr>
+<tr><td class="jp" onclick="speakJP('くに')">くに</td><td>國家</td><td class="jp" onclick="speakJP('おくには どちらですか')">おくには どちらですか。</td><td>您是哪國人？</td></tr>
+<tr><td class="jp" onclick="speakJP('かいしゃ')">かいしゃ</td><td>公司</td><td class="jp" onclick="speakJP('ABCは にほんの かいしゃです')">ABCは にほんの かいしゃです。</td><td>ABC是日本的公司。</td></tr>
+<tr><td class="jp" onclick="speakJP('うち')">うち</td><td>家</td><td class="jp" onclick="speakJP('うちは とうきょうです')">うちは とうきょうです。</td><td>我家在東京。</td></tr>
+<tr><td class="jp" onclick="speakJP('でんわ')">でんわ</td><td>電話</td><td class="jp" onclick="speakJP('でんわは あそこです')">でんわは あそこです。</td><td>電話在那裡。</td></tr>
+<tr><td class="jp" onclick="speakJP('くつ')">くつ</td><td>鞋子</td><td class="jp" onclick="speakJP('このくつは いくらですか')">このくつは いくらですか。</td><td>這雙鞋多少錢？</td></tr>
+<tr><td class="jp" onclick="speakJP('ネクタイ')">ネクタイ</td><td>領帶</td><td class="jp" onclick="speakJP('ネクタイの うりばは どこですか')">ネクタイの うりばは どこですか。</td><td>領帶賣場在哪裡？</td></tr>
+<tr><td class="jp" onclick="speakJP('ワイン')">ワイン</td><td>紅酒</td><td class="jp" onclick="speakJP('このワインを ください')">このワインを ください。</td><td>請給我這瓶紅酒。</td></tr>
+<tr><td class="jp" onclick="speakJP('たばこ')">たばこ</td><td>香菸</td><td class="jp" onclick="speakJP('たばこは いくらですか')">たばこは いくらですか。</td><td>香菸多少錢？</td></tr>
+<tr><td class="jp" onclick="speakJP('うりば')">うりば</td><td>賣場</td><td class="jp" onclick="speakJP('ワインの うりばは ちかです')">ワインの うりばは ちかです。</td><td>紅酒賣場在地下樓。</td></tr>
+<tr><td class="jp" onclick="speakJP('ちか')">ちか</td><td>地下</td><td class="jp" onclick="speakJP('ちかに トイレが あります')">ちかに トイレが あります。</td><td>地下有洗手間。</td></tr>
+<tr><td class="jp" onclick="speakJP('～かい')">～かい</td><td>～樓</td><td class="jp" onclick="speakJP('うけつけは 1かいです')">うけつけは 1かいです。</td><td>接待處在一樓。</td></tr>
+<tr><td class="jp" onclick="speakJP('なんがい')">なんがい</td><td>幾樓</td><td class="jp" onclick="speakJP('うけつけは なんがいですか')">うけつけは なんがいですか。</td><td>接待處在幾樓？</td></tr>
+<tr><td class="jp" onclick="speakJP('～えん')">～えん</td><td>～日圓</td><td class="jp" onclick="speakJP('このワインは 1000えんです')">このワインは 1000えんです。</td><td>這瓶紅酒是1000日圓。</td></tr>
+<tr><td class="jp" onclick="speakJP('いくら')">いくら</td><td>多少錢</td><td class="jp" onclick="speakJP('このくつは いくらですか')">このくつは いくらですか。</td><td>這雙鞋多少錢？</td></tr>
+<tr><td class="jp" onclick="speakJP('ひゃく')">ひゃく</td><td>一百</td><td class="jp" onclick="speakJP('これは ひゃくえんです')">これは ひゃくえんです。</td><td>這是100日圓。</td></tr>
+<tr><td class="jp" onclick="speakJP('せん')">せん</td><td>一千</td><td class="jp" onclick="speakJP('これは せんえんです')">これは せんえんです。</td><td>這是1000日圓。</td></tr>
+<tr><td class="jp" onclick="speakJP('まん')">まん</td><td>一萬</td><td class="jp" onclick="speakJP('これは いちまんえんです')">これは いちまんえんです。</td><td>這是一萬日圓。</td></tr>
+<tr><td class="jp" onclick="speakJP('すみません')">すみません</td><td>對不起</td><td class="jp" onclick="speakJP('すみません、トイレは どこですか')">すみません、トイレは どこですか。</td><td>不好意思，洗手間在哪裡？</td></tr>
+<tr><td class="jp" onclick="speakJP('～をみせてください')">～をみせてください</td><td>請讓我看～</td><td class="jp" onclick="speakJP('そのネクタイを みせてください')">そのネクタイを みせてください。</td><td>請讓我看那條領帶。</td></tr>
+<tr><td class="jp" onclick="speakJP('じゃ')">じゃ</td><td>那麼</td><td class="jp" onclick="speakJP('じゃ、これをください')">じゃ、これをください。</td><td>那麼，請給我這個。</td></tr>
+<tr><td class="jp" onclick="speakJP('～をください')">～をください</td><td>請給我～</td><td class="jp" onclick="speakJP('このワインを ください')">このワインを ください。</td><td>請給我這瓶紅酒。</td></tr>
 
   </table>
 
