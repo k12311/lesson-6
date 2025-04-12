@@ -1,1 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>第12課：單字朗讀練習</title>
+  <style>
+    body {
+      font-family: 'Arial', 'Hiragino Kaku Gothic ProN', sans-serif;
+      background-color: #fff0f5;
+      color: #333;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      color: #d26fa0;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 12px #e3a5c7;
+    }
+    th, td {
+      padding: 0.8rem;
+      text-align: left;
+      border-bottom: 1px solid #f0cde3;
+    }
+    th {
+      background-color: #f8d8e9;
+      color: #c04583;
+    }
+    td.jp:hover {
+      cursor: pointer;
+      background-color: #ffeaf5;
+    }
+    .button-home {
+      margin-top: 2rem;
+      display: block;
+      text-align: center;
+    }
+    .button-home a {
+      background-color: #ffaad4;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      text-decoration: none;
+      border-radius: 20px;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .button-home a:hover {
+      background-color: #f98fc3;
+    }
+  </style>
+</head>
+<body>
+  <h1>📘 第12課：單字＋例句朗讀練習</h1>
+  <table>
+    <tr>
+      <th>單字（日文）</th>
+      <th>中文意思</th>
+      <th>例句（日文）</th>
+      <th>中文翻譯</th>
+    </tr>
+    <tr><td class="jp" onclick="speakJP('ぶたにく')">ぶたにく（豚肉）</td><td>豬肉</td><td class="jp" onclick="speakJP('ぶたにくを かいました。')">ぶたにくを かいました。</td><td>買了豬肉。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ぎゅうにく')">ぎゅうにく（牛肉）</td><td>牛肉</td><td class="jp" onclick="speakJP('ぎゅうにくの カレーが すきです。')">ぎゅうにくの カレーが すきです。</td><td>我喜歡牛肉咖哩。</td></tr>
+    <tr><td class="jp" onclick="speakJP('とりにく')">とりにく（とり肉）</td><td>雞肉</td><td class="jp" onclick="speakJP('とりにくを やきます。')">とりにくを やきます。</td><td>烤雞肉。</td></tr>
+    <tr><td class="jp" onclick="speakJP('とんかつ')">とんかつ（豚カツ）</td><td>炸豬排</td><td class="jp" onclick="speakJP('ひるごはんに とんかつを たべました。')">ひるごはんに とんかつを たべました。</td><td>午餐吃了炸豬排。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ハンバーグ')">ハンバーグ</td><td>漢堡排</td><td class="jp" onclick="speakJP('ハンバーグが にんきです。')">ハンバーグが にんきです。</td><td>漢堡排很受歡迎。</td></tr>
+    <tr><td class="jp" onclick="speakJP('さかな')">さかな（魚）</td><td>魚</td><td class="jp" onclick="speakJP('さかなを たべます。')">さかなを たべます。</td><td>吃魚。</td></tr>
+    <tr><td class="jp" onclick="speakJP('かい')">かい（貝）</td><td>貝類</td><td class="jp" onclick="speakJP('かいの りょうりが すきです。')">かいの りょうりが すきです。</td><td>我喜歡貝類料理。</td></tr>
+    <tr><td class="jp" onclick="speakJP('えび')">えび</td><td>蝦</td><td class="jp" onclick="speakJP('えびを やきました。')">えびを やきました。</td><td>烤蝦。</td></tr>
+    <tr><td class="jp" onclick="speakJP('たこ')">たこ（章魚）</td><td>章魚</td><td class="jp" onclick="speakJP('たこやきを たべました。')">たこやきを たべました。</td><td>吃了章魚燒。</td></tr>
+    <tr><td class="jp" onclick="speakJP('かに')">かに（蟹）</td><td>螃蟹</td><td class="jp" onclick="speakJP('かにりょうりが すきです。')">かにりょうりが すきです。</td><td>我喜歡螃蟹料理。</td></tr>
+    <tr><td class="jp" onclick="speakJP('うに')">うに（海胆）</td><td>海膽</td><td class="jp" onclick="speakJP('すしで うにを たべました。')">すしで うにを たべました。</td><td>吃了海膽壽司。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ねぎ')">ねぎ（葱）</td><td>蔥</td><td class="jp" onclick="speakJP('ねぎを いれますか。')">ねぎを いれますか。</td><td>要加蔥嗎？</td></tr>
+    <tr><td class="jp" onclick="speakJP('たまねぎ')">たまねぎ（玉葱）</td><td>洋蔥</td><td class="jp" onclick="speakJP('たまねぎを きります。')">たまねぎを きります。</td><td>切洋蔥。</td></tr>
+    <tr><td class="jp" onclick="speakJP('だいこん')">だいこん（大根）</td><td>白蘿蔔</td><td class="jp" onclick="speakJP('だいこんを にます。')">だいこんを にます。</td><td>煮白蘿蔔。</td></tr>
+    <tr><td class="jp" onclick="speakJP('にんじん')">にんじん</td><td>胡蘿蔔</td><td class="jp" onclick="speakJP('にんじんを きります。')">にんじんを きります。</td><td>切胡蘿蔔。</td></tr>
+    <tr><td class="jp" onclick="speakJP('なす')">なす（茄子）</td><td>茄子</td><td class="jp" onclick="speakJP('なすの てんぷらを たべました。')">なすの てんぷらを たべました。</td><td>吃了茄子天婦羅。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ごぼう')">ごぼう（牛蒡）</td><td>牛蒡</td><td class="jp" onclick="speakJP('ごぼうの きんぴらが すきです。')">ごぼうの きんぴらが すきです。</td><td>我喜歡炒牛蒡。</td></tr>
+    <tr><td class="jp" onclick="speakJP('じゃがいも')">じゃがいも</td><td>馬鈴薯</td><td class="jp" onclick="speakJP('じゃがいもで コロッケを つくります。')">じゃがいもで コロッケを つくります。</td><td>用馬鈴薯做可樂餅。</td></tr>
+    <tr><td class="jp" onclick="speakJP('きゅうり')">きゅうり</td><td>黃瓜</td><td class="jp" onclick="speakJP('きゅうりを スライスします。')">きゅうりを スライスします。</td><td>切黃瓜片。</td></tr>
+    <tr><td class="jp" onclick="speakJP('キャベツ')">キャベツ</td><td>高麗菜</td><td class="jp" onclick="speakJP('キャベツを ゆでます。')">キャベツを ゆでます。</td><td>燙高麗菜。</td></tr>
+    <tr><td class="jp" onclick="speakJP('パセリ')">パセリ</td><td>芫荽、香菜</td><td class="jp" onclick="speakJP('パセリを そえます。')">パセリを そえます。</td><td>加點香菜裝飾。</td></tr>
+    <tr><td class="jp" onclick="speakJP('りんご')">りんご（林檎）</td><td>蘋果</td><td class="jp" onclick="speakJP('りんごを むきます。')">りんごを むきます。</td><td>削蘋果皮。</td></tr>
+    <tr><td class="jp" onclick="speakJP('もも')">もも（桃）</td><td>桃子</td><td class="jp" onclick="speakJP('ももが あまいです。')">ももが あまいです。</td><td>桃子很甜。</td></tr>
+    <tr><td class="jp" onclick="speakJP('いちご')">いちご（苺）</td><td>草莓</td><td class="jp" onclick="speakJP('いちごの ケーキを たべました。')">いちごの ケーキを たべました。</td><td>吃了草莓蛋糕。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ぶどう')">ぶどう（葡萄）</td><td>葡萄</td><td class="jp" onclick="speakJP('ぶどうを ひとふさ ください。')">ぶどうを ひとふさ ください。</td><td>請給我一串葡萄。</td></tr>
+    <tr><td class="jp" onclick="speakJP('バナナ')">バナナ</td><td>香蕉</td><td class="jp" onclick="speakJP('バナナを １ほん たべました。')">バナナを １ほん たべました。</td><td>吃了一根香蕉。</td></tr>
+    <tr><td class="jp" onclick="speakJP('トマト')">トマト</td><td>番茄</td><td class="jp" onclick="speakJP('トマトを サラダに いれます。')">トマトを サラダに いれます。</td><td>把番茄加進沙拉。</td></tr>
+    <tr><td class="jp" onclick="speakJP('みかん')">みかん（蜜柑）</td><td>橘子</td><td class="jp" onclick="speakJP('みかんを むきます。')">みかんを むきます。</td><td>剝橘子。</td></tr>
+    <tr><td class="jp" onclick="speakJP('レモン')">レモン</td><td>檸檬</td><td class="jp" onclick="speakJP('レモンを しぼります。')">レモンを しぼります。</td><td>擠檸檬汁。</td></tr>
+    <tr><td class="jp" onclick="speakJP('すいか')">すいか（西瓜）</td><td>西瓜</td><td class="jp" onclick="speakJP('すいかを たべましょう。')">すいかを たべましょう。</td><td>來吃西瓜吧。</td></tr>
+    <tr><td class="jp" onclick="speakJP('かき')">かき（柿）</td><td>柿子</td><td class="jp" onclick="speakJP('あきに かきを たべます。')">あきに かきを たべます。</td><td>秋天吃柿子。</td></tr>
+    <tr><td class="jp" onclick="speakJP('メロン')">メロン</td><td>哈密瓜</td><td class="jp" onclick="speakJP('メロンは あまくて おいしいです。')">メロンは あまくて おいしいです。</td><td>哈密瓜又甜又好吃。</td></tr>
+    <tr><td class="jp" onclick="speakJP('マンゴー')">マンゴー</td><td>芒果</td><td class="jp" onclick="speakJP('マンゴーアイスを たべました。')">マンゴーアイスを たべました。</td><td>吃了芒果冰。</td></tr>
+    <tr><td class="jp" onclick="speakJP('パパイヤ')">パパイヤ</td><td>木瓜</td><td class="jp" onclick="speakJP('パパイヤは からだに いいです。')">パパイヤは からだに いいです。</td><td>木瓜對身體很好。</td></tr>
+    <tr><td class="jp" onclick="speakJP('パイナップル')">パイナップル</td><td>鳳梨</td><td class="jp" onclick="speakJP('パイナップルジュースが すきです。')">パイナップルジュースが すきです。</td><td>我喜歡鳳梨汁。</td></tr>
+
+   </table>
+  <div class="button-home">
+    <a href="index.html">回首頁 🏠</a>
+  </div>
+ <script>
+  function speakJP(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'ja-JP';
+
+    // 嘗試找出一個日文語音
+    const voices = speechSynthesis.getVoices();
+    const jpVoice = voices.find(voice => voice.lang === 'ja-JP');
+    if (jpVoice) {
+      utterance.voice = jpVoice;
+    }
+
+    speechSynthesis.speak(utterance);
+  }
+
+  // 為了處理某些瀏覽器第一次載入時沒有 voices 的情況
+  window.speechSynthesis.onvoiceschanged = () => {};
+</script>
+</body>
+</html>
 
