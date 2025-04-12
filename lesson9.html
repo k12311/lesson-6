@@ -66,74 +66,6 @@
       <th>例句（日文）</th>
       <th>中文翻譯</th>
     </tr>
-   <!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>第9課：單字朗讀練習</title>
-  <style>
-    body {
-      font-family: 'Arial', 'Hiragino Kaku Gothic ProN', sans-serif;
-      background-color: #fff0f5;
-      color: #333;
-      padding: 2rem;
-    }
-    h1 {
-      text-align: center;
-      color: #d26fa0;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 0 12px #e3a5c7;
-    }
-    th, td {
-      padding: 0.8rem;
-      text-align: left;
-      border-bottom: 1px solid #f0cde3;
-    }
-    th {
-      background-color: #f8d8e9;
-      color: #c04583;
-    }
-    td.jp:hover {
-      cursor: pointer;
-      background-color: #ffeaf5;
-    }
-    .button-home {
-      margin-top: 2rem;
-      display: block;
-      text-align: center;
-    }
-    .button-home a {
-      background-color: #ffaad4;
-      color: white;
-      padding: 0.8rem 1.5rem;
-      text-decoration: none;
-      border-radius: 20px;
-      font-weight: bold;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    .button-home a:hover {
-      background-color: #f98fc3;
-    }
-  </style>
-</head>
-<body>
-  <h1>📘 第9課：單字＋例句朗讀練習</h1>
-  <table>
-    <tr>
-      <th>單字（日文）</th>
-      <th>中文意思</th>
-      <th>例句（日文）</th>
-      <th>中文翻譯</th>
-    </tr>
       <tr><td class="jp" onclick="speakJP('わかります')">わかります</td><td>懂、明白</td><td class="jp" onclick="speakJP('にほんごが わかります。')">にほんごが わかります。</td><td>我懂日文。</td></tr>
     <tr><td class="jp" onclick="speakJP('あります')">あります</td><td>有（非生物）</td><td class="jp" onclick="speakJP('じかんが あります。')">じかんが あります。</td><td>我有時間。</td></tr>
     <tr><td class="jp" onclick="speakJP('すき')">すき（好き[な]）</td><td>喜歡</td><td class="jp" onclick="speakJP('おちゃが すきです。')">おちゃが すきです。</td><td>我喜歡茶。</td></tr>
@@ -152,8 +84,6 @@
     <tr><td class="jp" onclick="speakJP('ジャズ')">ジャズ</td><td>爵士樂</td><td class="jp" onclick="speakJP('ジャズを よく ききます。')">ジャズを よく ききます。</td><td>我常聽爵士樂。</td></tr>
     <tr><td class="jp" onclick="speakJP('コンサート')">コンサート</td><td>音樂會、演唱會</td><td class="jp" onclick="speakJP('コンサートに いきます。')">コンサートに いきます。</td><td>我要去聽演唱會。</td></tr>
 
- 
-  </table>
   <div class="button-home">
     <a href="index.html">回首頁 🏠</a>
   </div>
@@ -178,28 +108,4 @@
 </body>
 </html>
 
-  </table>
-  <div class="button-home">
-    <a href="index.html">回首頁 🏠</a>
-  </div>
- <script>
-  function speakJP(text) {
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'ja-JP';
-
-    // 嘗試找出一個日文語音
-    const voices = speechSynthesis.getVoices();
-    const jpVoice = voices.find(voice => voice.lang === 'ja-JP');
-    if (jpVoice) {
-      utterance.voice = jpVoice;
-    }
-
-    speechSynthesis.speak(utterance);
-  }
-
-  // 為了處理某些瀏覽器第一次載入時沒有 voices 的情況
-  window.speechSynthesis.onvoiceschanged = () => {};
-</script>
-</body>
-</html>
 
