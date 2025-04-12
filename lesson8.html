@@ -1,1 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>第8課：單字朗讀練習</title>
+  <style>
+    body {
+      font-family: 'Arial', 'Hiragino Kaku Gothic ProN', sans-serif;
+      background-color: #fff0f5;
+      color: #333;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      color: #d26fa0;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 12px #e3a5c7;
+    }
+    th, td {
+      padding: 0.8rem;
+      text-align: left;
+      border-bottom: 1px solid #f0cde3;
+    }
+    th {
+      background-color: #f8d8e9;
+      color: #c04583;
+    }
+    td.jp:hover {
+      cursor: pointer;
+      background-color: #ffeaf5;
+    }
+    .button-home {
+      margin-top: 2rem;
+      display: block;
+      text-align: center;
+    }
+    .button-home a {
+      background-color: #ffaad4;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      text-decoration: none;
+      border-radius: 20px;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .button-home a:hover {
+      background-color: #f98fc3;
+    }
+  </style>
+</head>
+<body>
+  <h1>📘 第8課：單字＋例句朗讀練習</h1>
+  <table>
+    <tr>
+      <th>單字（日文）</th>
+      <th>中文意思</th>
+      <th>例句（日文）</th>
+      <th>中文翻譯</th>
+    </tr>
+    <tr><td class="jp" onclick="speakJP('ハンサム')">ハンサム</td><td>英俊</td><td class="jp" onclick="speakJP('かれは ハンサムです。')">かれは ハンサムです。</td><td>他很英俊。</td></tr>
+    <tr><td class="jp" onclick="speakJP('きれい')">きれい</td><td>漂亮</td><td class="jp" onclick="speakJP('にわは きれいです。')">にわは きれいです。</td><td>庭院很漂亮。</td></tr>
+    <tr><td class="jp" onclick="speakJP('しずか')">しずか（静か[な]）</td><td>安靜</td><td class="jp" onclick="speakJP('この へやは しずかです。')">この へやは しずかです。</td><td>這個房間很安靜。</td></tr>
+    <tr><td class="jp" onclick="speakJP('にぎやか')">にぎやか</td><td>熱鬧</td><td class="jp" onclick="speakJP('まちは にぎやかです。')">まちは にぎやかです。</td><td>城市很熱鬧。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ゆうめい')">ゆうめい（有名[な]）</td><td>有名</td><td class="jp" onclick="speakJP('この がっこうは ゆうめいです。')">この がっこうは ゆうめいです。</td><td>這所學校很有名。</td></tr>
+    <tr><td class="jp" onclick="speakJP('しんせつ')">しんせつ（親切[な]）</td><td>親切</td><td class="jp" onclick="speakJP('せんせいは しんせつです。')">せんせいは しんせつです。</td><td>老師很親切。</td></tr>
+    <tr><td class="jp" onclick="speakJP('げんき')">げんき（元気[な]）</td><td>健康、有精神</td><td class="jp" onclick="speakJP('かれは げんきです。')">かれは げんきです。</td><td>他很有精神。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ひま')">ひま（暇[な]）</td><td>有空</td><td class="jp" onclick="speakJP('きょうは ひまです。')">きょうは ひまです。</td><td>今天有空。</td></tr>
+    <tr><td class="jp" onclick="speakJP('べんり')">べんり（便利[な]）</td><td>方便</td><td class="jp" onclick="speakJP('この でんしゃは べんりです。')">この でんしゃは べんりです。</td><td>這列電車很方便。</td></tr>
+    <tr><td class="jp" onclick="speakJP('すてき')">すてき</td><td>非常好、棒</td><td class="jp" onclick="speakJP('すてきな プレゼントですね。')">すてきな プレゼントですね。</td><td>真是個很棒的禮物呢。</td></tr>
+    <tr><td class="jp" onclick="speakJP('おおきい')">おおきい（大きい）</td><td>大</td><td class="jp" onclick="speakJP('この いぬは おおきいです。')">この いぬは おおきいです。</td><td>這隻狗很大。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ちいさい')">ちいさい（小さい）</td><td>小</td><td class="jp" onclick="speakJP('ちいさい こえで はなします。')">ちいさい こえで はなします。</td><td>小聲地說話。</td></tr>
+    <tr><td class="jp" onclick="speakJP('あたらしい')">あたらしい（新しい）</td><td>新</td><td class="jp" onclick="speakJP('あたらしい じてんしゃを かいました。')">あたらしい じてんしゃを かいました。</td><td>買了新腳踏車。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ふるい')">ふるい（古い）</td><td>舊</td><td class="jp" onclick="speakJP('ふるい たてものです。')">ふるい たてものです。</td><td>是棟老建築。</td></tr>
+    <tr><td class="jp" onclick="speakJP('いい')">いい（良い）</td><td>好</td><td class="jp" onclick="speakJP('この ほんは いいです。')">この ほんは いいです。</td><td>這本書很好。</td></tr>
+    <tr><td class="jp" onclick="speakJP('わるい')">わるい（悪い）</td><td>壞</td><td class="jp" onclick="speakJP('てんきが わるいです。')">てんきが わるいです。</td><td>天氣不好。</td></tr>
+    <tr><td class="jp" onclick="speakJP('あつい')">あつい（暑い・熱い）</td><td>熱（天氣／東西）</td><td class="jp" onclick="speakJP('きょうは とても あついです。')">きょうは とても あついです。</td><td>今天非常熱。</td></tr>
+    <tr><td class="jp" onclick="speakJP('さむい')">さむい（寒い）</td><td>冷（天氣）</td><td class="jp" onclick="speakJP('さむい ふゆが きました。')">さむい ふゆが きました。</td><td>寒冷的冬天到了。</td></tr>
+        <tr><td class="jp" onclick="speakJP('つめたい')">つめたい（冷たい）</td><td>冰、涼</td><td class="jp" onclick="speakJP('つめたい のみものが すきです。')">つめたい のみものが すきです。</td><td>我喜歡冰的飲料。</td></tr>
+    <tr><td class="jp" onclick="speakJP('むずかしい')">むずかしい（難しい）</td><td>難</td><td class="jp" onclick="speakJP('この しゅくだいは むずかしいです。')">この しゅくだいは むずかしいです。</td><td>這份作業很難。</td></tr>
+    <tr><td class="jp" onclick="speakJP('やさしい')">やさしい（易しい）</td><td>簡單</td><td class="jp" onclick="speakJP('この テストは やさしいです。')">この テストは やさしいです。</td><td>這個考試很簡單。</td></tr>
+    <tr><td class="jp" onclick="speakJP('たかい')">たかい（高い）</td><td>貴、高</td><td class="jp" onclick="speakJP('この ビルは とても たかいです。')">この ビルは とても たかいです。</td><td>這棟大樓很高。</td></tr>
+    <tr><td class="jp" onclick="speakJP('やすい')">やすい（安い）</td><td>便宜</td><td class="jp" onclick="speakJP('この ほんは やすいです。')">この ほんは やすいです。</td><td>這本書很便宜。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ひくい')">ひくい（低い）</td><td>低、矮</td><td class="jp" onclick="speakJP('この いすは ひくいです。')">この いすは ひくいです。</td><td>這張椅子很矮。</td></tr>
+    <tr><td class="jp" onclick="speakJP('おもしろい')">おもしろい</td><td>有趣</td><td class="jp" onclick="speakJP('この えいがは おもしろいです。')">この えいがは おもしろいです。</td><td>這部電影很有趣。</td></tr>
+    <tr><td class="jp" onclick="speakJP('おいしい')">おいしい</td><td>好吃</td><td class="jp" onclick="speakJP('この ケーキは おいしいです。')">この ケーキは おいしいです。</td><td>這個蛋糕很好吃。</td></tr>
+    <tr><td class="jp" onclick="speakJP('いそがしい')">いそがしい（忙しい）</td><td>忙</td><td class="jp" onclick="speakJP('きょうは いそがしいです。')">きょうは いそがしいです。</td><td>今天很忙。</td></tr>
+    <tr><td class="jp" onclick="speakJP('たのしい')">たのしい（楽しい）</td><td>愉快</td><td class="jp" onclick="speakJP('パーティーは たのしかったです。')">パーティーは たのしかったです。</td><td>派對很開心。</td></tr>
+    <tr><td class="jp" onclick="speakJP('しろい')">しろい（白い）</td><td>白色</td><td class="jp" onclick="speakJP('しろい シャツを きます。')">しろい シャツを きます。</td><td>穿白色襯衫。</td></tr>
+    <tr><td class="jp" onclick="speakJP('くろい')">くろい（黒い）</td><td>黑色</td><td class="jp" onclick="speakJP('くろい くつを はきます。')">くろい くつを はきます。</td><td>穿黑色鞋子。</td></tr>
+    <tr><td class="jp" onclick="speakJP('あかい')">あかい（赤い）</td><td>紅色</td><td class="jp" onclick="speakJP('あかい はなです。')">あかい はなです。</td><td>是紅色的花。</td></tr>
+    <tr><td class="jp" onclick="speakJP('あおい')">あおい（青い）</td><td>藍色</td><td class="jp" onclick="speakJP('あおい そらが きれいです。')">あおい そらが きれいです。</td><td>藍色的天空很漂亮。</td></tr>
+    <tr><td class="jp" onclick="speakJP('さくら')">さくら（桜）</td><td>櫻花</td><td class="jp" onclick="speakJP('こうえんに さくらが さきます。')">こうえんに さくらが さきます。</td><td>公園裡櫻花綻放。</td></tr>
+    <tr><td class="jp" onclick="speakJP('やま')">やま（山）</td><td>山</td><td class="jp" onclick="speakJP('やまで ハイキングを します。')">やまで ハイキングを します。</td><td>去山裡健行。</td></tr>
+    <tr><td class="jp" onclick="speakJP('まち')">まち（町）</td><td>市鎮、街道</td><td class="jp" onclick="speakJP('この まちは にぎやかです。')">この まちは にぎやかです。</td><td>這個城市很熱鬧。</td></tr>
+    <tr><td class="jp" onclick="speakJP('たべもの')">たべもの（食べ物）</td><td>食物</td><td class="jp" onclick="speakJP('にほんの たべものが すきです。')">にほんの たべものが すきです。</td><td>我喜歡日本食物。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ところ')">ところ（所）</td><td>地方</td><td class="jp" onclick="speakJP('いい ところを しっていますか。')">いい ところを しっていますか。</td><td>你知道好地方嗎？</td></tr>
+    <tr><td class="jp" onclick="speakJP('りょう')">りょう（寮）</td><td>宿舍</td><td class="jp" onclick="speakJP('だいがくの りょうに すんでいます。')">だいがくの りょうに すんでいます。</td><td>我住在大學宿舍。</td></tr>
+    <tr><td class="jp" onclick="speakJP('レストラン')">レストラン</td><td>餐廳</td><td class="jp" onclick="speakJP('レストランで ばんごはんを たべます。')">レストランで ばんごはんを たべます。</td><td>在餐廳吃晚餐。</td></tr>
+ 
+  </table>
+  <div class="button-home">
+    <a href="index.html">回首頁 🏠</a>
+  </div>
+ <script>
+  function speakJP(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'ja-JP';
+
+    // 嘗試找出一個日文語音
+    const voices = speechSynthesis.getVoices();
+    const jpVoice = voices.find(voice => voice.lang === 'ja-JP');
+    if (jpVoice) {
+      utterance.voice = jpVoice;
+    }
+
+    speechSynthesis.speak(utterance);
+  }
+
+  // 為了處理某些瀏覽器第一次載入時沒有 voices 的情況
+  window.speechSynthesis.onvoiceschanged = () => {};
+</script>
+</body>
+</html>
 
