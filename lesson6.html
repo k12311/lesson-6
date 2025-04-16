@@ -125,12 +125,22 @@
   </div>
 
   <script>
- function speakJP(text) {
-  // 先取消前一段朗讀（避免重複播放問題）
-  speechSynthesis.cancel();
+  let voicesLoaded = false;
 
-  // 等語音載入完成後再播放
-  const speakNow = () => {
+  function speakJP(text) {
+    // 若語音尚未載入，延遲執行
+    if (!voicesLoaded) {
+      window.speechSynthesis.onvoiceschanged = () => {
+        voicesLoaded = true;
+        speakJP(text); // 再次嘗試朗讀
+      };
+      speechSynthesis.getVoices(); // 觸發載入
+      return;
+    }
+
+    // 清除前一段朗讀（防止重複或無聲）
+    speechSynthesis.cancel();
+
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'ja-JP';
 
@@ -141,17 +151,21 @@
     }
 
     speechSynthesis.speak(utterance);
-  };
-
-  // 語音未載入時延遲執行
-  if (speechSynthesis.getVoices().length === 0) {
-    speechSynthesis.onvoiceschanged = speakNow;
-  } else {
-    speakNow();
   }
-}
 
+  // 頁面載入時初始化語音清單
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkVoices = () => {
+      if (speechSynthesis.getVoices().length > 0) {
+        voicesLoaded = true;
+      } else {
+        setTimeout(checkVoices, 100);
+      }
+    };
+    checkVoices();
+  });
 </script>
+
 
 </body>
 </html>
