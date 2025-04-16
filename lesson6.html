@@ -125,11 +125,15 @@
   </div>
 
   <script>
-  function speakJP(text) {
+ function speakJP(text) {
+  // 先取消前一段朗讀（避免重複播放問題）
+  speechSynthesis.cancel();
+
+  // 等語音載入完成後再播放
+  const speakNow = () => {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'ja-JP';
 
-    // 嘗試找出一個日文語音
     const voices = speechSynthesis.getVoices();
     const jpVoice = voices.find(voice => voice.lang === 'ja-JP');
     if (jpVoice) {
@@ -137,10 +141,16 @@
     }
 
     speechSynthesis.speak(utterance);
-  }
+  };
 
-  // 為了處理某些瀏覽器第一次載入時沒有 voices 的情況
-  window.speechSynthesis.onvoiceschanged = () => {};
+  // 語音未載入時延遲執行
+  if (speechSynthesis.getVoices().length === 0) {
+    speechSynthesis.onvoiceschanged = speakNow;
+  } else {
+    speakNow();
+  }
+}
+
 </script>
 
 </body>
