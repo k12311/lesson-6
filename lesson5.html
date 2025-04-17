@@ -113,11 +113,25 @@
   </div>
 
  <script>
+  let voicesLoaded = false;
+
   function speakJP(text) {
+    // 若語音尚未載入，延遲執行
+    if (!voicesLoaded) {
+      window.speechSynthesis.onvoiceschanged = () => {
+        voicesLoaded = true;
+        speakJP(text); // 再次嘗試朗讀
+      };
+      speechSynthesis.getVoices(); // 觸發載入
+      return;
+    }
+
+    // 清除前一段朗讀（防止重複或無聲）
+    speechSynthesis.cancel();
+
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'ja-JP';
 
-    // 嘗試找出一個日文語音
     const voices = speechSynthesis.getVoices();
     const jpVoice = voices.find(voice => voice.lang === 'ja-JP');
     if (jpVoice) {
@@ -127,8 +141,17 @@
     speechSynthesis.speak(utterance);
   }
 
-  // 為了處理某些瀏覽器第一次載入時沒有 voices 的情況
-  window.speechSynthesis.onvoiceschanged = () => {};
+  // 頁面載入時初始化語音清單
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkVoices = () => {
+      if (speechSynthesis.getVoices().length > 0) {
+        voicesLoaded = true;
+      } else {
+        setTimeout(checkVoices, 100);
+      }
+    };
+    checkVoices();
+  });
 </script>
 
 </body>
