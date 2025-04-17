@@ -6,11 +6,10 @@
   <title>大家的日本語 - 首頁</title>
 
   <!-- 🌸 PWA 設定 -->
+  <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon-192.png" type="image/png">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <link rel="manifest" href="manifest.json">
 
-  <!-- 🌸 CSS 樣式 -->
   <style>
     body {
       font-family: 'Arial', 'Hiragino Kaku Gothic ProN', sans-serif;
@@ -18,12 +17,15 @@
       color: #333;
       padding: 2rem;
       text-align: center;
+      margin: 0;
     }
+
     h1 {
       color: #d26fa0;
       font-size: 2.2rem;
       margin-bottom: 1.5rem;
     }
+
     .lesson-btn {
       display: inline-block;
       padding: 12px 24px;
@@ -37,17 +39,19 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       transition: background-color 0.3s, transform 0.2s;
     }
+
     .lesson-btn:hover {
       background-color: #f98fc3;
       transform: scale(1.05);
     }
+
     .footer {
       margin-top: 3rem;
       font-size: 0.9rem;
       color: #999;
     }
 
-    /* 🌸 開場畫面樣式 */
+    /* 🌸 Splash 畫面 */
     #splash {
       position: fixed;
       top: 0; left: 0;
@@ -62,13 +66,30 @@
       max-width: 80%;
       height: auto;
     }
+
+    /* 🎵 音樂按鈕 */
+    .music-btn {
+      padding: 10px 20px;
+      background-color: #ffc1d9;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      margin-top: 1rem;
+      cursor: pointer;
+    }
   </style>
 </head>
+
 <body>
-  <!-- 🌸 開場畫面 -->
+  <!-- 🌸 開場動畫 -->
   <div id="splash">
     <img src="splash-screen.png" alt="開場畫面">
   </div>
+
+  <!-- 🎵 背景音樂 -->
+  <audio id="bgm" src="bgm.mp3" loop></audio>
+  <button class="music-btn" onclick="document.getElementById('bgm').play()">🎵 播放音樂</button>
 
   <h1>🌸 大家的日本語：主選單</h1>
 
@@ -89,16 +110,16 @@
 
   <div class="footer">© 2025 Minna No Nihongo 練習平台</div>
 
-  <!-- 🌸 Splash 自動消失 -->
+  <!-- 🌸 Splash 自動隱藏 -->
   <script>
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.getElementById('splash').style.display = 'none';
-      }, 2000); // 顯示 2 秒
+      }, 2000);
     });
   </script>
 
-  <!-- 🔧 註冊 Service Worker -->
+  <!-- 🔧 註冊 Service Worker (v2) -->
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js')
@@ -108,5 +129,6 @@
   </script>
 </body>
 </html>
+
 
 
