@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>大家的日本語 - 首頁</title>
 
-  <!-- 🌸 Icon 設定 -->
+  <!-- 🌸 Icon 與 PWA 設定 -->
   <link rel="icon" href="icon-192.png" type="image/png">
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="manifest" href="manifest.json">
@@ -67,6 +67,15 @@
   </div>
 
   <div class="footer">© 2025 Minna No Nihongo 練習平台</div>
+
+  <!-- 🔧 Service Worker 註冊程式 -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(reg => console.log('✅ Service Worker 註冊成功', reg))
+        .catch(err => console.log('❌ Service Worker 註冊失敗', err));
+    }
+  </script>
 </body>
 </html>
 
