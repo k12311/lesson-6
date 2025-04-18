@@ -1,12 +1,14 @@
-const CACHE_NAME = 'nihongo-v7';
+const CACHE_VERSION = 'v3'; // << 每次更新請手動改版本號
+const CACHE_NAME = `nihongo-${CACHE_VERSION}`;
 const FILES_TO_CACHE = [
   '/',
   '/index.html',
   '/bgm.mp3',
+  '/usagi.gif',
   '/splash-screen.png',
+  '/manifest.json',
   '/icon-192.png',
   '/icon-512.png',
-  '/manifest.json',
   '/translator-practice.html',
   '/lesson1.html',
   '/lesson2.html',
@@ -24,7 +26,10 @@ const FILES_TO_CACHE = [
 
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(FILES_TO_CACHE))
+    caches.open(CACHE_NAME).then(cache => {
+      console.log('📦 快取中:', CACHE_NAME);
+      return cache.addAll(FILES_TO_CACHE);
+    })
   );
   self.skipWaiting();
 });
@@ -34,6 +39,7 @@ self.addEventListener('activate', event => {
     caches.keys().then(keys =>
       Promise.all(keys.map(key => {
         if (key !== CACHE_NAME) {
+          console.log('🧹 移除舊快取:', key);
           return caches.delete(key);
         }
       }))
@@ -47,4 +53,5 @@ self.addEventListener('fetch', event => {
     caches.match(event.request).then(resp => resp || fetch(event.request))
   );
 });
+
 
