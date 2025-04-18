@@ -82,6 +82,22 @@
     .music-btn:hover {
       background-color: #fca6c5;
     }
+
+    /* 🐰 吉伊卡哇跳舞動畫 */
+    #usagiDance {
+      width: 100px;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      display: none;
+      animation: dance 0.5s infinite alternate;
+    }
+
+    @keyframes dance {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
   </style>
 </head>
 
@@ -94,6 +110,9 @@
   <!-- 🎵 背景音樂 -->
   <audio id="bgm" src="bgm.mp3" loop></audio>
   <button class="music-btn" id="musicToggleBtn">🎵 播放音樂</button>
+
+  <!-- 🐰 跳舞的吉伊卡哇 -->
+  <img id="usagiDance" src="usagi.gif" alt="吉伊卡哇跳舞">
 
   <h1>🌸 大家的日本語：主選單</h1>
 
@@ -123,10 +142,11 @@
     });
   </script>
 
-  <!-- 🎵 音樂播放控制 -->
+  <!-- 🎵 音樂控制與吉伊卡哇動畫 -->
   <script>
     const bgm = document.getElementById("bgm");
     const btn = document.getElementById("musicToggleBtn");
+    const usagi = document.getElementById("usagiDance");
     let isPlaying = false;
 
     btn.addEventListener("click", async () => {
@@ -134,14 +154,16 @@
         if (!isPlaying) {
           await bgm.play();
           btn.textContent = "⏸️ 暫停音樂";
+          usagi.style.display = "block";
         } else {
           bgm.pause();
           btn.textContent = "🎵 播放音樂";
+          usagi.style.display = "none";
         }
         isPlaying = !isPlaying;
       } catch (e) {
-        alert("音樂播放失敗，請點擊允許播放或檢查瀏覽器設定🎧");
-        console.error("播放失敗:", e);
+        alert("⚠️ 無法播放音樂，請確認瀏覽器允許播放或音樂載入成功");
+        console.error(e);
       }
     });
   </script>
