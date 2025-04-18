@@ -1,44 +1,50 @@
-const CACHE_NAME = 'minna-v4'; // ✅ 每次更新時改這裡：v3 → v4 → v5...
-
-const urlsToCache = [
-  './',
-  './index.html',
-  './manifest.json',
-  './icon-192.png',
-  './icon-512.png',
-  './splash-screen.png',
-  './bgm.mp3'
+const CACHE_NAME = 'nihongo-v2';
+const FILES_TO_CACHE = [
+  '/',
+  '/index.html',
+  '/bgm.mp3',
+  '/splash-screen.png',
+  '/icon-192.png',
+  '/icon-512.png',
+  '/manifest.json',
+  '/translator-practice.html',
+  '/lesson1.html',
+  '/lesson2.html',
+  '/lesson3.html',
+  '/lesson4.html',
+  '/lesson5.html',
+  '/lesson6.html',
+  '/lesson7.html',
+  '/lesson8.html',
+  '/lesson9.html',
+  '/lesson10.html',
+  '/lesson11.html',
+  '/lesson12.html'
 ];
 
-// 📥 安裝時：快取重要資源
-self.addEventListener('install', (event) => {
+self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(urlsToCache);
-    })
+    caches.open(CACHE_NAME).then(cache => cache.addAll(FILES_TO_CACHE))
   );
+  self.skipWaiting();
 });
 
-// ♻️ 啟用時：刪掉舊快取版本
-self.addEventListener('activate', (event) => {
+self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName); // ❌ 刪掉舊的
-          }
-        })
-      );
-    })
+    caches.keys().then(keys =>
+      Promise.all(keys.map(key => {
+        if (key !== CACHE_NAME) {
+          return caches.delete(key);
+        }
+      }))
+    )
   );
+  self.clients.claim();
 });
 
-// 🌐 使用中：攔截 fetch，優先從快取拿
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request); // 沒有就去抓新的
-    })
+    caches.match(event.request).then(resp => resp || fetch(event.request))
   );
 });
+
