@@ -62,6 +62,7 @@
       align-items: center;
       justify-content: center;
     }
+
     #splash img {
       max-width: 80%;
       height: auto;
@@ -79,11 +80,12 @@
       cursor: pointer;
       transition: background-color 0.2s ease;
     }
+
     .music-btn:hover {
       background-color: #fca6c5;
     }
 
-    /* 🐰 吉伊卡哇跳舞動畫 */
+    /* 🐰 跳舞的吉伊卡哇 */
     #usagiDance {
       width: 100px;
       position: fixed;
@@ -98,6 +100,37 @@
       0% { transform: translateY(0); }
       100% { transform: translateY(-10px); }
     }
+
+    /* 🐞 Debug 視窗 */
+    #debugBox {
+      position: fixed;
+      top: 50px;
+      left: 10px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid #ffc1d9;
+      border-radius: 8px;
+      padding: 10px 15px;
+      font-size: 0.9rem;
+      box-shadow: 0 0 8px rgba(255, 182, 193, 0.5);
+      color: #d63384;
+      display: none;
+      z-index: 2000;
+    }
+
+    /* 🐞 Debug 切換按鈕 */
+    #toggleDebug {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background: #ffe2ec;
+      border: 1px solid #ffb6c1;
+      color: #d63384;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      z-index: 3000;
+    }
   </style>
 </head>
 
@@ -105,6 +138,16 @@
   <!-- 🌸 開場動畫 -->
   <div id="splash">
     <img src="splash-screen.png" alt="開場畫面">
+  </div>
+
+  <!-- 🐞 Debug 切換按鈕 -->
+  <button id="toggleDebug">🐞 Debug</button>
+
+  <!-- 🎯 Debug 顯示框 -->
+  <div id="debugBox">
+    🎧 音樂：<span id="debugMusic">停止</span><br>
+    🐰 圖片：<span id="debugUsagi">隱藏</span><br>
+    💃 動畫：<span id="debugAnim">未啟動</span>
   </div>
 
   <!-- 🎵 背景音樂 -->
@@ -142,30 +185,59 @@
     });
   </script>
 
-  <!-- 🎵 音樂控制與吉伊卡哇動畫 -->
+  <!-- 🎵 音樂控制與 Debug 切換 -->
   <script>
     const bgm = document.getElementById("bgm");
     const btn = document.getElementById("musicToggleBtn");
     const usagi = document.getElementById("usagiDance");
+    const debugBox = document.getElementById("debugBox");
+    const debugBtn = document.getElementById("toggleDebug");
+
     let isPlaying = false;
+    let debugVisible = false;
 
     btn.addEventListener("click", async () => {
       try {
         if (!isPlaying) {
           await bgm.play();
           btn.textContent = "⏸️ 暫停音樂";
+          usagi.style.display = "none";
+          void usagi.offsetWidth;
           usagi.style.display = "block";
         } else {
           bgm.pause();
           btn.textContent = "🎵 播放音樂";
           usagi.style.display = "none";
         }
+
+        // 🎯 更新 Debug 狀態
+        document.getElementById("debugMusic").textContent = isPlaying ? "播放中" : "停止";
+        document.getElementById("debugUsagi").textContent = isPlaying ? "顯示中" : "隱藏";
+        document.getElementById("debugAnim").textContent = isPlaying ? "已啟動" : "未啟動";
+
         isPlaying = !isPlaying;
       } catch (e) {
         alert("⚠️ 無法播放音樂，請確認瀏覽器允許播放或音樂載入成功");
         console.error(e);
       }
     });
+
+    // 🐞 Debug 按鈕切換
+    debugBtn.addEventListener('click', toggleDebug);
+
+    // Ctrl + D 鍵盤快捷開關
+    document.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.key === 'd') {
+        e.preventDefault();
+        toggleDebug();
+      }
+    });
+
+    function toggleDebug() {
+      debugVisible = !debugVisible;
+      debugBox.style.display = debugVisible ? 'block' : 'none';
+      debugBtn.textContent = debugVisible ? '❌ 關閉 Debug' : '🐞 Debug';
+    }
   </script>
 
   <!-- 🔧 註冊 Service Worker -->
@@ -178,6 +250,7 @@
   </script>
 </body>
 </html>
+
 
 
 
