@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nihongo-v2';
+const CACHE_NAME = 'nihongo-v6';
 const FILES_TO_CACHE = [
   '/',
   '/index.html',
