@@ -77,6 +77,10 @@
       font-size: 1rem;
       margin-top: 1rem;
       cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    .music-btn:hover {
+      background-color: #fca6c5;
     }
   </style>
 </head>
@@ -89,23 +93,23 @@
 
   <!-- 🎵 背景音樂 -->
   <audio id="bgm" src="bgm.mp3" loop></audio>
-  <button class="music-btn" onclick="document.getElementById('bgm').play()">🎵 播放音樂</button>
+  <button class="music-btn" id="musicToggleBtn">🎵 播放音樂</button>
 
   <h1>🌸 大家的日本語：主選單</h1>
 
   <div class="lesson-links">
-    <a href="lesson1.html" class="lesson-btn">第1課朗讀練習</a>
-    <a href="lesson2.html" class="lesson-btn">第2課朗讀練習</a>
-    <a href="lesson3.html" class="lesson-btn">第3課朗讀練習</a>
-    <a href="lesson4.html" class="lesson-btn">第4課朗讀練習</a>
-    <a href="lesson5.html" class="lesson-btn">第5課朗讀練習</a>
-    <a href="lesson6.html" class="lesson-btn">第6課朗讀練習</a>
-    <a href="lesson7.html" class="lesson-btn">第7課朗讀練習</a>
-    <a href="lesson8.html" class="lesson-btn">第8課朗讀練習</a>
-    <a href="lesson9.html" class="lesson-btn">第9課朗讀練習</a>
-    <a href="lesson10.html" class="lesson-btn">第10課朗讀練習</a>
-    <a href="lesson11.html" class="lesson-btn">第11課朗讀練習</a>
-    <a href="lesson12.html" class="lesson-btn">第12課朗讀練習</a>
+    <a href="translator-practice.html?day=1" class="lesson-btn">第1課朗讀練習</a>
+    <a href="translator-practice.html?day=2" class="lesson-btn">第2課朗讀練習</a>
+    <a href="translator-practice.html?day=3" class="lesson-btn">第3課朗讀練習</a>
+    <a href="translator-practice.html?day=4" class="lesson-btn">第4課朗讀練習</a>
+    <a href="translator-practice.html?day=5" class="lesson-btn">第5課朗讀練習</a>
+    <a href="translator-practice.html?day=6" class="lesson-btn">第6課朗讀練習</a>
+    <a href="translator-practice.html?day=7" class="lesson-btn">第7課朗讀練習</a>
+    <a href="translator-practice.html?day=8" class="lesson-btn">第8課朗讀練習</a>
+    <a href="translator-practice.html?day=9" class="lesson-btn">第9課朗讀練習</a>
+    <a href="translator-practice.html?day=10" class="lesson-btn">第10課朗讀練習</a>
+    <a href="translator-practice.html?day=11" class="lesson-btn">第11課朗讀練習</a>
+    <a href="translator-practice.html?day=12" class="lesson-btn">第12課朗讀練習</a>
   </div>
 
   <div class="footer">© 2025 Minna No Nihongo 練習平台</div>
@@ -119,7 +123,30 @@
     });
   </script>
 
-  <!-- 🔧 註冊 Service Worker (v2) -->
+  <!-- 🎵 音樂播放控制 -->
+  <script>
+    const bgm = document.getElementById("bgm");
+    const btn = document.getElementById("musicToggleBtn");
+    let isPlaying = false;
+
+    btn.addEventListener("click", async () => {
+      try {
+        if (!isPlaying) {
+          await bgm.play();
+          btn.textContent = "⏸️ 暫停音樂";
+        } else {
+          bgm.pause();
+          btn.textContent = "🎵 播放音樂";
+        }
+        isPlaying = !isPlaying;
+      } catch (e) {
+        alert("音樂播放失敗，請點擊允許播放或檢查瀏覽器設定🎧");
+        console.error("播放失敗:", e);
+      }
+    });
+  </script>
+
+  <!-- 🔧 註冊 Service Worker -->
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js')
