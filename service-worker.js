@@ -1,22 +1,44 @@
-self.addEventListener('install', (e) => {
-  console.log('🔧 Service Worker 安裝完成');
-  e.waitUntil(
-    caches.open('minna-cache').then((cache) => {
-      return cache.addAll([
-        './',
-        './index.html',
-        './icon-192.png',
-        './icon-512.png'
-        // 也可加入其他頁面如 lesson1.html...
-      ]);
+const CACHE_NAME = 'minna-v3'; // ✅ 每次更新時改這裡：v3 → v4 → v5...
+
+const urlsToCache = [
+  './',
+  './index.html',
+  './manifest.json',
+  './icon-192.png',
+  './icon-512.png',
+  './splash-screen.png',
+  './bgm.mp3'
+];
+
+// 📥 安裝時：快取重要資源
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(urlsToCache);
     })
   );
 });
 
-self.addEventListener('fetch', (e) => {
-  e.respondWith(
-    caches.match(e.request).then((response) => {
-      return response || fetch(e.request);
+// ♻️ 啟用時：刪掉舊快取版本
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          if (cacheName !== CACHE_NAME) {
+            return caches.delete(cacheName); // ❌ 刪掉舊的
+          }
+        })
+      );
+    })
+  );
+});
+
+// 🌐 使用中：攔截 fetch，優先從快取拿
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request); // 沒有就去抓新的
     })
   );
 });
