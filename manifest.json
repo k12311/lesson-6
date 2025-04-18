@@ -1,6 +1,10 @@
 {
-  "name": "大家的日本語",
-  "short_name": "にほんご",
+  "name": "大家的日本語練習",
+  "short_name": "日語練習",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#fff0f5",
+  "theme_color": "#ffaad4",
   "icons": [
     {
       "src": "icon-192.png",
@@ -12,10 +16,6 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#fff0f5",
-  "theme_color": "#ffaad4",
-  "orientation": "portrait"
+  ]
 }
+
