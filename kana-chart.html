@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>平假名來源對照表</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>平假名漢字來源表</title>
   <style>
     body {
       background-color: #fff0f5;
@@ -38,7 +38,6 @@
     }
     td:hover {
       background-color: #fff5f9;
-      cursor: pointer;
     }
     .footer {
       margin-top: 2rem;
@@ -63,10 +62,10 @@
   </style>
 </head>
 <body>
-  <h1>🌸 平假名的漢字來源對照表</h1>
+  <h1>🌸 平假名的漢字來源對照表（點擊朗讀）</h1>
 
   <table id="kanaTable">
-    <tr><th>萬葉假名（漢字）</th><th>平假名</th><th>片假名</th><th>羅馬拼音</th><th>中文音譯</th></tr>
+    <tr><th>漢字</th><th>平假名</th><th>片假名</th><th>羅馬拼音</th><th>中文音譯</th></tr>
     <tr><td>安</td><td>あ</td><td>ア</td><td>a</td><td>啊</td></tr>
     <tr><td>以</td><td>い</td><td>イ</td><td>i</td><td>咿</td></tr>
     <tr><td>宇</td><td>う</td><td>ウ</td><td>u</td><td>嗚</td></tr>
@@ -116,7 +115,6 @@
   </table>
 
   <a href="index.html" class="home-link">🏠 回首頁</a>
-
   <div class="footer">© 2025 Minna no Nihongo</div>
 
   <script>
@@ -133,16 +131,14 @@
       document.querySelectorAll("#kanaTable tr").forEach(row => {
         const kanaCell = row.cells[1];
         if (kanaCell && kanaCell.textContent.trim()) {
+          kanaCell.style.cursor = 'pointer';
           kanaCell.addEventListener("click", () => speakKana(kanaCell.textContent.trim()));
         }
       });
     }
 
-    // 初次語音載入完成後再綁定
     if (speechSynthesis.onvoiceschanged !== undefined) {
-      speechSynthesis.onvoiceschanged = () => {
-        bindKanaClicks();
-      };
+      speechSynthesis.onvoiceschanged = () => bindKanaClicks();
     } else {
       bindKanaClicks();
     }
