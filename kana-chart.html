@@ -121,13 +121,17 @@
 
   <script>
   function speakKana(text) {
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'ja-JP';
-    const voices = speechSynthesis.getVoices();
-    const jpVoice = voices.find(v => v.lang === 'ja-JP');
-    if (jpVoice) utterance.voice = jpVoice;
-    speechSynthesis.speak(utterance);
-  }
+  speechSynthesis.cancel(); // ✅ 解決連點無聲問題
+
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'ja-JP';
+
+  const voices = speechSynthesis.getVoices();
+  const jpVoice = voices.find(v => v.lang === 'ja-JP');
+  if (jpVoice) utterance.voice = jpVoice;
+
+  speechSynthesis.speak(utterance);
+}
 
   function bindKanaClicks() {
     document.querySelectorAll("#kanaTable tr").forEach(row => {
@@ -159,3 +163,4 @@
 </div>
 </body>
 </html>
+
