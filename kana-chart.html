@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <m<!DOCTYPE html>
+<html lang="ja">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>平假名來源對照表</title>
@@ -38,6 +41,7 @@
     }
     td:hover {
       background-color: #fff5f9;
+      cursor: pointer;
     }
     .footer {
       margin-top: 2rem;
@@ -64,7 +68,7 @@
 <body>
   <h1>🌸 平假名的漢字來源對照表</h1>
 
-  <table>
+  <table id="kanaTable">
     <tr><th>萬葉假名（漢字）</th><th>平假名</th><th>片假名</th><th>羅馬拼音</th><th>中文音譯</th></tr>
     <tr><td>安</td><td>あ</td><td>ア</td><td>a</td><td>啊</td></tr>
     <tr><td>以</td><td>い</td><td>イ</td><td>i</td><td>咿</td></tr>
@@ -117,6 +121,23 @@
   <a href="index.html" class="home-link">🏠 回首頁</a>
 
   <div class="footer">© 2025 Minna no Nihongo</div>
+
+  <script>
+    function speakKana(text) {
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'ja-JP';
+        speechSynthesis.speak(utterance);
+      }
+    }
+
+    document.querySelectorAll("#kanaTable tr").forEach(row => {
+      const kanaCell = row.cells[1];
+      if (kanaCell && kanaCell.textContent.trim()) {
+        kanaCell.addEventListener("click", () => speakKana(kanaCell.textContent.trim()));
+      }
+    });
+  </script>
 </body>
 </html>
 
