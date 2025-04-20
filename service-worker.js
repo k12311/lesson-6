@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v7'; // << 每次更新請手動改版本號
+const CACHE_VERSION = 'v8'; // << 每次更新請手動改版本號
 const CACHE_NAME = `nihongo-${CACHE_VERSION}`;
 const FILES_TO_CACHE = [
   '/',
