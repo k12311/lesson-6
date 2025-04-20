@@ -1,5 +1,6 @@
-const CACHE_VERSION = 'v8'; // << 每次更新請手動改版本號
+const CACHE_VERSION = 'v9'; // << 每次更新請改版本號
 const CACHE_NAME = `nihongo-${CACHE_VERSION}`;
+
 const FILES_TO_CACHE = [
   '/',
   '/index.html',
@@ -9,7 +10,6 @@ const FILES_TO_CACHE = [
   '/manifest.json',
   '/icon-192.png',
   '/icon-512.png',
-  '/translator-practice.html',
   '/lesson1.html',
   '/lesson2.html',
   '/lesson3.html',
@@ -26,13 +26,43 @@ const FILES_TO_CACHE = [
 
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      console.log('📦 快取中:', CACHE_NAME);
-      return cache.addAll(FILES_TO_CACHE);
+    caches.open(CACHE_NAME).then(async cache => {
+      console.log('📦 開始快取:', CACHE_NAME);
+      for (const file of FILES_TO_CACHE) {
+        try {
+          await cache.add(file);
+          console.log('✅ 快取成功:', file);
+        } catch (e) {
+          console.warn('⚠️ 快取失敗:', file, e);
+        }
+      }
     })
   );
-  self.skipWaiting();
+  self.skipWaiting(); // ⏩ 安裝完就跳過等待
 });
+
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(keys.map(key => {
+        if (key !== CACHE_NAME) {
+          console.log('🧹 移除舊快取:', key);
+          return caches.delete(key);
+        }
+      }))
+    )
+  );
+  self.clients.claim(); // ⛳ 立即控制所有頁面
+});
+
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request).then(resp => {
+      return resp || fetch(event.request);
+    })
+  );
+});
+
 
 self.addEventListener('activate', event => {
   event.waitUntil(
