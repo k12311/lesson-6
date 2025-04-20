@@ -156,12 +156,48 @@
   }
 </script>
 
-<!-- 🔈 測試朗讀按鈕 -->
+<!-- 🔈 測試朗讀 + 自動朗讀按鈕 -->
 <div>
   <button onclick="speakKana('あ')" style="margin-top: 1.5rem; padding: 10px 20px; background-color: #ffc1d9; color: white; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer;">
     🔈 測試朗讀「あ」
   </button>
+  <button onclick="toggleAutoReading()" style="margin-left: 10px; margin-top: 1.5rem; padding: 10px 20px; background-color: #a4d4ff; color: white; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer;">
+    ▶️ 自動朗讀全部平假名
+  </button>
 </div>
+
+<script>
+  let autoReading = false;
+  let autoReadIndex = 0;
+  let autoReadTimeout;
+
+  function startAutoReading() {
+    const kanaCells = Array.from(document.querySelectorAll("#kanaTable tr td:nth-child(2)"));
+    if (autoReadIndex < kanaCells.length) {
+      const text = kanaCells[autoReadIndex].textContent.trim();
+      if (text) speakKana(text);
+      autoReadIndex++;
+      autoReadTimeout = setTimeout(startAutoReading, 1200);
+    } else {
+      autoReading = false;
+      autoReadIndex = 0;
+      document.querySelector("button[onclick='toggleAutoReading()']").textContent = '▶️ 自動朗讀全部平假名';
+    }
+  }
+
+  function toggleAutoReading() {
+    if (!autoReading) {
+      autoReading = true;
+      autoReadIndex = 0;
+      document.querySelector("button[onclick='toggleAutoReading()']").textContent = '⏹️ 停止朗讀';
+      startAutoReading();
+    } else {
+      clearTimeout(autoReadTimeout);
+      autoReading = false;
+      autoReadIndex = 0;
+      document.querySelector("button[onclick='toggleAutoReading()']").textContent = '▶️ 自動朗讀全部平假名';
+    }
+  }
+</script>
 </body>
 </html>
-
