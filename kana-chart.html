@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>平假名來源對照表</title>
   <style>
@@ -116,104 +116,88 @@
   </table>
 
   <a href="index.html" class="home-link">🏠 回首頁</a>
-
   <div class="footer">© 2025 Minna no Nihongo</div>
 
+  <!-- 🔈 自動朗讀按鈕 -->
+  <div>
+    <button onclick="toggleAutoReading()" style="margin-top: 1.5rem; padding: 10px 20px; background-color: #a4d4ff; color: white; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer;">
+      ▶️ 自動朗讀全部平假名
+    </button>
+  </div>
+
   <script>
-  function speakKana(text) {
-  speechSynthesis.cancel();
+    let autoReading = false;
+    let autoReadIndex = 0;
+    let autoReadTimeout;
 
-  // 💡 強制系統當作新內容（用不可見字元）
-  const utterance = new SpeechSynthesisUtterance(text + String.fromCharCode(8203));
-  utterance.lang = 'ja-JP';
-
-  const voices = speechSynthesis.getVoices();
-  const jpVoice = voices.find(v => v.lang === 'ja-JP');
-  if (jpVoice) utterance.voice = jpVoice;
-
-  speechSynthesis.speak(utterance);
-}
-
-  function bindKanaClicks() {
-    document.querySelectorAll("#kanaTable tr").forEach(row => {
-      const kanaCell = row.cells[1];
-      if (kanaCell && kanaCell.textContent.trim()) {
-        kanaCell.style.cursor = 'pointer';
-        kanaCell.addEventListener("click", () => speakKana(kanaCell.textContent.trim()));
-      }
-    });
-  }
-
-  // 最穩定的語音載入與綁定方式
-  if (typeof speechSynthesis !== 'undefined') {
-    if (speechSynthesis.getVoices().length === 0) {
-      speechSynthesis.onvoiceschanged = () => {
-        bindKanaClicks();
-      };
-    } else {
-      bindKanaClicks();
+    function speakKana(text) {
+      speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text + String.fromCharCode(8203));
+      utterance.lang = 'ja-JP';
+      const voices = speechSynthesis.getVoices();
+      const jpVoice = voices.find(v => v.lang === 'ja-JP');
+      if (jpVoice) utterance.voice = jpVoice;
+      speechSynthesis.speak(utterance);
     }
-  }
-  const kanaCells = Array.from(document.querySelectorAll("#kanaTable tr td:nth-child(2)"));
-  kanaCells.forEach(cell => cell.style.backgroundColor = '');
-  
-  function highlightCurrent(index) {
-    kanaCells.forEach((cell, i) => {
-      cell.style.backgroundColor = i === index ? '#fff3cd' : '';
-    });
-  }
-</script>
 
-<!-- 🔈 測試朗讀 + 自動朗讀按鈕 -->
-<div>
-    <button onclick="toggleAutoReading()" style="margin-left: 10px; margin-top: 1.5rem; padding: 10px 20px; background-color: #a4d4ff; color: white; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer;">
-    ▶️ 自動朗讀全部平假名
-  </button>
-</div>
+    function highlightCurrent(index) {
+      const kanaCells = document.querySelectorAll("#kanaTable tr td:nth-child(2)");
+      kanaCells.forEach((cell, i) => {
+        cell.style.backgroundColor = i === index ? '#fff3cd' : '';
+      });
+    }
 
-<script>
-  let autoReading = false;
-  let autoReadIndex = 0;
-  let autoReadTimeout;
-
-  function startAutoReading() {
-    const kanaCells = Array.from(document.querySelectorAll("#kanaTable tr td:nth-child(2)"));
-    if (autoReadIndex < kanaCells.length) {
-      const text = kanaCells[autoReadIndex].textContent.trim();
-      if (text) {
-        speakKana(text);
-        highlightCurrent(autoReadIndex);
+    function startAutoReading() {
+      const kanaCells = document.querySelectorAll("#kanaTable tr td:nth-child(2)");
+      if (autoReadIndex < kanaCells.length) {
+        const text = kanaCells[autoReadIndex].textContent.trim();
+        if (text) {
+          speakKana(text);
+          highlightCurrent(autoReadIndex);
+        }
+        autoReadIndex++;
+        autoReadTimeout = setTimeout(startAutoReading, 1200);
+      } else {
+        stopAutoReading();
       }
-      autoReadIndex++;
-      autoReadTimeout = setTimeout(startAutoReading, 1200);
-    } else {
+    }
+
+    function stopAutoReading() {
+      clearTimeout(autoReadTimeout);
       autoReading = false;
       autoReadIndex = 0;
       highlightCurrent(-1);
       document.querySelector("button[onclick='toggleAutoReading()']").textContent = '▶️ 自動朗讀全部平假名';
     }
-  }
-    } else {
-      autoReading = false;
-      autoReadIndex = 0;
-      document.querySelector("button[onclick='toggleAutoReading()']").textContent = '▶️ 自動朗讀全部平假名';
-    }
-  }
 
-  function toggleAutoReading() {
-    if (!autoReading) {
-      autoReading = true;
-      autoReadIndex = 0;
-      document.querySelector("button[onclick='toggleAutoReading()']").textContent = '⏹️ 停止朗讀';
-      startAutoReading();
-    } else {
-      clearTimeout(autoReadTimeout);
-      autoReading = false;
-      autoReadIndex = 0;
-      document.querySelector("button[onclick='toggleAutoReading()']").textContent = '▶️ 自動朗讀全部平假名';
+    function toggleAutoReading() {
+      if (!autoReading) {
+        autoReading = true;
+        autoReadIndex = 0;
+        document.querySelector("button[onclick='toggleAutoReading()']").textContent = '⏹️ 停止朗讀';
+        startAutoReading();
+      } else {
+        stopAutoReading();
+      }
     }
-  }
-</script>
+
+    function bindKanaClicks() {
+      document.querySelectorAll("#kanaTable tr").forEach(row => {
+        const kanaCell = row.cells[1];
+        if (kanaCell && kanaCell.textContent.trim()) {
+          kanaCell.style.cursor = 'pointer';
+          kanaCell.addEventListener("click", () => speakKana(kanaCell.textContent.trim()));
+        }
+      });
+    }
+
+    // 確保語音載入後才綁定
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = () => bindKanaClicks();
+    } else {
+      bindKanaClicks();
+    }
+  </script>
 </body>
 </html>
 
