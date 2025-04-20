@@ -139,14 +139,23 @@
     });
   }
 
-  // ✅ 等待語音載入（延遲 500ms）
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      speechSynthesis.getVoices(); // 強制觸發語音載入
+  // 最穩定的語音載入與綁定方式
+  if (typeof speechSynthesis !== 'undefined') {
+    if (speechSynthesis.getVoices().length === 0) {
+      speechSynthesis.onvoiceschanged = () => {
+        bindKanaClicks();
+      };
+    } else {
       bindKanaClicks();
-    }, 500);
-  });
+    }
+  }
 </script>
+
+<!-- 🔈 測試朗讀按鈕 -->
+<div>
+  <button onclick="speakKana('あ')" style="margin-top: 1.5rem; padding: 10px 20px; background-color: #ffc1d9; color: white; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer;">
+    🔈 測試朗讀「あ」
+  </button>
+</div>
 </body>
 </html>
-
