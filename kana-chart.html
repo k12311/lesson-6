@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <m<!DOCTYPE html>
-<html lang="ja">
-<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>平假名來源對照表</title>
@@ -124,20 +121,31 @@
 
   <script>
     function speakKana(text) {
-      if ('speechSynthesis' in window) {
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'ja-JP';
-        speechSynthesis.speak(utterance);
-      }
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'ja-JP';
+      const voices = speechSynthesis.getVoices();
+      const jpVoice = voices.find(v => v.lang === 'ja-JP');
+      if (jpVoice) utterance.voice = jpVoice;
+      speechSynthesis.speak(utterance);
     }
 
-    document.querySelectorAll("#kanaTable tr").forEach(row => {
-      const kanaCell = row.cells[1];
-      if (kanaCell && kanaCell.textContent.trim()) {
-        kanaCell.addEventListener("click", () => speakKana(kanaCell.textContent.trim()));
-      }
-    });
+    function bindKanaClicks() {
+      document.querySelectorAll("#kanaTable tr").forEach(row => {
+        const kanaCell = row.cells[1];
+        if (kanaCell && kanaCell.textContent.trim()) {
+          kanaCell.addEventListener("click", () => speakKana(kanaCell.textContent.trim()));
+        }
+      });
+    }
+
+    // 初次語音載入完成後再綁定
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = () => {
+        bindKanaClicks();
+      };
+    } else {
+      bindKanaClicks();
+    }
   </script>
 </body>
 </html>
-
