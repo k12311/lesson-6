@@ -121,9 +121,10 @@
 
   <script>
   function speakKana(text) {
-  speechSynthesis.cancel(); // ✅ 解決連點無聲問題
+  speechSynthesis.cancel();
 
-  const utterance = new SpeechSynthesisUtterance(text);
+  // 💡 強制系統當作新內容（用不可見字元）
+  const utterance = new SpeechSynthesisUtterance(text + String.fromCharCode(8203));
   utterance.lang = 'ja-JP';
 
   const voices = speechSynthesis.getVoices();
