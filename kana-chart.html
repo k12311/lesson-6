@@ -119,11 +119,21 @@
   <div class="footer">© 2025 Minna no Nihongo</div>
 
   <!-- 🔈 自動朗讀按鈕 -->
-  <div>
-    <button onclick="toggleAutoReading()" style="margin-top: 1.5rem; padding: 10px 20px; background-color: #a4d4ff; color: white; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer;">
-      ▶️ 自動朗讀全部平假名
-    </button>
-  </div>
+  <div style="margin-top: 2rem;">
+  <label for="speedSelect" style="margin-right: 10px; font-weight: bold;">朗讀速度：</label>
+  <select id="speedSelect" style="padding: 6px 10px; border-radius: 8px;">
+    <option value="600">快</option>
+    <option value="1200" selected>中</option>
+    <option value="1800">慢</option>
+  </select>
+</div>
+
+<div>
+  <button onclick="toggleAutoReading()" style="margin-top: 1.5rem; padding: 10px 20px; background-color: #a4d4ff; color: white; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer;">
+    ▶️ 自動朗讀全部平假名
+  </button>
+</div>
+
 
   <script>
     let autoReading = false;
