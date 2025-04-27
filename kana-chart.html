@@ -135,79 +135,84 @@
 </div>
 
 
-  <script>
-    let autoReading = false;
-    let autoReadIndex = 0;
-    let autoReadTimeout;
+ <script>
+  let autoReading = false;
+  let autoReadIndex = 0;
+  let autoReadTimeout;
 
-    function speakKana(text) {
-      speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text + String.fromCharCode(8203));
-      utterance.lang = 'ja-JP';
-      const voices = speechSynthesis.getVoices();
-      const jpVoice = voices.find(v => v.lang === 'ja-JP');
-      if (jpVoice) utterance.voice = jpVoice;
-      speechSynthesis.speak(utterance);
-    }
+  function speakKana(text) {
+    speechSynthesis.getVoices(); // 強制載入語音
+    speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text + String.fromCharCode(8203));
+    utterance.lang = 'ja-JP';
+    const voices = speechSynthesis.getVoices();
+    const jpVoice = voices.find(v => v.lang === 'ja-JP');
+    if (jpVoice) utterance.voice = jpVoice;
+    speechSynthesis.speak(utterance);
+  }
 
-    function highlightCurrent(index) {
-      const kanaCells = document.querySelectorAll("#kanaTable tr td:nth-child(2)");
-      kanaCells.forEach((cell, i) => {
-        cell.style.backgroundColor = i === index ? '#fff3cd' : '';
-      });
-    }
+  function highlightCurrent(index) {
+    const kanaCells = document.querySelectorAll("#kanaTable tr td:nth-child(2)");
+    kanaCells.forEach((cell, i) => {
+      cell.style.backgroundColor = i === index ? '#fff3cd' : '';
+    });
+  }
 
-    function startAutoReading() {
-      const kanaCells = document.querySelectorAll("#kanaTable tr td:nth-child(2)");
-      if (autoReadIndex < kanaCells.length) {
-        const text = kanaCells[autoReadIndex].textContent.trim();
-        if (text) {
-          speakKana(text);
-          highlightCurrent(autoReadIndex);
-        }
-        autoReadIndex++;
-        autoReadTimeout = setTimeout(startAutoReading, 1200);
-      } else {
-        stopAutoReading();
+  function startAutoReading() {
+    const kanaCells = document.querySelectorAll("#kanaTable tr td:nth-child(2)");
+    if (autoReadIndex < kanaCells.length) {
+      const text = kanaCells[autoReadIndex].textContent.trim();
+      if (text) {
+        speakKana(text);
+        highlightCurrent(autoReadIndex);
       }
-    }
-
-    function stopAutoReading() {
-      clearTimeout(autoReadTimeout);
-      autoReading = false;
-      autoReadIndex = 0;
-      highlightCurrent(-1);
-      document.querySelector("button[onclick='toggleAutoReading()']").textContent = '▶️ 自動朗讀全部平假名';
-    }
-
-    function toggleAutoReading() {
-      if (!autoReading) {
-        autoReading = true;
-        autoReadIndex = 0;
-        document.querySelector("button[onclick='toggleAutoReading()']").textContent = '⏹️ 停止朗讀';
-        startAutoReading();
-      } else {
-        stopAutoReading();
-      }
-    }
-
-    function bindKanaClicks() {
-      document.querySelectorAll("#kanaTable tr").forEach(row => {
-        const kanaCell = row.cells[1];
-        if (kanaCell && kanaCell.textContent.trim()) {
-          kanaCell.style.cursor = 'pointer';
-          kanaCell.addEventListener("click", () => speakKana(kanaCell.textContent.trim()));
-        }
-      });
-    }
-
-    // 確保語音載入後才綁定
-    if (speechSynthesis.onvoiceschanged !== undefined) {
-      speechSynthesis.onvoiceschanged = () => bindKanaClicks();
+      autoReadIndex++;
+      const selectedSpeed = parseInt(document.getElementById("speedSelect").value, 10) || 1200;
+      autoReadTimeout = setTimeout(startAutoReading, selectedSpeed);
     } else {
-      bindKanaClicks();
+      stopAutoReading();
     }
-  </script>
+  }
+
+  function stopAutoReading() {
+    clearTimeout(autoReadTimeout);
+    autoReading = false;
+    autoReadIndex = 0;
+    highlightCurrent(-1);
+    document.querySelector("button[onclick='toggleAutoReading()']").textContent = '▶️ 自動朗讀全部平假名';
+  }
+
+  function toggleAutoReading() {
+    if (!autoReading) {
+      autoReading = true;
+      autoReadIndex = 0;
+      document.querySelector("button[onclick='toggleAutoReading()']").textContent = '⏹️ 停止朗讀';
+      startAutoReading();
+    } else {
+      stopAutoReading();
+    }
+  }
+
+  function bindKanaClicks() {
+    document.querySelectorAll("#kanaTable tr").forEach(row => {
+      const kanaCell = row.cells[1];
+      if (kanaCell && kanaCell.textContent.trim()) {
+        kanaCell.style.cursor = 'pointer';
+        kanaCell.addEventListener("click", () => {
+          speakKana(kanaCell.textContent.trim());
+        });
+      }
+    });
+  }
+
+  // 強制載入聲音 & 綁定點擊
+  speechSynthesis.getVoices();
+  bindKanaClicks();
+  if (speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = () => bindKanaClicks();
+  }
+</script>
+
 </body>
 </html>
 
