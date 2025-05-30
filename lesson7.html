@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>第7課：單字朗讀練習</title>
+  <title>第6課：單字朗讀練習</title>
   <style>
     body {
       font-family: 'Arial', 'Hiragino Kaku Gothic ProN', '游ゴシック', sans-serif;
@@ -24,6 +24,7 @@
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 0 12px #e3a5c7;
+      margin-bottom: 2rem;
     }
     th, td {
       padding: 0.8rem;
@@ -38,9 +39,32 @@
       cursor: pointer;
       background-color: #ffeaf5;
     }
+    .highlight {
+      background-color: #fff2b2 !important;
+    }
+    .controls {
+      text-align: center;
+      margin: 1rem 0 2rem;
+    }
+    .controls button {
+      background-color: #ffaad4;
+      border: none;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 20px;
+      margin: 0 0.5rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      cursor: pointer;
+    }
+    .controls button:hover {
+      background-color: #f98fc3;
+    }
+    .controls button:disabled {
+      background-color: #f4c7dc;
+      cursor: default;
+    }
     .button-home {
-      margin-top: 2rem;
-      display: block;
       text-align: center;
     }
     .button-home a {
@@ -59,6 +83,7 @@
 </head>
 <body>
   <h1>📘 第7課：單字＋例句朗讀練習</h1>
+
   <table>
     <tr>
       <th>單字（日文）</th>
@@ -66,99 +91,170 @@
       <th>例句（日文）</th>
       <th>中文翻譯</th>
     </tr>
+<tr><td class="jp" onclick="speakJP('きります')">きります（切ります）</td><td>剪、切</td><td class="jp" onclick="speakJP('はさみで かみを きります。')">はさみで かみを きります。</td><td>用剪刀剪紙。</td></tr>
+<tr><td class="jp" onclick="speakJP('おくります')">おくります（送ります）</td><td>寄、送</td><td class="jp" onclick="speakJP('ともだちに プレゼントを おくります。')">ともだちに プレゼントを おくります。</td><td>送禮物給朋友。</td></tr>
+<tr><td class="jp" onclick="speakJP('あげます')">あげます</td><td>給</td><td class="jp" onclick="speakJP('せんせいに おかしを あげます。')">せんせいに おかしを あげます。</td><td>給老師點心。</td></tr>
+<tr><td class="jp" onclick="speakJP('もらいます')">もらいます</td><td>得到</td><td class="jp" onclick="speakJP('ともだちに はなを もらいます。')">ともだちに はなを もらいます。</td><td>收到朋友送的花。</td></tr>
+<tr><td class="jp" onclick="speakJP('かします')">かします（貸します）</td><td>借給</td><td class="jp" onclick="speakJP('ともだちに おかねを かします。')">ともだちに おかねを かします。</td><td>借錢給朋友。</td></tr>
+<tr><td class="jp" onclick="speakJP('かります')">かります（借ります）</td><td>借</td><td class="jp" onclick="speakJP('ともだちから ほんを かります。')">ともだちから ほんを かります。</td><td>向朋友借書。</td></tr>
+<tr><td class="jp" onclick="speakJP('おしえます')">おしえます（教えます）</td><td>教、告訴</td><td class="jp" onclick="speakJP('にほんごを おしえます。')">にほんごを おしえます。</td><td>教日文。</td></tr>
+<tr><td class="jp" onclick="speakJP('ならいます')">ならいます（習います）</td><td>學習</td><td class="jp" onclick="speakJP('ピアノを ならいます。')">ピアノを ならいます。</td><td>學鋼琴。</td></tr>
+<tr><td class="jp" onclick="speakJP('かけます')">かけます</td><td>打［電話］</td><td class="jp" onclick="speakJP('でんわを かけます。')">でんわを かけます。</td><td>打電話。</td></tr>
+<tr><td class="jp" onclick="speakJP('て')">て（手）</td><td>手</td><td class="jp" onclick="speakJP('てで たべます。')">てで たべます。</td><td>用手吃。</td></tr>
+<tr><td class="jp" onclick="speakJP('はし')">はし</td><td>筷子</td><td class="jp" onclick="speakJP('はしで ごはんを たべます。')">はしで ごはんを たべます。</td><td>用筷子吃飯。</td></tr>
+<tr><td class="jp" onclick="speakJP('スプーン')">スプーン</td><td>湯匙</td><td class="jp" onclick="speakJP('スプーンで スープを のみます。')">スプーンで スープを のみます。</td><td>用湯匙喝湯。</td></tr>
+<tr><td class="jp" onclick="speakJP('ナイフ')">ナイフ</td><td>刀子</td><td class="jp" onclick="speakJP('ナイフで にくを きります。')">ナイフで にくを きります。</td><td>用刀子切肉。</td></tr>
+<tr><td class="jp" onclick="speakJP('フォーク')">フォーク</td><td>叉子</td><td class="jp" onclick="speakJP('フォークで パスタを たべます。')">フォークで パスタを たべます。</td><td>用叉子吃義大利麵。</td></tr>
+<tr><td class="jp" onclick="speakJP('はさみ')">はさみ</td><td>剪刀</td><td class="jp" onclick="speakJP('はさみで かみを きります。')">はさみで かみを きります。</td><td>用剪刀剪紙。</td></tr>
+<tr><td class="jp" onclick="speakJP('パソコン')">パソコン</td><td>個人電腦</td><td class="jp" onclick="speakJP('まいにち パソコンを つかいます。')">まいにち パソコンを つかいます。</td><td>每天使用電腦。</td></tr>
+<tr><td class="jp" onclick="speakJP('ケータイ')">ケータイ</td><td>手機</td><td class="jp" onclick="speakJP('ケータイで でんわを かけます。')">ケータイで でんわを かけます。</td><td>用手機打電話。</td></tr>
+<tr><td class="jp" onclick="speakJP('メール')">メール</td><td>電子郵件</td><td class="jp" onclick="speakJP('ともだちに メールを おくります。')">ともだちに メールを おくります。</td><td>寄電子郵件給朋友。</td></tr>
+<tr><td class="jp" onclick="speakJP('ねんがじょう')">ねんがじょう（年賀状）</td><td>賀年卡</td><td class="jp" onclick="speakJP('ねんがじょうを かきます。')">ねんがじょうを かきます。</td><td>寫賀年卡。</td></tr>
+<tr><td class="jp" onclick="speakJP('パンチ')">パンチ</td><td>打洞機</td><td class="jp" onclick="speakJP('パンチで あなを あけます。')">パンチで あなを あけます。</td><td>用打洞機打洞。</td></tr>
+<tr><td class="jp" onclick="speakJP('ホッチキス')">ホッチキス</td><td>釘書機</td><td class="jp" onclick="speakJP('ホッチキスで とじます。')">ホッチキスで とじます。</td><td>用釘書機裝訂。</td></tr>
+<tr><td class="jp" onclick="speakJP('セロテープ')">セロテープ</td><td>透明膠帶</td><td class="jp" onclick="speakJP('セロテープで はります。')">セロテープで はります。</td><td>用膠帶貼上。</td></tr>
+<tr><td class="jp" onclick="speakJP('けしゴム')">けしゴム（消しゴム）</td><td>橡皮擦</td><td class="jp" onclick="speakJP('まちがえを けしゴムで けします。')">まちがえを けしゴムで けします。</td><td>用橡皮擦擦錯誤。</td></tr>
+<tr><td class="jp" onclick="speakJP('かみ')">かみ（紙）</td><td>紙</td><td class="jp" onclick="speakJP('かみに じを かきます。')">かみに じを かきます。</td><td>在紙上寫字。</td></tr>
+<tr><td class="jp" onclick="speakJP('はな')">はな（花）</td><td>花</td><td class="jp" onclick="speakJP('はなを かいます。')">はなを かいます。</td><td>買花。</td></tr>
+<tr><td class="jp" onclick="speakJP('シャツ')">シャツ</td><td>襯衫</td><td class="jp" onclick="speakJP('あたらしい シャツを かいます。')">あたらしい シャツを かいます。</td><td>買新的襯衫。</td></tr>
+<tr><td class="jp" onclick="speakJP('プレゼント')">プレゼント</td><td>禮物</td><td class="jp" onclick="speakJP('たんじょうびに プレゼントを あげます。')">たんじょうびに プレゼントを あげます。</td><td>生日時送禮物。</td></tr>
+<tr><td class="jp" onclick="speakJP('にもつ')">にもつ（荷物）</td><td>行李、包裹</td><td class="jp" onclick="speakJP('おおきい にもつが あります。')">おおきい にもつが あります。</td><td>有大件行李。</td></tr>
+<tr><td class="jp" onclick="speakJP('おかね')">おかね（お金）</td><td>錢</td><td class="jp" onclick="speakJP('おかねが いります。')">おかねが いります。</td><td>需要錢。</td></tr>
+<tr><td class="jp" onclick="speakJP('きっぷ')">きっぷ（切符）</td><td>車票、入場券</td><td class="jp" onclick="speakJP('きっぷを かいます。')">きっぷを かいます。</td><td>買票。</td></tr>
+<tr><td class="jp" onclick="speakJP('クリスマス')">クリスマス</td><td>聖誕節</td><td class="jp" onclick="speakJP('クリスマスに パーティーを します。')">クリスマスに パーティーを します。</td><td>聖誕節辦派對。</td></tr>
+  <tr><td class="jp" onclick="speakJP('ちち')">ちち（父）</td><td>家父</td><td class="jp" onclick="speakJP('これは ちちです。')">これは ちちです。</td><td>這是我爸爸。</td></tr>
+<tr><td class="jp" onclick="speakJP('はは')">はは（母）</td><td>家母</td><td class="jp" onclick="speakJP('ははは せんせいです。')">ははは せんせいです。</td><td>我媽媽是老師。</td></tr>
+<tr><td class="jp" onclick="speakJP('おとうさん')">おとうさん（お父さん）</td><td>（別人的）父親，也可稱呼自己父親</td><td class="jp" onclick="speakJP('おとうさんは いま いえに います。')">おとうさんは いま いえに います。</td><td>爸爸現在在家。</td></tr>
+<tr><td class="jp" onclick="speakJP('おかあさん')">おかあさん（お母さん）</td><td>（別人的）母親，也可稱呼自己母親</td><td class="jp" onclick="speakJP('おかあさんは しごとに いきました。')">おかあさんは しごとに いきました。</td><td>媽媽去工作了。</td></tr>
+<tr><td class="jp" onclick="speakJP('もう')">もう</td><td>已經</td><td class="jp" onclick="speakJP('もう ごはんを たべました。')">もう ごはんを たべました。</td><td>已經吃過飯了。</td></tr>
+<tr><td class="jp" onclick="speakJP('まだ')">まだ</td><td>尚未、還沒</td><td class="jp" onclick="speakJP('まだ たべていません。')">まだ たべていません。</td><td>還沒吃。</td></tr>
+<tr><td class="jp" onclick="speakJP('これから')">これから</td><td>從現在起（要去做某事）</td><td class="jp" onclick="speakJP('これから かいものに いきます。')">これから かいものに いきます。</td><td>接下來要去買東西。</td></tr>
+<tr><td class="jp" onclick="speakJP('いらっしゃい')">いらっしゃい。</td><td>歡迎。</td><td class="jp" onclick="speakJP('いらっしゃい。どうぞ。')">いらっしゃい。どうぞ。</td><td>歡迎，請進。</td></tr>
+<tr><td class="jp" onclick="speakJP('どうぞおあがりください')">どうぞおあがりください。</td><td>請進。</td><td class="jp" onclick="speakJP('どうぞ おあがりください。')">どうぞ おあがりください。</td><td>請進。</td></tr>
+<tr><td class="jp" onclick="speakJP('しつれいします')">しつれいします（失礼します）</td><td>打擾了。</td><td class="jp" onclick="speakJP('おじゃまします。しつれいします。')">おじゃまします。しつれいします。</td><td>打擾了，失禮了。</td></tr>
+<tr><td class="jp" onclick="speakJP('〜は いかがですか')">〜は いかがですか。</td><td>你覺得〜怎麼樣？</td><td class="jp" onclick="speakJP('おちゃは いかがですか。')">おちゃは いかがですか。</td><td>要不要喝杯茶呢？</td></tr>
+<tr><td class="jp" onclick="speakJP('いただきます')">いただきます。</td><td>我開動了（用於用餐前）</td><td class="jp" onclick="speakJP('いただきます。')">いただきます。</td><td>我開動了。</td></tr>
+<tr><td class="jp" onclick="speakJP('ごちそうさまでした')">ごちそうさまでした。</td><td>我吃飽了／謝謝招待（用於用餐後）</td><td class="jp" onclick="speakJP('ごちそうさまでした。')">ごちそうさまでした。</td><td>謝謝你的招待。</td></tr>
+<tr><td class="jp" onclick="speakJP('すてきですね')">〜、すてきですね。</td><td>〜真不錯啊！</td><td class="jp" onclick="speakJP('そのシャツ、すてきですね。')">そのシャツ、すてきですね。</td><td>那件襯衫真不錯啊！</td></tr>
+</table>
 
-    <tr><td class="jp" onclick="speakJP('きります')">きります（切ります）</td><td>剪、切</td><td class="jp" onclick="speakJP('はさみで かみを きります。')">はさみで かみを きります。</td><td>用剪刀剪紙。</td></tr>
-    <tr><td class="jp" onclick="speakJP('おくります')">おくります（送ります）</td><td>寄、送</td><td class="jp" onclick="speakJP('ともだちに プレゼントを おくります。')">ともだちに プレゼントを おくります。</td><td>送禮物給朋友。</td></tr>
-    <tr><td class="jp" onclick="speakJP('あげます')">あげます</td><td>給</td><td class="jp" onclick="speakJP('せんせいに おかしを あげます。')">せんせいに おかしを あげます。</td><td>給老師點心。</td></tr>
-    <tr><td class="jp" onclick="speakJP('もらいます')">もらいます</td><td>得到</td><td class="jp" onclick="speakJP('ともだちに はなを もらいます。')">ともだちに はなを もらいます。</td><td>收到朋友送的花。</td></tr>
-    <tr><td class="jp" onclick="speakJP('かします')">かします（貸します）</td><td>借給</td><td class="jp" onclick="speakJP('ともだちに おかねを かします。')">ともだちに おかねを かします。</td><td>借錢給朋友。</td></tr>
-    <tr><td class="jp" onclick="speakJP('かります')">かります（借ります）</td><td>借</td><td class="jp" onclick="speakJP('ともだちから ほんを かります。')">ともだちから ほんを かります。</td><td>向朋友借書。</td></tr>
-    <tr><td class="jp" onclick="speakJP('おしえます')">おしえます（教えます）</td><td>教、告訴</td><td class="jp" onclick="speakJP('にほんごを おしえます。')">にほんごを おしえます。</td><td>教日文。</td></tr>
-    <tr><td class="jp" onclick="speakJP('ならいます')">ならいます（習います）</td><td>學習</td><td class="jp" onclick="speakJP('ピアノを ならいます。')">ピアノを ならいます。</td><td>學鋼琴。</td></tr>
-    <tr><td class="jp" onclick="speakJP('かけます')">かけます</td><td>打［電話］</td><td class="jp" onclick="speakJP('でんわを かけます。')">でんわを かけます。</td><td>打電話。</td></tr>
-    <tr><td class="jp" onclick="speakJP('て')">て（手）</td><td>手</td><td class="jp" onclick="speakJP('てで たべます。')">てで たべます。</td><td>用手吃。</td></tr>
-    <tr><td class="jp" onclick="speakJP('はし')">はし</td><td>筷子</td><td class="jp" onclick="speakJP('はしで ごはんを たべます。')">はしで ごはんを たべます。</td><td>用筷子吃飯。</td></tr>
-    <tr><td class="jp" onclick="speakJP('スプーン')">スプーン</td><td>湯匙</td><td class="jp" onclick="speakJP('スプーンで スープを のみます。')">スプーンで スープを のみます。</td><td>用湯匙喝湯。</td></tr>
-    <tr><td class="jp" onclick="speakJP('ナイフ')">ナイフ</td><td>刀子</td><td class="jp" onclick="speakJP('ナイフで にくを きります。')">ナイフで にくを きります。</td><td>用刀子切肉。</td></tr>
-    <tr><td class="jp" onclick="speakJP('フォーク')">フォーク</td><td>叉子</td><td class="jp" onclick="speakJP('フォークで パスタを たべます。')">フォークで パスタを たべます。</td><td>用叉子吃義大利麵。</td></tr>
-    <tr><td class="jp" onclick="speakJP('はさみ')">はさみ</td><td>剪刀</td><td class="jp" onclick="speakJP('はさみで かみを きります。')">はさみで かみを きります。</td><td>用剪刀剪紙。</td></tr>
-    <tr><td class="jp" onclick="speakJP('パソコン')">パソコン</td><td>個人電腦</td><td class="jp" onclick="speakJP('まいにち パソコンを つかいます。')">まいにち パソコンを つかいます。</td><td>每天使用電腦。</td></tr>
-    <tr><td class="jp" onclick="speakJP('ケータイ')">ケータイ</td><td>手機</td><td class="jp" onclick="speakJP('ケータイで でんわを かけます。')">ケータイで でんわを かけます。</td><td>用手機打電話。</td></tr>
-    <tr><td class="jp" onclick="speakJP('メール')">メール</td><td>電子郵件</td><td class="jp" onclick="speakJP('ともだちに メールを おくります。')">ともだちに メールを おくります。</td><td>寄電子郵件給朋友。</td></tr>
-    <tr><td class="jp" onclick="speakJP('ねんがじょう')">ねんがじょう（年賀状）</td><td>賀年卡</td><td class="jp" onclick="speakJP('ねんがじょうを かきます。')">ねんがじょうを かきます。</td><td>寫賀年卡。</td></tr>
-    <tr><td class="jp" onclick="speakJP('パンチ')">パンチ</td><td>打洞機</td><td class="jp" onclick="speakJP('パンチで あなを あけます。')">パンチで あなを あけます。</td><td>用打洞機打洞。</td></tr>
-    <tr><td class="jp" onclick="speakJP('ホッチキス')">ホッチキス</td><td>釘書機</td><td class="jp" onclick="speakJP('ホッチキスで とじます。')">ホッチキスで とじます。</td><td>用釘書機裝訂。</td></tr>
-    <tr><td class="jp" onclick="speakJP('セロテープ')">セロテープ</td><td>透明膠帶</td><td class="jp" onclick="speakJP('セロテープで はります。')">セロテープで はります。</td><td>用膠帶貼上。</td></tr>
-    <tr><td class="jp" onclick="speakJP('けしゴム')">けしゴム（消しゴム）</td><td>橡皮擦</td><td class="jp" onclick="speakJP('まちがえを けしゴムで けします。')">まちがえを けしゴムで けします。</td><td>用橡皮擦擦錯誤。</td></tr>
-    <tr><td class="jp" onclick="speakJP('かみ')">かみ（紙）</td><td>紙</td><td class="jp" onclick="speakJP('かみに じを かきます。')">かみに じを かきます。</td><td>在紙上寫字。</td></tr>
-    <tr><td class="jp" onclick="speakJP('はな')">はな（花）</td><td>花</td><td class="jp" onclick="speakJP('はなを かいます。')">はなを かいます。</td><td>買花。</td></tr>
-    <tr><td class="jp" onclick="speakJP('シャツ')">シャツ</td><td>襯衫</td><td class="jp" onclick="speakJP('あたらしい シャツを かいます。')">あたらしい シャツを かいます。</td><td>買新的襯衫。</td></tr>
-    <tr><td class="jp" onclick="speakJP('プレゼント')">プレゼント</td><td>禮物</td><td class="jp" onclick="speakJP('たんじょうびに プレゼントを あげます。')">たんじょうびに プレゼントを あげます。</td><td>生日時送禮物。</td></tr>
-    <tr><td class="jp" onclick="speakJP('にもつ')">にもつ（荷物）</td><td>行李、包裹</td><td class="jp" onclick="speakJP('おおきい にもつが あります。')">おおきい にもつが あります。</td><td>有大件行李。</td></tr>
-    <tr><td class="jp" onclick="speakJP('おかね')">おかね（お金）</td><td>錢</td><td class="jp" onclick="speakJP('おかねが いります。')">おかねが いります。</td><td>需要錢。</td></tr>
-    <tr><td class="jp" onclick="speakJP('きっぷ')">きっぷ（切符）</td><td>車票、入場券</td><td class="jp" onclick="speakJP('きっぷを かいます。')">きっぷを かいます。</td><td>買票。</td></tr>
-    <tr><td class="jp" onclick="speakJP('クリスマス')">クリスマス</td><td>聖誕節</td><td class="jp" onclick="speakJP('クリスマスに パーティーを します。')">クリスマスに パーティーを します。</td><td>聖誕節辦派對。</td></tr>
-        <tr><td class="jp" onclick="speakJP('ちち')">ちち（父）</td><td>家父</td><td class="jp" onclick="speakJP('これは ちちです。')">これは ちちです。</td><td>這是我爸爸。</td></tr>
-    <tr><td class="jp" onclick="speakJP('はは')">はは（母）</td><td>家母</td><td class="jp" onclick="speakJP('ははは せんせいです。')">ははは せんせいです。</td><td>我媽媽是老師。</td></tr>
-    <tr><td class="jp" onclick="speakJP('おとうさん')">おとうさん（お父さん）</td><td>(別人的)父親、稱呼自己父親時也用</td><td class="jp" onclick="speakJP('おとうさんは いま いえに います。')">おとうさんは いま いえに います。</td><td>爸爸現在在家。</td></tr>
-    <tr><td class="jp" onclick="speakJP('おかあさん')">おかあさん（お母さん）</td><td>(別人的)母親、稱呼自己母親時也用</td><td class="jp" onclick="speakJP('おかあさんは しごとに いきました。')">おかあさんは しごとに いきました。</td><td>媽媽去工作了。</td></tr>
-    <tr><td class="jp" onclick="speakJP('もう')">もう</td><td>已經</td><td class="jp" onclick="speakJP('もう ごはんを たべました。')">もう ごはんを たべました。</td><td>已經吃過飯了。</td></tr>
-    <tr><td class="jp" onclick="speakJP('まだ')">まだ</td><td>尚未、還沒</td><td class="jp" onclick="speakJP('まだ たべていません。')">まだ たべていません。</td><td>還沒吃。</td></tr>
-    <tr><td class="jp" onclick="speakJP('これから')">これから</td><td>從現在起(要去做某事)</td><td class="jp" onclick="speakJP('これから かいものに いきます。')">これから かいものに いきます。</td><td>接下來要去買東西。</td></tr>
-    <tr><td class="jp" onclick="speakJP('いらっしゃい')">いらっしゃい。</td><td>歡迎。</td><td class="jp" onclick="speakJP('いらっしゃい。どうぞ。')">いらっしゃい。どうぞ。</td><td>歡迎，請進。</td></tr>
-    <tr><td class="jp" onclick="speakJP('どうぞおあがりください')">どうぞおあがりください。</td><td>請進。</td><td class="jp" onclick="speakJP('どうぞ おあがりください。')">どうぞ おあがりください。</td><td>請進。</td></tr>
-    <tr><td class="jp" onclick="speakJP('しつれいします')">しつれいします（失礼します）</td><td>打擾了。</td><td class="jp" onclick="speakJP('おじゃまします。しつれいします。')">おじゃまします。しつれいします。</td><td>打擾了，失禮了。</td></tr>
-    <tr><td class="jp" onclick="speakJP('〜は いかがですか')">[〜は] いかがですか。</td><td>你覺得〔～〕怎麼樣？</td><td class="jp" onclick="speakJP('おちゃは いかがですか。')">おちゃは いかがですか。</td><td>要不要喝杯茶呢？</td></tr>
-    <tr><td class="jp" onclick="speakJP('いただきます')">いただきます。</td><td>我開動了。（用於用餐前）</td><td class="jp" onclick="speakJP('いただきます。')">いただきます。</td><td>我開動了。</td></tr>
-    <tr><td class="jp" onclick="speakJP('ごちそうさまでした')">ごちそうさま[でした]。</td><td>我吃飽了／謝謝招待。（用於用餐後）</td><td class="jp" onclick="speakJP('ごちそうさまでした。')">ごちそうさまでした。</td><td>謝謝你的招待。</td></tr>
-    <tr><td class="jp" onclick="speakJP('すてきですね')">[〜、] すてきですね。</td><td>〔～，〕真不錯啊！</td><td class="jp" onclick="speakJP('そのシャツ、すてきですね。')">そのシャツ、すてきですね。</td><td>那件襯衫真不錯啊！</td></tr>
-
-
-  </table>
+  <div class="controls">
+    <button id="autoPlayButton">🔄 自動播放</button>
+    <button id="pauseButton" disabled>⏸ 暫停</button>
+  </div>
 
   <div class="button-home">
     <a href="index.html">回首頁 🏠</a>
   </div>
 
-   <script>
-  let voicesLoaded = false;
+  <!-- ...（略，head 與 style 完全相同） -->
+<script>
+  let isAutoPlaying = false;
+  let isPaused = false;
+  let currentIndex = 0;
+  let rows = [];
 
-  function speakJP(text) {
-    // 若語音尚未載入，延遲執行
-    if (!voicesLoaded) {
-      window.speechSynthesis.onvoiceschanged = () => {
-        voicesLoaded = true;
-        speakJP(text); // 再次嘗試朗讀
+  function clearHighlights() {
+    document.querySelectorAll('.highlight').forEach(el => el.classList.remove('highlight'));
+  }
+
+  function stopAutoPlay() {
+    isAutoPlaying = false;
+    isPaused = false;
+    currentIndex = 0;
+    clearHighlights();
+    document.getElementById('pauseButton').disabled = true;
+    document.getElementById('pauseButton').textContent = '⏸ 暫停';
+  }
+
+  function waitUntilResume() {
+    return new Promise(resolve => {
+      const check = () => {
+        if (!isPaused) return resolve();
+        setTimeout(check, 200);
       };
-      speechSynthesis.getVoices(); // 觸發載入
+      check();
+    });
+  }
+
+  async function speakText(text, lang) {
+    return new Promise(resolve => {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = lang;
+      const voices = speechSynthesis.getVoices();
+      const match = voices.find(v => v.lang === lang);
+      if (match) utterance.voice = match;
+      utterance.onend = () => resolve();
+      speechSynthesis.cancel();
+      speechSynthesis.speak(utterance);
+    });
+  }
+
+  async function autoPlayNext() {
+    if (!isAutoPlaying || currentIndex >= rows.length) {
+      stopAutoPlay();
       return;
     }
 
-    // 清除前一段朗讀（防止重複或無聲）
-    speechSynthesis.cancel();
+    await waitUntilResume();
+    clearHighlights();
 
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'ja-JP';
+    const row = rows[currentIndex];
+    const wordJP = row.querySelectorAll('td.jp')[0];
+    const meaningCN = row.children[1];
+    const sentenceJP = row.querySelectorAll('td.jp')[1];
+    const sentenceCN = row.children[3];
 
-    const voices = speechSynthesis.getVoices();
-    const jpVoice = voices.find(voice => voice.lang === 'ja-JP');
-    if (jpVoice) {
-      utterance.voice = jpVoice;
-    }
+    wordJP.classList.add('highlight');
+    await speakText(wordJP.textContent.replace(/[（）\[\]]/g, '').trim(), 'ja-JP');
+    wordJP.classList.remove('highlight');
 
-    speechSynthesis.speak(utterance);
+    await waitUntilResume();
+    meaningCN.classList.add('highlight');
+    await speakText(meaningCN.textContent.trim(), 'zh-TW');
+    meaningCN.classList.remove('highlight');
+
+    await waitUntilResume();
+    sentenceJP.classList.add('highlight');
+    await speakText(sentenceJP.textContent.trim(), 'ja-JP');
+    sentenceJP.classList.remove('highlight');
+
+    await waitUntilResume();
+    sentenceCN.classList.add('highlight');
+    await speakText(sentenceCN.textContent.trim(), 'zh-TW');
+    sentenceCN.classList.remove('highlight');
+
+    currentIndex++;
+    setTimeout(autoPlayNext, 400);
   }
 
-  // 頁面載入時初始化語音清單
   document.addEventListener('DOMContentLoaded', () => {
-    const checkVoices = () => {
-      if (speechSynthesis.getVoices().length > 0) {
-        voicesLoaded = true;
-      } else {
-        setTimeout(checkVoices, 100);
-      }
-    };
-    checkVoices();
+    rows = Array.from(document.querySelectorAll('table tr')).slice(1);
+
+    document.querySelectorAll('td.jp').forEach(cell => {
+      cell.addEventListener('click', () => {
+        const txt = cell.textContent.replace(/[（）\[\]]/g, '').trim();
+        speakText(txt, 'ja-JP');
+      });
+    });
+
+    document.getElementById('autoPlayButton').addEventListener('click', () => {
+      isAutoPlaying = true;
+      isPaused = false;
+      currentIndex = 0;
+      document.getElementById('pauseButton').disabled = false;
+      autoPlayNext();
+    });
+
+    document.getElementById('pauseButton').addEventListener('click', () => {
+      isPaused = !isPaused;
+      document.getElementById('pauseButton').textContent = isPaused ? '▶️ 繼續' : '⏸ 暫停';
+    });
+
+    if (speechSynthesis.getVoices().length === 0) {
+      speechSynthesis.onvoiceschanged = () => {};
+      speechSynthesis.getVoices();
+    }
   });
 </script>
 
