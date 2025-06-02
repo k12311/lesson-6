@@ -149,115 +149,121 @@
 
   <!-- ...（略，head 與 style 完全相同） -->
 <script>
-  let isAutoPlaying = false;
-  let isPaused = false;
-  let currentIndex = 0;
-  let rows = [];
+    let isAutoPlaying = false;
+    let isPaused = false;
+    let currentIndex = 0;
+    let rows = [];
+    let progressBar, progressText;
 
-  function clearHighlights() {
-    document.querySelectorAll('.highlight').forEach(el => el.classList.remove('highlight'));
-  }
-
-  function stopAutoPlay() {
-    isAutoPlaying = false;
-    isPaused = false;
-    currentIndex = 0;
-    clearHighlights();
-    document.getElementById('pauseButton').disabled = true;
-    document.getElementById('pauseButton').textContent = '⏸ 暫停';
-  }
-
-  function waitUntilResume() {
-    return new Promise(resolve => {
-      const check = () => {
-        if (!isPaused) return resolve();
-        setTimeout(check, 200);
-      };
-      check();
-    });
-  }
-
-  async function speakText(text, lang) {
-    return new Promise(resolve => {
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = lang;
-      const voices = speechSynthesis.getVoices();
-      const match = voices.find(v => v.lang === lang);
-      if (match) utterance.voice = match;
-      utterance.onend = () => resolve();
-      speechSynthesis.cancel();
-      speechSynthesis.speak(utterance);
-    });
-  }
-
-  async function autoPlayNext() {
-    if (!isAutoPlaying || currentIndex >= rows.length) {
-      stopAutoPlay();
-      return;
+    function clearHighlights() {
+      document.querySelectorAll('.highlight').forEach(el => el.classList.remove('highlight'));
     }
 
-    await waitUntilResume();
-    clearHighlights();
-
-    const row = rows[currentIndex];
-    const wordJP = row.querySelectorAll('td.jp')[0];
-    const meaningCN = row.children[1];
-    const sentenceJP = row.querySelectorAll('td.jp')[1];
-    const sentenceCN = row.children[3];
-
-    wordJP.classList.add('highlight');
-    await speakText(wordJP.textContent.replace(/[（）\[\]]/g, '').trim(), 'ja-JP');
-    wordJP.classList.remove('highlight');
-
-    await waitUntilResume();
-    meaningCN.classList.add('highlight');
-    await speakText(meaningCN.textContent.trim(), 'zh-TW');
-    meaningCN.classList.remove('highlight');
-
-    await waitUntilResume();
-    sentenceJP.classList.add('highlight');
-    await speakText(sentenceJP.textContent.trim(), 'ja-JP');
-    sentenceJP.classList.remove('highlight');
-
-    await waitUntilResume();
-    sentenceCN.classList.add('highlight');
-    await speakText(sentenceCN.textContent.trim(), 'zh-TW');
-    sentenceCN.classList.remove('highlight');
-
-    currentIndex++;
-    setTimeout(autoPlayNext, 400);
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    rows = Array.from(document.querySelectorAll('table tr')).slice(1);
-
-    document.querySelectorAll('td.jp').forEach(cell => {
-      cell.addEventListener('click', () => {
-        const txt = cell.textContent.replace(/[（）\[\]]/g, '').trim();
-        speakText(txt, 'ja-JP');
-      });
-    });
-
-    document.getElementById('autoPlayButton').addEventListener('click', () => {
-      isAutoPlaying = true;
+    function stopAutoPlay() {
+      isAutoPlaying = false;
       isPaused = false;
       currentIndex = 0;
-      document.getElementById('pauseButton').disabled = false;
-      autoPlayNext();
-    });
-
-    document.getElementById('pauseButton').addEventListener('click', () => {
-      isPaused = !isPaused;
-      document.getElementById('pauseButton').textContent = isPaused ? '▶️ 繼續' : '⏸ 暫停';
-    });
-
-    if (speechSynthesis.getVoices().length === 0) {
-      speechSynthesis.onvoiceschanged = () => {};
-      speechSynthesis.getVoices();
+      clearHighlights();
+      document.getElementById('pauseButton').disabled = true;
+      document.getElementById('pauseButton').textContent = '⏸ 暫停';
+      progressBar.value = 0;
+      progressText.textContent = '';
     }
-  });
-</script>
 
+    function waitUntilResume() {
+      return new Promise(resolve => {
+        const check = () => {
+          if (!isPaused) return resolve();
+          setTimeout(check, 200);
+        };
+        check();
+      });
+    }
+
+    async function speakText(text, lang) {
+      return new Promise(resolve => {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = lang;
+        const voices = speechSynthesis.getVoices();
+        const match = voices.find(v => v.lang === lang);
+        if (match) utterance.voice = match;
+        utterance.onend = () => resolve();
+        speechSynthesis.cancel();
+        speechSynthesis.speak(utterance);
+      });
+    }
+
+    async function autoPlayNext() {
+      if (!isAutoPlaying || currentIndex >= rows.length) {
+        stopAutoPlay();
+        return;
+      }
+
+      await waitUntilResume();
+      clearHighlights();
+
+      const row = rows[currentIndex];
+      const wordJP = row.querySelectorAll('td.jp')[0];
+      const meaningCN = row.children[1];
+      const sentenceJP = row.querySelectorAll('td.jp')[1];
+      const sentenceCN = row.children[3];
+
+      wordJP.classList.add('highlight');
+      await speakText(wordJP.textContent.replace(/[（）\[\]]/g, '').trim(), 'ja-JP');
+      wordJP.classList.remove('highlight');
+
+      await waitUntilResume();
+      meaningCN.classList.add('highlight');
+      await speakText(meaningCN.textContent.trim(), 'zh-TW');
+      meaningCN.classList.remove('highlight');
+
+      await waitUntilResume();
+      sentenceJP.classList.add('highlight');
+      await speakText(sentenceJP.textContent.trim(), 'ja-JP');
+      sentenceJP.classList.remove('highlight');
+
+      await waitUntilResume();
+      sentenceCN.classList.add('highlight');
+      await speakText(sentenceCN.textContent.trim(), 'zh-TW');
+      sentenceCN.classList.remove('highlight');
+
+      currentIndex++;
+      progressBar.value = currentIndex;
+      progressText.textContent = `進度：${currentIndex} / ${rows.length}`;
+      setTimeout(autoPlayNext, 400);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      rows = Array.from(document.querySelectorAll('table tr')).slice(1);
+      progressBar = document.getElementById('progressBar');
+      progressText = document.getElementById('progressText');
+      progressBar.max = rows.length;
+
+      document.querySelectorAll('td.jp').forEach(cell => {
+        cell.addEventListener('click', () => {
+          const txt = cell.textContent.replace(/[（）\[\]]/g, '').trim();
+          speakText(txt, 'ja-JP');
+        });
+      });
+
+      document.getElementById('autoPlayButton').addEventListener('click', () => {
+        isAutoPlaying = true;
+        isPaused = false;
+        currentIndex = 0;
+        document.getElementById('pauseButton').disabled = false;
+        autoPlayNext();
+      });
+
+      document.getElementById('pauseButton').addEventListener('click', () => {
+        isPaused = !isPaused;
+        document.getElementById('pauseButton').textContent = isPaused ? '▶️ 繼續' : '⏸ 暫停';
+      });
+
+      if (speechSynthesis.getVoices().length === 0) {
+        speechSynthesis.onvoiceschanged = () => {};
+        speechSynthesis.getVoices();
+      }
+    });
+  </script>
 </body>
-</html>
 </html>
