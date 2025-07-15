@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>📘 第1課文法說明</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    body {
+      font-family: "Noto Sans JP", sans-serif;
+      line-height: 1.6;
+      padding: 20px;
+      background-color: #fefefe;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+
+    a {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #2980b9;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .grammar-section {
+      background-color: #f9f9ff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .grammar-toggle {
+      font-size: 22px;
+      color: #2c3e50;
+      cursor: pointer;
+      user-select: none;
+      border-left: 6px solid #f1c40f;
+      padding-left: 12px;
+      margin-bottom: 15px;
+    }
+
+    .grammar-content {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .grammar-point {
+      margin-bottom: 20px;
+    }
+
+    .grammar-point h3 {
+      color: #34495e;
+      margin-bottom: 6px;
+    }
+
+    .grammar-point p,
+    .grammar-point ul {
+      margin-left: 10px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📘 第1課文法說明</h1>
+  <a href="index.html">← 回到朗讀練習</a>
+
+  <section class="grammar-section">
+    <h2 class="grammar-toggle">📘 第1課 文法整理 ▾</h2>
+    <div class="grammar-content">
+      <div class="grammar-point">
+        <h3>1️⃣ ～は～です。</h3>
+        <p>表示「是～」，句尾「です」表示禮貌語氣。</p>
+        <ul>
+          <li>わたしは がくせいです。→ 我是學生。</li>
+          <li>かれは エンジニアです。→ 他是工程師。</li>
+        </ul>
+      </div>
+
+      <div class="grammar-point">
+        <h3>2️⃣ ～は～ではありません。</h3>
+        <p>表示否定句，「不是～」。</p>
+        <ul>
+          <li>わたしは せんせいではありません。→ 我不是老師。</li>
+          <li>あのひとは にほんじんではありません。→ 那個人不是日本人。</li>
+        </ul>
+      </div>
+
+      <div class="grammar-point">
+        <h3>3️⃣ ～は～ですか。</h3>
+        <p>表示疑問句，「是～嗎？」</p>
+        <ul>
+          <li>あなたは がくせいですか？ → 你是學生嗎？</li>
+          <li>かれは いしゃですか？ → 他是醫生嗎？</li>
+        </ul>
+        <p>✅ 回答：</p>
+        <ul>
+          <li>はい、そうです。→ 是的，是這樣。</li>
+          <li>いいえ、ちがいます。→ 不，不是。</li>
+        </ul>
+      </div>
+
+      <div class="grammar-point">
+        <h3>4️⃣ ～さん（敬稱）</h3>
+        <p>對別人加上的敬稱，不能用在自己身上。</p>
+        <ul>
+          <li>たなかさん → 田中先生／小姐</li>
+          <li>リ―さん → 李先生／小姐</li>
+        </ul>
+      </div>
+
+      <div class="grammar-point">
+        <h3>5️⃣ ～の～（所有格）</h3>
+        <p>A の B → 表示「B是A的」。</p>
+        <ul>
+          <li>わたしの なまえ → 我的名字</li>
+          <li>かいしゃの ひと → 公司的同事</li>
+        </ul>
+      </div>
+
+      <div class="grammar-point">
+        <h3>6️⃣ ～から きました。</h3>
+        <p>表示「從～來的」。</p>
+        <ul>
+          <li>にほんから きました。→ 我從日本來。</li>
+          <li>ちゅうごくから きました。→ 我從中國來。</li>
+        </ul>
+      </div>
+
+      <div class="grammar-point">
+        <h3>7️⃣ おなまえは？（您的名字是？）</h3>
+        <p>用於禮貌詢問對方姓名，也可說「おなまえは なんですか？」</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggle = document.querySelector(".grammar-toggle");
+      const content = document.querySelector(".grammar-content");
+
+      toggle.addEventListener("click", function () {
+        const isVisible = content.style.display === "block";
+        content.style.display = isVisible ? "none" : "block";
+        toggle.textContent = isVisible
+          ? "📘 第1課 文法整理 ▾"
+          : "📘 第1課 文法整理 ▴";
+      });
+    });
+  </script>
+
+</body>
+</html>
