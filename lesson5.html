@@ -3,156 +3,124 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>第5課：單字朗讀練習</title>
+  <title>第5課：單字朗讀練習（課本順序）</title>
   <style>
-    body {
-      font-family: 'Arial', 'Hiragino Kaku Gothic ProN', sans-serif;
-      background-color: #fff0f5;
-      color: #333;
-      padding: 2rem;
-    }
-    h1 {
-      text-align: center;
-      color: #d26fa0;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 0 12px #e3a5c7;
-    }
-    th, td {
-      padding: 0.8rem;
-      text-align: left;
-      border-bottom: 1px solid #f0cde3;
-    }
-    th {
-      background-color: #f8d8e9;
-      color: #c04583;
-    }
-    td.jp:hover {
-      cursor: pointer;
-      background-color: #ffeaf5;
-    }
-    .button-home {
-      margin-top: 2rem;
-      display: block;
-      text-align: center;
-    }
-    .button-home a {
-      background-color: #ffaad4;
-      color: white;
-      padding: 0.8rem 1.5rem;
-      text-decoration: none;
-      border-radius: 20px;
-      font-weight: bold;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    .button-home a:hover {
-      background-color: #f98fc3;
-    }
+    body { font-family: 'Arial','Hiragino Kaku Gothic ProN',sans-serif; background:#fff0f5; color:#333; padding:2rem; }
+    h1 { text-align:center; color:#d26fa0; font-size:2rem; margin-bottom:1rem; }
+    table { width:100%; border-collapse:collapse; background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 0 12px #e3a5c7; }
+    th, td { padding:0.8rem; text-align:left; border-bottom:1px solid #f0cde3; }
+    th { background:#f8d8e9; color:#c04583; }
+    td.jp:hover { cursor:pointer; background:#ffeaf5; }
+    .button-home { margin-top:2rem; text-align:center; }
+    .button-home a { background:#ffaad4; color:#fff; padding:0.8rem 1.5rem; text-decoration:none; border-radius:20px; font-weight:bold; box-shadow:0 4px 8px rgba(0,0,0,.1); }
+    .button-home a:hover { background:#f98fc3; }
   </style>
 </head>
 <body>
-  <h1>📘 第5課：單字＋例句朗讀練習</h1>
+  <h1>📘 第5課：單字＋例句朗讀練習（依課本順序）</h1>
+
   <table>
-<tr>
-  <th>單字（日文）</th>
-  <th>中文意思</th>
-  <th>例句（日文）</th>
-  <th>中文翻譯</th>
-</tr>
+    <tr>
+      <th>單字（日文）</th>
+      <th>中文意思（依課本）</th>
+      <th>例句（日文）</th>
+      <th>中文翻譯</th>
+    </tr>
 
-<tr><td class="jp" onclick="speakJP('いきます')">いきます（行きます）</td><td>去</td><td class="jp" onclick="speakJP('わたしは きょうとへ いきます')">わたしは きょうとへ いきます。</td><td>我去京都。</td></tr>
-<tr><td class="jp" onclick="speakJP('きます')">きます（来ます）</td><td>來</td><td class="jp" onclick="speakJP('ともだちは うちへ きます')">ともだちは うちへ きます。</td><td>朋友來我家。</td></tr>
-<tr><td class="jp" onclick="speakJP('かえります')">かえります（帰ります）</td><td>回</td><td class="jp" onclick="speakJP('よる うちへ かえります')">よる うちへ かえります。</td><td>晚上回家。</td></tr>
-<tr><td class="jp" onclick="speakJP('がっこう')">がっこう（学校）</td><td>學校</td><td class="jp" onclick="speakJP('がっこうへ いきます')">がっこうへ いきます。</td><td>去學校。</td></tr>
-<tr><td class="jp" onclick="speakJP('スーパー')">スーパー</td><td>超市</td><td class="jp" onclick="speakJP('スーパーで たべものを かいます')">スーパーで たべものを かいます。</td><td>在超市買食物。</td></tr>
-<tr><td class="jp" onclick="speakJP('えき')">えき（駅）</td><td>車站</td><td class="jp" onclick="speakJP('えきで ともだちを まちます')">えきで ともだちを まちます。</td><td>在車站等朋友。</td></tr>
-<tr><td class="jp" onclick="speakJP('ひこうき')">ひこうき（飛行機）</td><td>飛機</td><td class="jp" onclick="speakJP('ひこうきで おおさかへ いきます')">ひこうきで おおさかへ いきます。</td><td>搭飛機去大阪。</td></tr>
-<tr><td class="jp" onclick="speakJP('ふね')">ふね（船）</td><td>船</td><td class="jp" onclick="speakJP('ふねで しまへ いきます')">ふねで しまへ いきます。</td><td>搭船去島上。</td></tr>
-<tr><td class="jp" onclick="speakJP('でんしゃ')">でんしゃ（電車）</td><td>電車</td><td class="jp" onclick="speakJP('でんしゃで とうきょうへ いきます')">でんしゃで とうきょうへ いきます。</td><td>搭電車去東京。</td></tr>
-<tr><td class="jp" onclick="speakJP('ちかてつ')">ちかてつ（地下鉄）</td><td>地下鐵</td><td class="jp" onclick="speakJP('ちかてつで かいしゃへ いきます')">ちかてつで かいしゃへ いきます。</td><td>搭地下鐵去公司。</td></tr>
-<tr><td class="jp" onclick="speakJP('しんかんせん')">しんかんせん（新幹線）</td><td>新幹線</td><td class="jp" onclick="speakJP('しんかんせんで なごやへ いきます')">しんかんせんで なごやへ いきます。</td><td>搭新幹線去名古屋。</td></tr>
-<tr><td class="jp" onclick="speakJP('バス')">バス</td><td>公車</td><td class="jp" onclick="speakJP('バスで うちへ かえります')">バスで うちへ かえります。</td><td>搭公車回家。</td></tr>
-<tr><td class="jp" onclick="speakJP('タクシー')">タクシー</td><td>計程車</td><td class="jp" onclick="speakJP('タクシーで ホテルへ いきます')">タクシーで ホテルへ いきます。</td><td>搭計程車去飯店。</td></tr>
-<tr><td class="jp" onclick="speakJP('じてんしゃ')">じてんしゃ（自転車）</td><td>腳踏車</td><td class="jp" onclick="speakJP('じてんしゃで がっこうへ いきます')">じてんしゃで がっこうへ いきます。</td><td>騎腳踏車去學校。</td></tr>
-<tr><td class="jp" onclick="speakJP('あるいて')">あるいて（歩いて）</td><td>步行</td><td class="jp" onclick="speakJP('あるいて えきへ いきます')">あるいて えきへ いきます。</td><td>走路去車站。</td></tr>
-<tr><td class="jp" onclick="speakJP('ひと')">ひと（人）</td><td>人</td><td class="jp" onclick="speakJP('あのひとは かいしゃいんです')">あのひとは かいしゃいんです。</td><td>那個人是公司職員。</td></tr>
-<tr><td class="jp" onclick="speakJP('ともだち')">ともだち（友達）</td><td>朋友</td><td class="jp" onclick="speakJP('ともだちと きょうとへ いきます')">ともだちと きょうとへ いきます。</td><td>和朋友一起去京都。</td></tr>
-<tr><td class="jp" onclick="speakJP('かれ')">かれ（彼）</td><td>他、男朋友</td><td class="jp" onclick="speakJP('かれは アメリカから きました')">かれは アメリカから きました。</td><td>他是從美國來的。</td></tr>
-<tr><td class="jp" onclick="speakJP('かのじょ')">かのじょ（彼女）</td><td>她、女朋友</td><td class="jp" onclick="speakJP('かのじょは せんせいです')">かのじょは せんせいです。</td><td>她是老師。</td></tr>
-<tr><td class="jp" onclick="speakJP('かぞく')">かぞく（家族）</td><td>家人</td><td class="jp" onclick="speakJP('かぞくと にほんへ いきます')">かぞくと にほんへ いきます。</td><td>和家人一起去日本。</td></tr>
-<tr><td class="jp" onclick="speakJP('ひとりで')">ひとりで（一人で）</td><td>一個人</td><td class="jp" onclick="speakJP('ひとりで びじゅつかんへ いきます')">ひとりで びじゅつかんへ いきます。</td><td>一個人去美術館。</td></tr>
-<tr><td class="jp" onclick="speakJP('せんしゅう')">せんしゅう（先週）</td><td>上週</td><td class="jp" onclick="speakJP('せんしゅう きょうとへ いきました')">せんしゅう きょうとへ いきました。</td><td>上週去了京都。</td></tr>
-<tr><td class="jp" onclick="speakJP('こんしゅう')">こんしゅう（今週）</td><td>這週</td><td class="jp" onclick="speakJP('こんしゅう とうきょうへ いきます')">こんしゅう とうきょうへ いきます。</td><td>這週要去東京。</td></tr>
-<tr><td class="jp" onclick="speakJP('らいしゅう')">らいしゅう（来週）</td><td>下週</td><td class="jp" onclick="speakJP('らいしゅう しんかんせんで なごやへ いきます')">らいしゅう しんかんせんで なごやへ いきます。</td><td>下週搭新幹線去名古屋。</td></tr>
-<tr><td class="jp" onclick="speakJP('せんげつ')">せんげつ（先月）</td><td>上個月</td><td class="jp" onclick="speakJP('せんげつ ちゅうごくへ いきました')">せんげつ ちゅうごくへ いきました。</td><td>上個月去了中國。</td></tr>
-<tr><td class="jp" onclick="speakJP('こんげつ')">こんげつ（今月）</td><td>這個月</td><td class="jp" onclick="speakJP('こんげつ ははの たんじょうびです')">こんげつ ははの たんじょうびです。</td><td>這個月是我媽媽的生日。</td></tr>
-<tr><td class="jp" onclick="speakJP('らいげつ')">らいげつ（来月）</td><td>下個月</td><td class="jp" onclick="speakJP('らいげつ にほんへ いきます')">らいげつ にほんへ いきます。</td><td>下個月去日本。</td></tr>
-<tr><td class="jp" onclick="speakJP('きょねん')">きょねん（去年）</td><td>去年</td><td class="jp" onclick="speakJP('きょねん はたらきました')">きょねん はたらきました。</td><td>去年工作了。</td></tr>
-<tr><td class="jp" onclick="speakJP('ことし')">ことし（今年）</td><td>今年</td><td class="jp" onclick="speakJP('ことし にほんごを べんきょうします')">ことし にほんごを べんきょうします。</td><td>今年學日文。</td></tr>
-<tr><td class="jp" onclick="speakJP('らいねん')">らいねん（来年）</td><td>明年</td><td class="jp" onclick="speakJP('らいねん にほんへ りょこうします')">らいねん にほんへ りょこうします。</td><td>明年去日本旅行。</td></tr>
-<tr><td class="jp" onclick="speakJP('たんじょうび')">たんじょうび（誕生日）</td><td>生日</td><td class="jp" onclick="speakJP('わたしの たんじょうびは しちがつです')">わたしの たんじょうびは しちがつです。</td><td>我的生日是七月。</td></tr>
-<tr><td class="jp" onclick="speakJP('いつ')">いつ</td><td>什麼時候</td><td class="jp" onclick="speakJP('たんじょうびは いつですか')">たんじょうびは いつですか。</td><td>你生日是什麼時候？</td></tr>
-<tr><td class="jp" onclick="speakJP('つぎの')">つぎの（次の）</td><td>下一個</td><td class="jp" onclick="speakJP('つぎの でんしゃは なんじですか')">つぎの でんしゃは なんじですか。</td><td>下一班電車是幾點？</td></tr>
-<tr><td class="jp" onclick="speakJP('ふつう')">ふつう（普通）</td><td>普通車</td><td class="jp" onclick="speakJP('ふつうで いきます')">ふつうで いきます。</td><td>搭普通車去。</td></tr>
-<tr><td class="jp" onclick="speakJP('きゅうこう')">きゅうこう（急行）</td><td>快車</td><td class="jp" onclick="speakJP('きゅうこうで なごやへ いきます')">きゅうこうで なごやへ いきます。</td><td>搭快車去名古屋。</td></tr>
-<tr><td class="jp" onclick="speakJP('とっきゅう')">とっきゅう（特急）</td><td>特快車</td><td class="jp" onclick="speakJP('とっきゅうは はやいです')">とっきゅうは はやいです。</td><td>特快車很快。</td></tr>
-<tr><td class="jp" onclick="speakJP('どうもありがとうございました')">どうもありがとうございました</td><td>非常感謝</td><td class="jp" onclick="speakJP('どうもありがとうございました')">どうもありがとうございました。</td><td>非常感謝。</td></tr>
-<tr><td class="jp" onclick="speakJP('どういたしまして')">どういたしまして</td><td>不客氣</td><td class="jp" onclick="speakJP('どういたしまして')">どういたしまして。</td><td>不客氣。</td></tr>
+    <!-- 交通・移動など -->
+    <tr><td class="jp" onclick="speakJP('いきます')">いきます（行きます）</td><td>去</td><td class="jp" onclick="speakJP('わたしは きょうとへ いきます')">わたしは きょうとへ いきます。</td><td>我去京都。</td></tr>
+    <tr><td class="jp" onclick="speakJP('きます')">きます（来ます）</td><td>來</td><td class="jp" onclick="speakJP('ともだちは うちへ きます')">ともだちは うちへ きます。</td><td>朋友來我家。</td></tr>
+    <tr><td class="jp" onclick="speakJP('かえります')">かえります（帰ります）</td><td>回</td><td class="jp" onclick="speakJP('よる うちへ かえります')">よる うちへ かえります。</td><td>晚上回家。</td></tr>
+    <tr><td class="jp" onclick="speakJP('がっこう')">がっこう（学校）</td><td>學校</td><td class="jp" onclick="speakJP('まいにち がっこうへ いきます')">まいにち がっこうへ いきます。</td><td>每天去學校。</td></tr>
+    <tr><td class="jp" onclick="speakJP('スーパー')">スーパー</td><td>超市</td><td class="jp" onclick="speakJP('スーパーで たべものを かいます')">スーパーで たべものを かいます。</td><td>在超市買食物。</td></tr>
+    <tr><td class="jp" onclick="speakJP('えき')">えき（駅）</td><td>車站</td><td class="jp" onclick="speakJP('えきで ともだちを まちます')">えきで ともだちを まちます。</td><td>在車站等朋友。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ひこうき')">ひこうき（飛行機）</td><td>飛機</td><td class="jp" onclick="speakJP('ひこうきで おおさかへ いきます')">ひこうきで おおさかへ いきます。</td><td>搭飛機去大阪。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ふね')">ふね（船）</td><td>船</td><td class="jp" onclick="speakJP('ふねで しまへ いきます')">ふねで しまへ いきます。</td><td>搭船去島上。</td></tr>
+    <tr><td class="jp" onclick="speakJP('でんしゃ')">でんしゃ（電車）</td><td>電車</td><td class="jp" onclick="speakJP('でんしゃで とうきょうへ いきます')">でんしゃで とうきょうへ いきます。</td><td>搭電車去東京。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ちかてつ')">ちかてつ（地下鉄）</td><td>地下鐵</td><td class="jp" onclick="speakJP('ちかてつで かいしゃへ いきます')">ちかてつで かいしゃへ いきます。</td><td>搭地下鐵去公司。</td></tr>
+    <tr><td class="jp" onclick="speakJP('しんかんせん')">しんかんせん（新幹線）</td><td>新幹線</td><td class="jp" onclick="speakJP('しんかんせんで なごやへ いきます')">しんかんせんで なごやへ いきます。</td><td>搭新幹線去名古屋。</td></tr>
+    <tr><td class="jp" onclick="speakJP('バス')">バス</td><td>公車、巴士</td><td class="jp" onclick="speakJP('バスで うちへ かえります')">バスで うちへ かえります。</td><td>搭公車回家。</td></tr>
+    <tr><td class="jp" onclick="speakJP('タクシー')">タクシー</td><td>計程車</td><td class="jp" onclick="speakJP('タクシーで ホテルへ いきます')">タクシーで ホテルへ いきます。</td><td>搭計程車去飯店。</td></tr>
+    <tr><td class="jp" onclick="speakJP('じてんしゃ')">じてんしゃ（自転車）</td><td>自行車、腳踏車</td><td class="jp" onclick="speakJP('じてんしゃで がっこうへ いきます')">じてんしゃで がっこうへ いきます。</td><td>騎腳踏車去學校。</td></tr>
+    <tr><td class="jp" onclick="speakJP('あるいて')">あるいて（歩いて）</td><td>步行</td><td class="jp" onclick="speakJP('あるいて えきへ いきます')">あるいて えきへ いきます。</td><td>走路去車站。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ひと')">ひと（人）</td><td>人</td><td class="jp" onclick="speakJP('あの ひとは かいしゃいんです')">あの ひとは かいしゃいんです。</td><td>那個人是公司職員。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ともだち')">ともだち（友達）</td><td>朋友</td><td class="jp" onclick="speakJP('ともだちと きょうとへ いきます')">ともだちと きょうとへ いきます。</td><td>和朋友一起去京都。</td></tr>
+    <tr><td class="jp" onclick="speakJP('かれ')">かれ（彼）</td><td>他、男朋友</td><td class="jp" onclick="speakJP('かれは アメリカから きました')">かれは アメリカから きました。</td><td>他是從美國來的。</td></tr>
 
+    <!-- 彼女／家族 -->
+    <tr><td class="jp" onclick="speakJP('かのじょ')">かのじょ（彼女）</td><td>她、女朋友</td><td class="jp" onclick="speakJP('かのじょは せんせいです')">かのじょは せんせいです。</td><td>她是老師。</td></tr>
+    <tr><td class="jp" onclick="speakJP('かぞく')">かぞく（家族）</td><td>家人、家屬</td><td class="jp" onclick="speakJP('かぞくと にほんへ いきます')">かぞくと にほんへ いきます。</td><td>和家人一起去日本。</td></tr>
+
+    <!-- 時間詞（週／月／年） -->
+    <tr><td class="jp" onclick="speakJP('ひとりで')">ひとりで（一人で）</td><td>一個人、自己</td><td class="jp" onclick="speakJP('ひとりで びじゅつかんへ いきます')">ひとりで びじゅつかんへ いきます。</td><td>一個人去美術館。</td></tr>
+    <tr><td class="jp" onclick="speakJP('せんしゅう')">せんしゅう（先週）</td><td>上週、上星期</td><td class="jp" onclick="speakJP('せんしゅう きょうとへ いきました')">せんしゅう きょうとへ いきました。</td><td>上週去了京都。</td></tr>
+    <tr><td class="jp" onclick="speakJP('こんしゅう')">こんしゅう（今週）</td><td>本週、這星期</td><td class="jp" onclick="speakJP('こんしゅう とうきょうへ いきます')">こんしゅう とうきょうへ いきます。</td><td>這星期要去東京。</td></tr>
+    <tr><td class="jp" onclick="speakJP('らいしゅう')">らいしゅう（来週）</td><td>下週、下星期</td><td class="jp" onclick="speakJP('らいしゅう しんかんせんで なごやへ いきます')">らいしゅう しんかんせんで なごやへ いきます。</td><td>下星期搭新幹線去名古屋。</td></tr>
+    <tr><td class="jp" onclick="speakJP('せんげつ')">せんげつ（先月）</td><td>上個月</td><td class="jp" onclick="speakJP('せんげつ ちゅうごくへ いきました')">せんげつ ちゅうごくへ いきました。</td><td>上個月去了中國。</td></tr>
+    <tr><td class="jp" onclick="speakJP('こんげつ')">こんげつ（今月）</td><td>這個月</td><td class="jp" onclick="speakJP('こんげつ ははの たんじょうびです')">こんげつ ははの たんじょうびです。</td><td>這個月是我媽媽的生日。</td></tr>
+    <tr><td class="jp" onclick="speakJP('らいげつ')">らいげつ（来月）</td><td>下個月</td><td class="jp" onclick="speakJP('らいげつ にほんへ いきます')">らいげつ にほんへ いきます。</td><td>下個月去日本。</td></tr>
+    <tr><td class="jp" onclick="speakJP('きょねん')">きょねん（去年）</td><td>去年</td><td class="jp" onclick="speakJP('きょねん はたらきました')">きょねん はたらきました。</td><td>去年工作了。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ことし')">ことし（今年）</td><td>今年</td><td class="jp" onclick="speakJP('ことし にほんごを べんきょうします')">ことし にほんごを べんきょうします。</td><td>今年學日文。</td></tr>
+    <tr><td class="jp" onclick="speakJP('らいねん')">らいねん（来年）</td><td>明年</td><td class="jp" onclick="speakJP('らいねん にほんへ りょこうします')">らいねん にほんへ りょこうします。</td><td>明年去日本旅行。</td></tr>
+    <tr><td class="jp" onclick="speakJP('…ねん')">…ねん（…年）</td><td>…年</td><td class="jp" onclick="speakJP('２０２５ねんです')">２０２５ねんです。</td><td>是2025年。</td></tr>
+    <tr><td class="jp" onclick="speakJP('なんねん')">なんねん（何年）</td><td>幾年</td><td class="jp" onclick="speakJP('いまは なんねんですか')">いまは なんねんですか。</td><td>現在是幾年？</td></tr>
+    <tr><td class="jp" onclick="speakJP('…がつ')">…がつ（…月）</td><td>…月</td><td class="jp" onclick="speakJP('しちがつです')">しちがつです。</td><td>是七月。</td></tr>
+    <tr><td class="jp" onclick="speakJP('なんがつ')">なんがつ（何月）</td><td>幾月</td><td class="jp" onclick="speakJP('いまは なんがつですか')">いまは なんがつですか。</td><td>現在是幾月？</td></tr>
+
+    <!-- 日期（1～10、14、20、24；以及通用…日／何日） -->
+    <tr><td class="jp" onclick="speakJP('ついたち')">ついたち（1日）</td><td>1號</td><td class="jp" onclick="speakJP('きょうは ついたちです')">きょうは ついたちです。</td><td>今天是1號。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ふつか')">ふつか（2日）</td><td>2號、兩天</td><td class="jp" onclick="speakJP('しめきりは ふつかです')">しめきりは ふつかです。</td><td>截止日是2號。</td></tr>
+    <tr><td class="jp" onclick="speakJP('みっか')">みっか（3日）</td><td>3號、三天</td><td class="jp" onclick="speakJP('やすみは みっか つづきます')">やすみは みっか つづきます。</td><td>放假持續三天。</td></tr>
+    <tr><td class="jp" onclick="speakJP('よっか')">よっか（4日）</td><td>4號、四天</td><td class="jp" onclick="speakJP('よっかに しゅっぱつします')">よっかに しゅっぱつします。</td><td>四號出發。</td></tr>
+    <tr><td class="jp" onclick="speakJP('いつか')">いつか（5日）</td><td>5號、五天</td><td class="jp" onclick="speakJP('パーティーは いつかです')">パーティーは いつかです。</td><td>派對在五號。</td></tr>
+    <tr><td class="jp" onclick="speakJP('むいか')">むいか（6日）</td><td>6號、六天</td><td class="jp" onclick="speakJP('むいか まえに かえりました')">むいか まえに かえりました。</td><td>六天前回來了。</td></tr>
+    <tr><td class="jp" onclick="speakJP('なのか')">なのか（7日）</td><td>7號、七天</td><td class="jp" onclick="speakJP('なのかまで にゅうりょくしてください')">なのかまで にゅうりょくしてください。</td><td>請在七號前輸入。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ようか')">ようか（8日）</td><td>8號、八天</td><td class="jp" onclick="speakJP('りょこうは ようか です')">りょこうは ようか です。</td><td>旅行八天。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ここのか')">ここのか（9日）</td><td>9號、九天</td><td class="jp" onclick="speakJP('ここのかに しけんが あります')">ここのかに しけんが あります。</td><td>九號有考試。</td></tr>
+    <tr><td class="jp" onclick="speakJP('とおか')">とおか（10日）</td><td>10號、十天</td><td class="jp" onclick="speakJP('とおか いないに おくってください')">とおか いないに おくってください。</td><td>請在十天內寄出。</td></tr>
+    <tr><td class="jp" onclick="speakJP('じゅうよっか')">じゅうよっか（14日）</td><td>14號、十四天</td><td class="jp" onclick="speakJP('じゅうよっかに あいます')">じゅうよっかに あいます。</td><td>十四號見面。</td></tr>
+    <tr><td class="jp" onclick="speakJP('はつか')">はつか（20日）</td><td>20號、二十天</td><td class="jp" onclick="speakJP('はつかに きゅうけいします')">はつかに きゅうけいします。</td><td>二十號休息。</td></tr>
+    <tr><td class="jp" onclick="speakJP('にじゅうよっか')">にじゅうよっか（24日）</td><td>24號、二十四天</td><td class="jp" onclick="speakJP('にじゅうよっかは にちようびです')">にじゅうよっかは にちようびです。</td><td>24號是星期天。</td></tr>
+    <tr><td class="jp" onclick="speakJP('…にち')">…にち（…日）</td><td>…號、…天</td><td class="jp" onclick="speakJP('しめきりは じゅうごにちです')">しめきりは じゅうごにちです。</td><td>截止是15號。</td></tr>
+    <tr><td class="jp" onclick="speakJP('なんにち')">なんにち（何日）</td><td>幾號、幾天</td><td class="jp" onclick="speakJP('しけんは なんにちですか')">しけんは なんにちですか。</td><td>考試是幾號？</td></tr>
+    <tr><td class="jp" onclick="speakJP('いつ')">いつ</td><td>什麼時候</td><td class="jp" onclick="speakJP('たんじょうびは いつですか')">たんじょうびは いつですか。</td><td>你生日是什麼時候？</td></tr>
+    <tr><td class="jp" onclick="speakJP('たんじょうび')">たんじょうび（誕生日）</td><td>生日</td><td class="jp" onclick="speakJP('わたしの たんじょうびは しちがつです')">わたしの たんじょうびは しちがつです。</td><td>我的生日是七月。</td></tr>
+
+    <!-- 會話表現・鐵道 -->
+    <tr><td class="jp" onclick="speakJP('どうもありがとうございました')">[どうも]ありがとうございました。</td><td>非常感謝。</td><td class="jp" onclick="speakJP('どうもありがとうございました')">どうも ありがとうございました。</td><td>非常感謝。</td></tr>
+    <tr><td class="jp" onclick="speakJP('どういたしまして')">どういたしまして。</td><td>不客氣。</td><td class="jp" onclick="speakJP('どういたしまして')">どういたしまして。</td><td>不客氣。</td></tr>
+    <tr><td class="jp" onclick="speakJP('ばんせん')">…ばんせん（...番線）</td><td>第····號月臺</td><td class="jp" onclick="speakJP('つぎは さんばんせんです')">つぎは ３ばんせんです。</td><td>下一班在3號月台。</td></tr>
+    <tr><td class="jp" onclick="speakJP('つぎの')">つぎの（次の）</td><td>下一個、下一班</td><td class="jp" onclick="speakJP('つぎの でんしゃは なんじですか')">つぎの でんしゃは なんじですか。</td><td>下一班電車是幾點？</td></tr>
+    <tr><td class="jp" onclick="speakJP('ふつう')">ふつう（普通）</td><td>普通車</td><td class="jp" onclick="speakJP('ふつうで いきます')">ふつうで いきます。</td><td>搭普通車去。</td></tr>
+    <tr><td class="jp" onclick="speakJP('きゅうこう')">きゅうこう（急行）</td><td>快車</td><td class="jp" onclick="speakJP('きゅうこうで なごやへ いきます')">きゅうこうで なごやへ いきます。</td><td>搭快車去名古屋。</td></tr>
+    <tr><td class="jp" onclick="speakJP('とっきゅう')">とっきゅう（特急）</td><td>特快車</td><td class="jp" onclick="speakJP('とっきゅうは はやいです')">とっきゅうは はやいです。</td><td>特快車很快。</td></tr>
   </table>
 
   <div class="button-home">
     <a href="index.html">回首頁 🏠</a>
   </div>
 
- <script>
-  let voicesLoaded = false;
-
-  function speakJP(text) {
-    // 若語音尚未載入，延遲執行
-    if (!voicesLoaded) {
-      window.speechSynthesis.onvoiceschanged = () => {
-        voicesLoaded = true;
-        speakJP(text); // 再次嘗試朗讀
-      };
-      speechSynthesis.getVoices(); // 觸發載入
-      return;
-    }
-
-    // 清除前一段朗讀（防止重複或無聲）
-    speechSynthesis.cancel();
-
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'ja-JP';
-
-    const voices = speechSynthesis.getVoices();
-    const jpVoice = voices.find(voice => voice.lang === 'ja-JP');
-    if (jpVoice) {
-      utterance.voice = jpVoice;
-    }
-
-    speechSynthesis.speak(utterance);
-  }
-
-  // 頁面載入時初始化語音清單
-  document.addEventListener('DOMContentLoaded', () => {
-    const checkVoices = () => {
-      if (speechSynthesis.getVoices().length > 0) {
-        voicesLoaded = true;
-      } else {
-        setTimeout(checkVoices, 100);
+  <script>
+    let voicesLoaded = false;
+    function speakJP(text) {
+      if (!voicesLoaded) {
+        window.speechSynthesis.onvoiceschanged = () => { voicesLoaded = true; speakJP(text); };
+        speechSynthesis.getVoices(); return;
       }
-    };
-    checkVoices();
-  });
-</script>
-
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'ja-JP';
+      const v = speechSynthesis.getVoices().find(voice => voice.lang === 'ja-JP');
+      if (v) u.voice = v;
+      speechSynthesis.speak(u);
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      const check = () => {
+        if (speechSynthesis.getVoices().length > 0) voicesLoaded = true;
+        else setTimeout(check, 100);
+      };
+      check();
+    });
+  </script>
 </body>
 </html>
