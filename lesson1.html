@@ -11,12 +11,71 @@
       color: #333;
       padding: 2rem;
     }
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: .8rem;
+    }
     h1 {
-      text-align: center;
       color: #d26fa0;
       font-size: 2rem;
-      margin-bottom: 1rem;
+      margin: 0;
     }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem .8rem;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: #fff;
+      border: 1px solid #f0cde3;
+      border-radius: 999px;
+      padding: .35rem .7rem;
+      color: #c04583;
+      box-shadow: 0 0 8px #e3a5c7;
+      font-size: .9rem;
+      user-select: none;
+    }
+    .pill input[type="checkbox"] {
+      width: 46px; height: 24px; appearance: none; outline: none;
+      background: #f8d8e9; border-radius: 999px; position: relative; cursor: pointer;
+      transition: background .2s ease;
+    }
+    .pill input[type="checkbox"]::after {
+      content: "";
+      position: absolute; width: 20px; height: 20px; top: 2px; left: 2px;
+      background: #fff; border-radius: 50%; box-shadow: 0 1px 4px rgba(0,0,0,.2);
+      transition: left .2s ease;
+    }
+    .pill input[type="checkbox"]:checked { background: #ffaad4; }
+    .pill input[type="checkbox"]:checked::after { left: 24px; }
+
+    .search {
+      background: #fff; border: 1px solid #f0cde3; border-radius: 999px;
+      padding: .4rem .8rem; box-shadow: 0 0 8px #e3a5c7;
+      display: inline-flex; align-items: center; gap: .5rem;
+      color: #c04583;
+    }
+    .search input {
+      border: none; outline: none; background: transparent; min-width: 12rem;
+      color: #333;
+    }
+
+    .sliders {
+      display: inline-flex; gap: .8rem; align-items: center; flex-wrap: wrap;
+      background: #fff; border: 1px solid #f0cde3; border-radius: 999px;
+      padding: .4rem .8rem; box-shadow: 0 0 8px #e3a5c7; color: #c04583;
+    }
+    .sliders label { display: flex; align-items: center; gap: .4rem; }
+    .sliders input[type="range"] { width: 120px; }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -24,42 +83,54 @@
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 0 12px #e3a5c7;
+      margin-top: .6rem;
     }
     th, td {
       padding: 0.8rem;
       text-align: left;
       border-bottom: 1px solid #f0cde3;
+      vertical-align: top;
     }
     th {
       background-color: #f8d8e9;
       color: #c04583;
     }
-    td.jp:hover {
-      cursor: pointer;
-      background-color: #ffeaf5;
-    }
-    .button-home {
-      margin-top: 2rem;
-      display: block;
-      text-align: center;
-    }
+    td.jp:hover { cursor: pointer; background-color: #ffeaf5; }
+
+    /* 假名切換：加上 .hide-kana 隱藏所有 <rt> */
+    .hide-kana rt { display: none; }
+
+    .button-home { margin-top: 2rem; text-align: center; }
     .button-home a {
-      background-color: #ffaad4;
-      color: white;
-      padding: 0.8rem 1.5rem;
-      text-decoration: none;
-      border-radius: 20px;
-      font-weight: bold;
+      background-color: #ffaad4; color: white; padding: 0.8rem 1.5rem;
+      text-decoration: none; border-radius: 20px; font-weight: bold;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
-    .button-home a:hover {
-      background-color: #f98fc3;
-    }
+    .button-home a:hover { background-color: #f98fc3; }
+
+    ruby { ruby-position: under; }
   </style>
 </head>
 <body>
-  <h1>📘 第1課：單字＋例句朗讀練習</h1>
-  <table>
+  <header>
+    <h1>📘 第1課：單字＋例句朗讀練習</h1>
+    <div class="controls">
+      <label class="search" title="輸入以即時篩選（日/中皆可）">
+        🔎
+        <input id="searchInput" type="text" placeholder="搜尋單字/意思/例句…" />
+      </label>
+      <label class="pill" title="切換顯示/隱藏假名（ふりがな）">
+        假名
+        <input id="kanaToggle" type="checkbox" />
+      </label>
+      <div class="sliders" title="調整朗讀速度與音量">
+        <label>速度 <input id="rate" type="range" min="0.6" max="1.6" step="0.1" value="1" /></label>
+        <label>音量 <input id="volume" type="range" min="0" max="1" step="0.05" value="1" /></label>
+      </div>
+    </div>
+  </header>
+
+  <table id="vocabTable">
     <tr>
       <th>單字（日文）</th>
       <th>中文意思</th>
@@ -67,50 +138,334 @@
       <th>中文翻譯</th>
     </tr>
 
-    <!-- 🔊 以下是第1課單字＋例句 -->
-   <tr><td class="jp" onclick="speakJP('わたし')">わたし</td><td>我</td><td class="jp" onclick="speakJP('わたしは がくせいです')">わたしは がくせいです。</td><td>我是學生。</td></tr>
-<tr><td class="jp" onclick="speakJP('あなた')">あなた</td><td>你、您</td><td class="jp" onclick="speakJP('あなたは せんせいですか')">あなたは せんせいですか。</td><td>你是老師嗎？</td></tr>
-<tr><td class="jp" onclick="speakJP('あのひと')">あのひと（あの人）</td><td>他、她、那個人</td><td class="jp" onclick="speakJP('あのひとは いしゃです')">あのひとは いしゃです。</td><td>那個人是醫生。</td></tr>
-<tr><td class="jp" onclick="speakJP('あのかた')">あのかた（あの方）</td><td>「あの人」的禮貌說法</td><td class="jp" onclick="speakJP('あのかたは どなたですか')">あのかたは どなたですか。</td><td>那位是誰？</td></tr>
-<tr><td class="jp" onclick="speakJP('～さん')">～さん</td><td>～先生、～小姐</td><td class="jp" onclick="speakJP('たなかさんは せんせいです')">たなかさんは せんせいです。</td><td>田中先生是老師。</td></tr>
-<tr><td class="jp" onclick="speakJP('～ちゃん')">～ちゃん</td><td>（小孩名字的接尾詞）</td><td class="jp" onclick="speakJP('はなちゃんは こどもです')">はなちゃんは こどもです。</td><td>花花是小孩。</td></tr>
-<tr><td class="jp" onclick="speakJP('～じん')">～じん</td><td>～人（表示國籍）</td><td class="jp" onclick="speakJP('わたしは にほんじんです')">わたしは にほんじんです。</td><td>我是日本人。</td></tr>
-<tr><td class="jp" onclick="speakJP('せんせい')">せんせい（先生）</td><td>老師</td><td class="jp" onclick="speakJP('せんせいは にほんごのせんせいです')">せんせいは にほんごのせんせいです。</td><td>老師是日文老師。</td></tr>
-<tr><td class="jp" onclick="speakJP('きょうし')">きょうし（教師）</td><td>教師</td><td class="jp" onclick="speakJP('わたしは きょうしです')">わたしは きょうしです。</td><td>我是教師。</td></tr>
-<tr><td class="jp" onclick="speakJP('がくせい')">がくせい（学生）</td><td>學生</td><td class="jp" onclick="speakJP('わたしは がくせいです')">わたしは がくせいです。</td><td>我是學生。</td></tr>
-<tr><td class="jp" onclick="speakJP('かいしゃいん')">かいしゃいん（会社員）</td><td>公司職員</td><td class="jp" onclick="speakJP('たなかさんは かいしゃいんです')">たなかさんは かいしゃいんです。</td><td>田中先生是公司職員。</td></tr>
-<tr><td class="jp" onclick="speakJP('しゃいん')">しゃいん（社員）</td><td>某公司職員</td><td class="jp" onclick="speakJP('IMCのしゃいんです')">IMCのしゃいんです。</td><td>我是IMC的職員。</td></tr>
-<tr><td class="jp" onclick="speakJP('ぎんこういん')">ぎんこういん（銀行員）</td><td>銀行行員</td><td class="jp" onclick="speakJP('わたしは ぎんこういんです')">わたしは ぎんこういんです。</td><td>我是銀行員。</td></tr>
-<tr><td class="jp" onclick="speakJP('いしゃ')">いしゃ（医者）</td><td>醫生</td><td class="jp" onclick="speakJP('あのひとは いしゃです')">あのひとは いしゃです。</td><td>那個人是醫生。</td></tr>
-<tr><td class="jp" onclick="speakJP('けんきゅうしゃ')">けんきゅうしゃ（研究者）</td><td>研究人員</td><td class="jp" onclick="speakJP('わたしは けんきゅうしゃです')">わたしは けんきゅうしゃです。</td><td>我是研究人員。</td></tr>
-<tr><td class="jp" onclick="speakJP('だいがく')">だいがく（大学）</td><td>大學</td><td class="jp" onclick="speakJP('ABCだいがくの がくせいです')">ABCだいがくの がくせいです。</td><td>我是ABC大學的學生。</td></tr>
-<tr><td class="jp" onclick="speakJP('びょういん')">びょういん（病院）</td><td>醫院</td><td class="jp" onclick="speakJP('びょういんの いしゃです')">びょういんの いしゃです。</td><td>我是醫院的醫生。</td></tr>
-<tr><td class="jp" onclick="speakJP('だれ')">だれ</td><td>誰（哪位）</td><td class="jp" onclick="speakJP('あのひとは だれですか')">あのひとは だれですか。</td><td>那個人是誰？</td></tr>
-<tr><td class="jp" onclick="speakJP('どなた')">どなた</td><td>誰（禮貌說法）</td><td class="jp" onclick="speakJP('あのかたは どなたですか')">あのかたは どなたですか。</td><td>那位是誰？</td></tr>
-<tr><td class="jp" onclick="speakJP('～さい')">～さい</td><td>～歲</td><td class="jp" onclick="speakJP('わたしは にじゅっさいです')">わたしは にじゅっさいです。</td><td>我20歲。</td></tr>
-<tr><td class="jp" onclick="speakJP('なんさい')">なんさい</td><td>幾歲</td><td class="jp" onclick="speakJP('なんさいですか')">なんさいですか。</td><td>幾歲？</td></tr>
-<tr><td class="jp" onclick="speakJP('おいくつ')">おいくつ</td><td>幾歲（禮貌說法）</td><td class="jp" onclick="speakJP('おいくつですか')">おいくつですか。</td><td>您幾歲？</td></tr>
-<tr><td class="jp" onclick="speakJP('はい')">はい</td><td>是、對</td><td class="jp" onclick="speakJP('はい、そうです')">はい、そうです。</td><td>是的，沒錯。</td></tr>
-<tr><td class="jp" onclick="speakJP('いいえ')">いいえ</td><td>不是</td><td class="jp" onclick="speakJP('いいえ、ちがいます')">いいえ、ちがいます。</td><td>不，不是。</td></tr>
-<tr><td class="jp" onclick="speakJP('はじめまして')">はじめまして</td><td>初次見面</td><td class="jp" onclick="speakJP('はじめまして、たなかです')">はじめまして、たなかです。</td><td>初次見面，我是田中。</td></tr>
-<tr><td class="jp" onclick="speakJP('～からきました')">～からきました</td><td>從～來的</td><td class="jp" onclick="speakJP('にほんから きました')">にほんから きました。</td><td>我從日本來。</td></tr>
-<tr><td class="jp" onclick="speakJP('どうぞよろしくおねがいします')">どうぞよろしくおねがいします</td><td>請多關照</td><td class="jp" onclick="speakJP('どうぞよろしくおねがいします')">どうぞよろしくおねがいします。</td><td>請多指教。</td></tr>
-<tr><td class="jp" onclick="speakJP('しつれいですが')">しつれいですが</td><td>抱歉，請問</td><td class="jp" onclick="speakJP('しつれいですが、おなまえは？')">しつれいですが、おなまえは？</td><td>不好意思，請問您貴姓？</td></tr>
-<tr><td class="jp" onclick="speakJP('おなまえは')">おなまえは</td><td>您叫什麼名字？</td><td class="jp" onclick="speakJP('おなまえは？')">おなまえは？</td><td>您叫什麼名字？</td></tr>
-<tr><td class="jp" onclick="speakJP('こちらは～さんです')">こちらは～さんです</td><td>這位是～</td><td class="jp" onclick="speakJP('こちらは やまださんです')">こちらは やまださんです。</td><td>這位是山田先生。</td></tr>
-<tr><td class="jp" onclick="speakJP('アメリカ')">アメリカ</td><td>美國</td><td class="jp" onclick="speakJP('アメリカから きました')">アメリカから きました。</td><td>我從美國來。</td></tr>
-<tr><td class="jp" onclick="speakJP('イギリス')">イギリス</td><td>英國</td><td class="jp" onclick="speakJP('イギリスから きました')">イギリスから きました。</td><td>我從英國來。</td></tr>
-<tr><td class="jp" onclick="speakJP('インド')">インド</td><td>印度</td><td class="jp" onclick="speakJP('インドから きました')">インドから きました。</td><td>我從印度來。</td></tr>
-<tr><td class="jp" onclick="speakJP('インドネシア')">インドネシア</td><td>印尼</td><td class="jp" onclick="speakJP('インドネシアから きました')">インドネシアから きました。</td><td>我從印尼來。</td></tr>
-<tr><td class="jp" onclick="speakJP('かんこく')">かんこく（韓国）</td><td>韓國</td><td class="jp" onclick="speakJP('かんこくから きました')">かんこくから きました。</td><td>我從韓國來。</td></tr>
-<tr><td class="jp" onclick="speakJP('タイ')">タイ</td><td>泰國</td><td class="jp" onclick="speakJP('タイから きました')">タイから きました。</td><td>我從泰國來。</td></tr>
-<tr><td class="jp" onclick="speakJP('ちゅうごく')">ちゅうごく（中国）</td><td>中國</td><td class="jp" onclick="speakJP('ちゅうごくから きました')">ちゅうごくから きました。</td><td>我從中國來。</td></tr>
-<tr><td class="jp" onclick="speakJP('ドイツ')">ドイツ</td><td>德國</td><td class="jp" onclick="speakJP('ドイツから きました')">ドイツから きました。</td><td>我從德國來。</td></tr>
-<tr><td class="jp" onclick="speakJP('にほん')">にほん（日本）</td><td>日本</td><td class="jp" onclick="speakJP('にほんから きました')">にほんから きました。</td><td>我從日本來。</td></tr>
-<tr><td class="jp" onclick="speakJP('ブラジル')">ブラジル</td><td>巴西</td><td class="jp" onclick="speakJP('ブラジルから きました')">ブラジルから きました。</td><td>我從巴西來。</td></tr>
-</tr>
+    <!-- 單字＋例句（第一欄與例句皆盡量加上 ruby） -->
+    <tr>
+      <td class="jp" onclick="speakJP('わたし')"><ruby><rb>私</rb><rt>わたし</rt></ruby></td>
+      <td>我</td>
+      <td class="jp" onclick="speakJP('わたしは がくせいです。')">
+        わたしは <ruby><rb>学生</rb><rt>がくせい</rt></ruby>です。
+      </td>
+      <td>我是學生。</td>
+    </tr>
 
+    <tr>
+      <td class="jp" onclick="speakJP('あなた')">あなた</td>
+      <td>你、您</td>
+      <td class="jp" onclick="speakJP('あなたは せんせいですか。')">
+        あなたは <ruby><rb>先生</rb><rt>せんせい</rt></ruby>ですか。
+      </td>
+      <td>你是老師嗎？</td>
+    </tr>
 
+    <tr>
+      <td class="jp" onclick="speakJP('あのひと')"><ruby><rb>あの人</rb><rt>あのひと</rt></ruby></td>
+      <td>他、她、那個人</td>
+      <td class="jp" onclick="speakJP('あのひとは いしゃです。')">
+        あのひとは <ruby><rb>医者</rb><rt>いしゃ</rt></ruby>です。
+      </td>
+      <td>那個人是醫生。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('あのかた')"><ruby><rb>あの方</rb><rt>あのかた</rt></ruby></td>
+      <td>「あの人」的禮貌說法</td>
+      <td class="jp" onclick="speakJP('あのかたは どなたですか。')">
+        あのかたは どなたですか。
+      </td>
+      <td>那位是誰？</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('〜さん')">〜さん</td>
+      <td>～先生、～小姐</td>
+      <td class="jp" onclick="speakJP('たなかさんは せんせいです。')">
+        たなかさんは <ruby><rb>先生</rb><rt>せんせい</rt></ruby>です。
+      </td>
+      <td>田中先生是老師。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('〜ちゃん')">〜ちゃん</td>
+      <td>（小孩名字的接尾詞）</td>
+      <td class="jp" onclick="speakJP('はなちゃんは こどもです。')">はなちゃんは こどもです。</td>
+      <td>花花是小孩。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('〜じん')"><ruby><rb>〜人</rb><rt>〜じん</rt></ruby></td>
+      <td>～人（表示國籍）</td>
+      <td class="jp" onclick="speakJP('わたしは にほんじんです。')">
+        わたしは <ruby><rb>日本</rb><rt>にほん</rt></ruby>じんです。
+      </td>
+      <td>我是日本人。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('せんせい')"><ruby><rb>先生</rb><rt>せんせい</rt></ruby></td>
+      <td>老師</td>
+      <td class="jp" onclick="speakJP('せんせいは にほんごの せんせいです。')">
+        <ruby><rb>先生</rb><rt>せんせい</rt></ruby>は にほんごの <ruby><rb>先生</rb><rt>せんせい</rt></ruby>です。
+      </td>
+      <td>老師是日文老師。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('きょうし')"><ruby><rb>教師</rb><rt>きょうし</rt></ruby></td>
+      <td>教師</td>
+      <td class="jp" onclick="speakJP('わたしは きょうしです。')">
+        わたしは <ruby><rb>教師</rb><rt>きょうし</rt></ruby>です。
+      </td>
+      <td>我是教師。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('がくせい')"><ruby><rb>学生</rb><rt>がくせい</rt></ruby></td>
+      <td>學生</td>
+      <td class="jp" onclick="speakJP('わたしは がくせいです。')">
+        わたしは <ruby><rb>学生</rb><rt>がくせい</rt></ruby>です。
+      </td>
+      <td>我是學生。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('かいしゃいん')"><ruby><rb>会社員</rb><rt>かいしゃいん</rt></ruby></td>
+      <td>公司職員</td>
+      <td class="jp" onclick="speakJP('たなかさんは かいしゃいんです。')">
+        たなかさんは <ruby><rb>会社員</rb><rt>かいしゃいん</rt></ruby>です。
+      </td>
+      <td>田中先生是公司職員。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('しゃいん')"><ruby><rb>社員</rb><rt>しゃいん</rt></ruby></td>
+      <td>某公司職員</td>
+      <td class="jp" onclick="speakJP('IMCの しゃいんです。')">
+        IMCの <ruby><rb>社員</rb><rt>しゃいん</rt></ruby>です。
+      </td>
+      <td>我是 IMC 的職員。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('ぎんこういん')"><ruby><rb>銀行員</rb><rt>ぎんこういん</rt></ruby></td>
+      <td>銀行行員</td>
+      <td class="jp" onclick="speakJP('わたしは ぎんこういんです。')">
+        わたしは <ruby><rb>銀行員</rb><rt>ぎんこういん</rt></ruby>です。
+      </td>
+      <td>我是銀行員。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('いしゃ')"><ruby><rb>医者</rb><rt>いしゃ</rt></ruby></td>
+      <td>醫生</td>
+      <td class="jp" onclick="speakJP('あのひとは いしゃです。')">
+        あのひとは <ruby><rb>医者</rb><rt>いしゃ</rt></ruby>です。
+      </td>
+      <td>那個人是醫生。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('けんきゅうしゃ')"><ruby><rb>研究者</rb><rt>けんきゅうしゃ</rt></ruby></td>
+      <td>研究人員</td>
+      <td class="jp" onclick="speakJP('わたしは けんきゅうしゃです。')">
+        わたしは <ruby><rb>研究者</rb><rt>けんきゅうしゃ</rt></ruby>です。
+      </td>
+      <td>我是研究人員。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('だいがく')"><ruby><rb>大学</rb><rt>だいがく</rt></ruby></td>
+      <td>大學</td>
+      <td class="jp" onclick="speakJP('ABCだいがくの がくせいです。')">
+        ABC<ruby><rb>大学</rb><rt>だいがく</rt></ruby>の <ruby><rb>学生</rb><rt>がくせい</rt></ruby>です。
+      </td>
+      <td>我是 ABC 大學的學生。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('びょういん')"><ruby><rb>病院</rb><rt>びょういん</rt></ruby></td>
+      <td>醫院</td>
+      <td class="jp" onclick="speakJP('びょういんの いしゃです。')">
+        <ruby><rb>病院</rb><rt>びょういん</rt></ruby>の <ruby><rb>医者</rb><rt>いしゃ</rt></ruby>です。
+      </td>
+      <td>我是醫院的醫生。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('だれ')"><ruby><rb>誰</rb><rt>だれ</rt></ruby></td>
+      <td>誰（哪位）</td>
+      <td class="jp" onclick="speakJP('あのひとは だれですか。')">
+        あのひとは <ruby><rb>誰</rb><rt>だれ</rt></ruby>ですか。
+      </td>
+      <td>那個人是誰？</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('どなた')">どなた</td>
+      <td>誰（禮貌說法）</td>
+      <td class="jp" onclick="speakJP('あのかたは どなたですか。')">あのかたは どなたですか。</td>
+      <td>那位是誰？</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('〜さい')"><ruby><rb>〜歳</rb><rt>〜さい</rt></ruby></td>
+      <td>～歲</td>
+      <td class="jp" onclick="speakJP('わたしは にじゅっさいです。')">わたしは にじゅっさいです。</td>
+      <td>我 20 歲。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('なんさい')"><ruby><rb>何歳</rb><rt>なんさい</rt></ruby></td>
+      <td>幾歲</td>
+      <td class="jp" onclick="speakJP('なんさいですか。')">
+        <ruby><rb>何歳</rb><rt>なんさい</rt></ruby>ですか。
+      </td>
+      <td>幾歲？</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('おいくつ')">おいくつ</td>
+      <td>幾歲（禮貌說法）</td>
+      <td class="jp" onclick="speakJP('おいくつですか。')">おいくつですか。</td>
+      <td>您幾歲？</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('はい')">はい</td>
+      <td>是、對</td>
+      <td class="jp" onclick="speakJP('はい、そうです。')">はい、そうです。</td>
+      <td>是的，沒錯。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('いいえ')">いいえ</td>
+      <td>不是</td>
+      <td class="jp" onclick="speakJP('いいえ、ちがいます。')">いいえ、ちがいます。</td>
+      <td>不，不是。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('はじめまして')">はじめまして</td>
+      <td>初次見面</td>
+      <td class="jp" onclick="speakJP('はじめまして、たなかです。')">はじめまして、たなかです。</td>
+      <td>初次見面，我是田中。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('〜からきました')">〜からきました</td>
+      <td>從～來的</td>
+      <td class="jp" onclick="speakJP('にほんから きました。')">
+        <ruby><rb>日本</rb><rt>にほん</rt></ruby>から きました。
+      </td>
+      <td>我從日本來。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('どうぞよろしくおねがいします')">どうぞよろしくおねがいします</td>
+      <td>請多關照</td>
+      <td class="jp" onclick="speakJP('どうぞ よろしく おねがいします。')">どうぞ よろしく おねがいします。</td>
+      <td>請多指教。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('しつれいですが')"><ruby><rb>失礼</rb><rt>しつれい</rt></ruby>ですが</td>
+      <td>抱歉，請問</td>
+      <td class="jp" onclick="speakJP('しつれいですが、おなまえは？')">
+        <ruby><rb>失礼</rb><rt>しつれい</rt></ruby>ですが、 <ruby><rb>お名前</rb><rt>おなまえ</rt></ruby>は？
+      </td>
+      <td>不好意思，請問您貴姓？</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('おなまえは')"><ruby><rb>お名前</rb><rt>おなまえ</rt></ruby>は</td>
+      <td>您叫什麼名字？</td>
+      <td class="jp" onclick="speakJP('おなまえは？')"><ruby><rb>お名前</rb><rt>おなまえ</rt></ruby>は？</td>
+      <td>您叫什麼名字？</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('こちらは〜さんです')">こちらは〜さんです</td>
+      <td>這位是～</td>
+      <td class="jp" onclick="speakJP('こちらは やまださんです。')">
+        こちらは やまださんです。
+      </td>
+      <td>這位是山田先生。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('アメリカ')">アメリカ</td>
+      <td>美國</td>
+      <td class="jp" onclick="speakJP('アメリカから きました。')">アメリカから きました。</td>
+      <td>我從美國來。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('イギリス')">イギリス</td>
+      <td>英國</td>
+      <td class="jp" onclick="speakJP('イギリスから きました。')">イギリスから きました。</td>
+      <td>我從英國來。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('インド')">インド</td>
+      <td>印度</td>
+      <td class="jp" onclick="speakJP('インドから きました。')">インドから きました。</td>
+      <td>我從印度來。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('インドネシア')">インドネシア</td>
+      <td>印尼</td>
+      <td class="jp" onclick="speakJP('インドネシアから きました。')">インドネシアから きました。</td>
+      <td>我從印尼來。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('かんこく')"><ruby><rb>韓国</rb><rt>かんこく</rt></ruby></td>
+      <td>韓國</td>
+      <td class="jp" onclick="speakJP('かんこくから きました。')">
+        <ruby><rb>韓国</rb><rt>かんこく</rt></ruby>から きました。
+      </td>
+      <td>我從韓國來。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('タイ')">タイ</td>
+      <td>泰國</td>
+      <td class="jp" onclick="speakJP('タイから きました。')">タイから きました。</td>
+      <td>我從泰國來。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('ちゅうごく')"><ruby><rb>中国</rb><rt>ちゅうごく</rt></ruby></td>
+      <td>中國</td>
+      <td class="jp" onclick="speakJP('ちゅうごくから きました。')">
+        <ruby><rb>中国</rb><rt>ちゅうごく</rt></ruby>から きました。
+      </td>
+      <td>我從中國來。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('ドイツ')">ドイツ</td>
+      <td>德國</td>
+      <td class="jp" onclick="speakJP('ドイツから きました。')">ドイツから きました。</td>
+      <td>我從德國來。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('にほん')"><ruby><rb>日本</rb><rt>にほん</rt></ruby></td>
+      <td>日本</td>
+      <td class="jp" onclick="speakJP('にほんから きました。')">
+        <ruby><rb>日本</rb><rt>にほん</rt></ruby>から きました。
+      </td>
+      <td>我從日本來。</td>
+    </tr>
+
+    <tr>
+      <td class="jp" onclick="speakJP('ブラジル')">ブラジル</td>
+      <td>巴西</td>
+      <td class="jp" onclick="speakJP('ブラジルから きました。')">ブラジルから きました。</td>
+      <td>我從巴西來。</td>
+    </tr>
   </table>
 
   <div class="button-home">
@@ -120,46 +475,102 @@
   <script>
   let voicesLoaded = false;
 
+  // 偏好 keys
+  const KANA_KEY = 'showKana';
+  const RATE_KEY = 'ttsRate';
+  const VOL_KEY  = 'ttsVolume';
+
+  function getRate() {
+    const r = parseFloat(localStorage.getItem(RATE_KEY) ?? '1');
+    return isNaN(r) ? 1 : r;
+    }
+  function getVolume() {
+    const v = parseFloat(localStorage.getItem(VOL_KEY) ?? '1');
+    return isNaN(v) ? 1 : v;
+  }
+
   function speakJP(text) {
-    // 若語音尚未載入，延遲執行
     if (!voicesLoaded) {
       window.speechSynthesis.onvoiceschanged = () => {
         voicesLoaded = true;
-        speakJP(text); // 再次嘗試朗讀
+        speakJP(text);
       };
-      speechSynthesis.getVoices(); // 觸發載入
+      speechSynthesis.getVoices();
       return;
     }
-
-    // 清除前一段朗讀（防止重複或無聲）
+    // 停掉前一段
     speechSynthesis.cancel();
 
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'ja-JP';
+    utterance.rate = getRate();
+    utterance.volume = getVolume();
 
     const voices = speechSynthesis.getVoices();
-    const jpVoice = voices.find(voice => voice.lang === 'ja-JP');
-    if (jpVoice) {
-      utterance.voice = jpVoice;
-    }
+    const jpVoice = voices.find(v => v.lang === 'ja-JP');
+    if (jpVoice) utterance.voice = jpVoice;
 
     speechSynthesis.speak(utterance);
   }
 
-  // 頁面載入時初始化語音清單
+  function applyKanaPreference(show) {
+    document.body.classList.toggle('hide-kana', !show);
+    const toggle = document.getElementById('kanaToggle');
+    if (toggle) toggle.checked = show;
+  }
+
+  // 即時搜尋：依 row 文字（含日/中）篩選
+  function setupSearch() {
+    const input = document.getElementById('searchInput');
+    const table = document.getElementById('vocabTable');
+    const rows = Array.from(table.querySelectorAll('tr')).slice(1); // 排除 header
+    input.addEventListener('input', () => {
+      const q = input.value.trim().toLowerCase();
+      rows.forEach(tr => {
+        const hit = tr.textContent.toLowerCase().includes(q);
+        tr.style.display = hit ? '' : 'none';
+      });
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
+    // 檢查語音
     const checkVoices = () => {
       if (speechSynthesis.getVoices().length > 0) {
         voicesLoaded = true;
       } else {
-        setTimeout(checkVoices, 100);
+        setTimeout(checkVoices, 120);
       }
     };
     checkVoices();
+
+    // 假名顯示偏好
+    const savedKana = localStorage.getItem(KANA_KEY);
+    const showKana = savedKana === null ? true : savedKana === 'true';
+    applyKanaPreference(showKana);
+
+    // 綁定切換
+    const toggle = document.getElementById('kanaToggle');
+    toggle.addEventListener('change', (e) => {
+      const show = e.target.checked;
+      applyKanaPreference(show);
+      localStorage.setItem(KANA_KEY, String(show));
+    });
+
+    // 朗讀速度/音量
+    const rateEl = document.getElementById('rate');
+    const volEl  = document.getElementById('volume');
+    rateEl.value = String(getRate());
+    volEl.value  = String(getVolume());
+    rateEl.addEventListener('input', () => localStorage.setItem(RATE_KEY, rateEl.value));
+    volEl.addEventListener('input',  () => localStorage.setItem(VOL_KEY,  volEl.value));
+
+    // 搜尋
+    setupSearch();
   });
-</script>
-
-
+  </script>
+</body>
+</html>
 
 </body>
 </html>
