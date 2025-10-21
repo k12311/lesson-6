@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>第9課：單字朗讀練習</title>
+  <title>第10課：單字朗讀練習</title>
   <style>
     body { font-family:'Arial','Hiragino Kaku Gothic ProN','游ゴシック',sans-serif; background:#fff0f5; color:#333; padding:2rem; }
     header { display:grid; grid-template-columns: 1fr auto; gap:1rem; align-items:center; margin-bottom:.8rem; }
@@ -13,20 +13,16 @@
     .pill,.seg{ background:#fff; border:1px solid #f0cde3; box-shadow:0 0 8px #e3a5c7; color:#c04583; }
     .pill{ display:inline-flex; align-items:center; gap:.6rem; border-radius:999px; padding:.4rem .8rem; font-size:.95rem; user-select:none; }
 
-    /* 假名切換按鈕 */
     .pill input[type="checkbox"]{ width:46px; height:24px; appearance:none; outline:none; background:#f8d8e9; border-radius:999px; position:relative; cursor:pointer; transition:background .2s; }
     .pill input[type="checkbox"]::after{ content:""; position:absolute; width:20px; height:20px; top:2px; left:2px; background:#fff; border-radius:50%; box-shadow:0 1px 4px rgba(0,0,0,.2); transition:left .2s; }
     .pill input[type="checkbox"]:checked{ background:#ffaad4; }
     .pill input[type="checkbox"]:checked::after{ left:24px; }
 
-    /* 搜尋框 */
     .search input{ border:none; outline:none; background:transparent; min-width:12rem; color:#333; }
 
-    /* 朗讀滑桿 */
     .sliders label{ display:flex; align-items:center; gap:.4rem; }
     .sliders input[type="range"]{ width:120px; }
 
-    /* 單向練習 segmented */
     .seg{ display:inline-flex; border-radius:999px; overflow:hidden; }
     .seg button{ border:none; background:transparent; padding:.45rem .9rem; cursor:pointer; color:#c04583; font-weight:600; }
     .seg button + button{ border-left:1px solid #f0cde3; }
@@ -37,13 +33,11 @@
     th{ background:#f8d8e9; color:#c04583; }
     td.jp:hover{ cursor:pointer; background:#ffeaf5; }
 
-    /* 假名顯示切換（需要 ruby 才有作用） */
     .hide-kana rt{ display:none; }
     ruby{ ruby-position:under; }
 
-    /* 單向練習模式：隱藏中/日欄位 */
-    .mode-cn .cn-col{ display:none; } /* 日→中：先看日文 */
-    .mode-jp .jp-col{ display:none; } /* 中→日：先看中文 */
+    .mode-cn .cn-col{ display:none; }
+    .mode-jp .jp-col{ display:none; }
 
     .button-home{ margin-top:2rem; text-align:center; }
     .button-home a{ background:#ffaad4; color:#fff; padding:.8rem 1.5rem; text-decoration:none; border-radius:20px; font-weight:bold; box-shadow:0 4px 8px rgba(0,0,0,.1); }
@@ -52,7 +46,7 @@
 </head>
 <body>
   <header>
-    <h1>📘 第9課：單字＋例句朗讀練習</h1>
+    <h1>📘 第10課：單字＋例句朗讀練習</h1>
     <div class="controls">
       <label class="pill search" title="輸入以即時篩選（日/中皆可）">
         🔎 <input id="searchInput" type="text" placeholder="搜尋單字/意思/例句…">
@@ -83,58 +77,53 @@
       <th class="cn-col">中文翻譯</th>
     </tr>
 
-    <!-- 你的內容，已補上 jp-col / cn-col 以支援模式切換；ruby 保留可配合假名切換 -->
-    <tr><td class="jp jp-col" onclick="speakJP('わかります')"><ruby><rb>分</rb><rt>わ</rt></ruby>かります</td><td class="cn-col">懂、明白</td><td class="jp jp-col" onclick="speakJP('にほんごが わかります。')"><ruby><rb>日本語</rb><rt>にほんご</rt></ruby>が <ruby><rb>分</rb><rt>わ</rt></ruby>かります。</td><td class="cn-col">我懂日文。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('あります')">あります</td><td class="cn-col">有（非生物）</td><td class="jp jp-col" onclick="speakJP('じかんが あります。')"><ruby><rb>時間</rb><rt>じかん</rt></ruby>が あります。</td><td class="cn-col">我有時間。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('すき')"><ruby><rb>好</rb><rt>す</rt></ruby>き（<ruby><rb>好</rb><rt>す</rt></ruby>き[な]）</td><td class="cn-col">喜歡</td><td class="jp jp-col" onclick="speakJP('おちゃが すきです。')"><ruby><rb>お茶</rb><rt>おちゃ</rt></ruby>が <ruby><rb>好</rb><rt>す</rt></ruby>きです。</td><td class="cn-col">我喜歡茶。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('きらい')"><ruby><rb>嫌</rb><rt>きら</rt></ruby>い（<ruby><rb>嫌</rb><rt>きら</rt></ruby>い[な]）</td><td class="cn-col">不喜歡</td><td class="jp jp-col" onclick="speakJP('さかなが きらいです。')"><ruby><rb>魚</rb><rt>さかな</rt></ruby>が <ruby><rb>嫌</rb><rt>きら</rt></ruby>いです。</td><td class="cn-col">我不喜歡魚。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('じょうず')"><ruby><rb>上手</rb><rt>じょうず</rt></ruby>[な]</td><td class="cn-col">擅長</td><td class="jp jp-col" onclick="speakJP('かれは サッカーが じょうずです。')"><ruby><rb>彼</rb><rt>かれ</rt></ruby>は サッカーが <ruby><rb>上手</rb><rt>じょうず</rt></ruby>です。</td><td class="cn-col">他擅長踢足球。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('へた')"><ruby><rb>下手</rb><rt>へた</rt></ruby>[な]</td><td class="cn-col">不擅長</td><td class="jp jp-col" onclick="speakJP('ピアノが へたです。')">ピアノが <ruby><rb>下手</rb><rt>へた</rt></ruby>です。</td><td class="cn-col">我不太會彈鋼琴。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('つくえの うえに ほんが あります。')">あります</td><td class="cn-col">有（物品）</td><td class="jp jp-col" onclick="speakJP('つくえの うえに ほんが あります。')"><ruby><rb>机</rb><rt>つくえ</rt></ruby>の <ruby><rb>上</rb><rt>うえ</rt></ruby>に <ruby><rb>本</rb><rt>ほん</rt></ruby>が あります。</td><td class="cn-col">桌上有書。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('へやに ねこが います。')">います</td><td class="cn-col">有（人・動物）</td><td class="jp jp-col" onclick="speakJP('へやに ねこが います。')"><ruby><rb>部屋</rb><rt>へや</rt></ruby>に <ruby><rb>猫</rb><rt>ねこ</rt></ruby>が います。</td><td class="cn-col">房間裡有一隻貓。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('いろいろな くだものが あります。')">いろいろ[な]</td><td class="cn-col">各式各樣</td><td class="jp jp-col" onclick="speakJP('いろいろな くだものが あります。')">いろいろな <ruby><rb>果物</rb><rt>くだもの</rt></ruby>が あります。</td><td class="cn-col">有各種水果。</td></tr>
 
-    <tr><td class="jp jp-col" onclick="speakJP('のみもの')"><ruby><rb>飲</rb><rt>の</rt></ruby>み<ruby><rb>物</rb><rt>もの</rt></ruby></td><td class="cn-col">飲料</td><td class="jp jp-col" onclick="speakJP('つめたい のみものが すきです。')"><ruby><rb>冷</rb><rt>つめ</rt></ruby>たい <ruby><rb>飲物</rb><rt>のみもの</rt></ruby>が <ruby><rb>好</rb><rt>す</rt></ruby>きです。</td><td class="cn-col">我喜歡冰的飲料。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('りょうり')"><ruby><rb>料理</rb><rt>りょうり</rt></ruby></td><td class="cn-col">料理、菜餚</td><td class="jp jp-col" onclick="speakJP('にほんの りょうりは おいしいです。')"><ruby><rb>日本</rb><rt>にほん</rt></ruby>の <ruby><rb>料理</rb><rt>りょうり</rt></ruby>は <ruby><rb>美味</rb><rt>おい</rt></ruby>しいです。</td><td class="cn-col">日本料理很好吃。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('あそこに おとこの ひとが います。')"><ruby><rb>男</rb><rt>おとこ</rt></ruby>の<ruby><rb>人</rb><rt>ひと</rt></ruby></td><td class="cn-col">男人</td><td class="jp jp-col" onclick="speakJP('あそこに おとこの ひとが います。')">あそこに <ruby><rb>男</rb><rt>おとこ</rt></ruby>の<ruby><rb>人</rb><rt>ひと</rt></ruby>が います。</td><td class="cn-col">那邊有個男人。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('レストランに おんなの ひとが います。')"><ruby><rb>女</rb><rt>おんな</rt></ruby>の<ruby><rb>人</rb><rt>ひと</rt></ruby></td><td class="cn-col">女人</td><td class="jp jp-col" onclick="speakJP('レストランに おんなの ひとが います。')">レストランに <ruby><rb>女</rb><rt>おんな</rt></ruby>の<ruby><rb>人</rb><rt>ひと</rt></ruby>が います。</td><td class="cn-col">餐廳裡有位女士。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('こうえんに おとこの こが います。')"><ruby><rb>男</rb><rt>おとこ</rt></ruby>の<ruby><rb>子</rb><rt>こ</rt></ruby></td><td class="cn-col">男孩</td><td class="jp jp-col" onclick="speakJP('こうえんに おとこの こが います。')"><ruby><rb>公園</rb><rt>こうえん</rt></ruby>に <ruby><rb>男</rb><rt>おとこ</rt></ruby>の<ruby><rb>子</rb><rt>こ</rt></ruby>が います。</td><td class="cn-col">公園裡有個男孩。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('おんなのこは かわいいです。')"><ruby><rb>女</rb><rt>おんな</rt></ruby>の<ruby><rb>子</rb><rt>こ</rt></ruby></td><td class="cn-col">女孩</td><td class="jp jp-col" onclick="speakJP('おんなのこは かわいいです。')"><ruby><rb>女</rb><rt>おんな</rt></ruby>の<ruby><rb>子</rb><rt>こ</rt></ruby>は かわいいです。</td><td class="cn-col">女孩很可愛。</td></tr>
 
-    <tr><td class="jp jp-col" onclick="speakJP('スポーツ')">スポーツ</td><td class="cn-col">體育、運動</td><td class="jp jp-col" onclick="speakJP('どんな スポーツが すきですか。')">どんな スポーツが <ruby><rb>好</rb><rt>す</rt></ruby>きですか。</td><td class="cn-col">你喜歡什麼運動？</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('やきゅう')"><ruby><rb>野球</rb><rt>やきゅう</rt></ruby></td><td class="cn-col">棒球</td><td class="jp jp-col" onclick="speakJP('やきゅうを します。')"><ruby><rb>野球</rb><rt>やきゅう</rt></ruby>を します。</td><td class="cn-col">我打棒球。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('ダンス')">ダンス</td><td class="cn-col">舞、跳舞</td><td class="jp jp-col" onclick="speakJP('ダンスが すきです。')">ダンスが <ruby><rb>好</rb><rt>す</rt></ruby>きです。</td><td class="cn-col">我喜歡跳舞。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('りょこう')"><ruby><rb>旅行</rb><rt>りょこう</rt></ruby></td><td class="cn-col">旅行</td><td class="jp jp-col" onclick="speakJP('こんしゅう りょこうに いきます。')"><ruby><rb>今週</rb><rt>こんしゅう</rt></ruby> <ruby><rb>旅行</rb><rt>りょこう</rt></ruby>に <ruby><rb>行</rb><rt>い</rt></ruby>きます。</td><td class="cn-col">這週要去旅行。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('いえに いぬが います。')"><ruby><rb>犬</rb><rt>いぬ</rt></ruby></td><td class="cn-col">狗</td><td class="jp jp-col" onclick="speakJP('いえに いぬが います。')"><ruby><rb>家</rb><rt>いえ</rt></ruby>に <ruby><rb>犬</rb><rt>いぬ</rt></ruby>が います。</td><td class="cn-col">家裡有一隻狗。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('ねこが そとに います。')"><ruby><rb>猫</rb><rt>ねこ</rt></ruby></td><td class="cn-col">貓</td><td class="jp jp-col" onclick="speakJP('ねこが そとに います。')"><ruby><rb>猫</rb><rt>ねこ</rt></ruby>が <ruby><rb>外</rb><rt>そと</rt></ruby>に います。</td><td class="cn-col">貓在外面。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('どうぶつえんに ぱんだが います。')">パンダ</td><td class="cn-col">貓熊</td><td class="jp jp-col" onclick="speakJP('どうぶつえんに ぱんだが います。')"><ruby><rb>動物園</rb><rt>どうぶつえん</rt></ruby>に パンダが います。</td><td class="cn-col">動物園裡有熊貓。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('ぞうは おおきいです。')"><ruby><rb>象</rb><rt>ぞう</rt></ruby></td><td class="cn-col">大象</td><td class="jp jp-col" onclick="speakJP('ぞうは おおきいです。')"><ruby><rb>象</rb><rt>ぞう</rt></ruby>は おおきいです。</td><td class="cn-col">大象很大。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('にわに きが あります。')"><ruby><rb>木</rb><rt>き</rt></ruby></td><td class="cn-col">樹木</td><td class="jp jp-col" onclick="speakJP('にわに きが あります。')"><ruby><rb>庭</rb><rt>にわ</rt></ruby>に <ruby><rb>木</rb><rt>き</rt></ruby>が あります。</td><td class="cn-col">院子裡有樹。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('たくさんの ものが あります。')"><ruby><rb>物</rb><rt>もの</rt></ruby></td><td class="cn-col">東西</td><td class="jp jp-col" onclick="speakJP('たくさんの ものが あります。')">たくさんの <ruby><rb>物</rb><rt>もの</rt></ruby>が あります。</td><td class="cn-col">有很多東西。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('でんちが ありません。')"><ruby><rb>電池</rb><rt>でんち</rt></ruby></td><td class="cn-col">電池</td><td class="jp jp-col" onclick="speakJP('でんちが ありません。')"><ruby><rb>電池</rb><rt>でんち</rt></ruby>が ありません。</td><td class="cn-col">沒有電池了。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('はこの なかに なにが ありますか。')"><ruby><rb>箱</rb><rt>はこ</rt></ruby></td><td class="cn-col">箱子</td><td class="jp jp-col" onclick="speakJP('はこの なかに なにが ありますか。')"><ruby><rb>箱</rb><rt>はこ</rt></ruby>の <ruby><rb>中</rb><rt>なか</rt></ruby>に なにが ありますか。</td><td class="cn-col">箱子裡有什麼？</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('でんきを つける すいっちです。')">スイッチ</td><td class="cn-col">開關</td><td class="jp jp-col" onclick="speakJP('でんきを つける すいっちです。')"><ruby><rb>電気</rb><rt>でんき</rt></ruby>を つける スイッチです。</td><td class="cn-col">是開燈的開關。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('れいぞうこに たべものが あります。')"><ruby><rb>冷蔵庫</rb><rt>れいぞうこ</rt></ruby></td><td class="cn-col">冰箱</td><td class="jp jp-col" onclick="speakJP('れいぞうこに たべものが あります。')"><ruby><rb>冷蔵庫</rb><rt>れいぞうこ</rt></ruby>に <ruby><rb>食べ物</rb><rt>たべもの</rt></ruby>が あります。</td><td class="cn-col">冰箱裡有食物。</td></tr>
 
-    <tr><td class="jp jp-col" onclick="speakJP('おんがく')"><ruby><rb>音楽</rb><rt>おんがく</rt></ruby></td><td class="cn-col">音樂</td><td class="jp jp-col" onclick="speakJP('おんがくを ききます。')"><ruby><rb>音楽</rb><rt>おんがく</rt></ruby>を <ruby><rb>聴</rb><rt>き</rt></ruby>きます。</td><td class="cn-col">我聽音樂。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('うた')"><ruby><rb>歌</rb><rt>うた</rt></ruby></td><td class="cn-col">歌</td><td class="jp jp-col" onclick="speakJP('うたを うたいます。')"><ruby><rb>歌</rb><rt>うた</rt></ruby>を <ruby><rb>歌</rb><rt>うた</rt></ruby>います。</td><td class="cn-col">唱歌。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('クラシック')">クラシック</td><td class="cn-col">古典音樂</td><td class="jp jp-col" onclick="speakJP('クラシックが すきです。')">クラシックが <ruby><rb>好</rb><rt>す</rt></ruby>きです。</td><td class="cn-col">我喜歡古典音樂。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('ジャズ')">ジャズ</td><td class="cn-col">爵士樂</td><td class="jp jp-col" onclick="speakJP('ジャズを よく ききます。')">ジャズを <ruby><rb>良</rb><rt>よ</rt></ruby>く <ruby><rb>聴</rb><rt>き</rt></ruby>きます。</td><td class="cn-col">我常聽爵士樂。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('コンサート')">コンサート</td><td class="cn-col">音樂會、演唱會</td><td class="jp jp-col" onclick="speakJP('コンサートに いきます。')">コンサートに <ruby><rb>行</rb><rt>い</rt></ruby>きます。</td><td class="cn-col">我要去聽演唱會。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('カラオケ')">カラオケ</td><td class="cn-col">卡拉OK</td><td class="jp jp-col" onclick="speakJP('ともだちと カラオケに いきます。')"><ruby><rb>友達</rb><rt>ともだち</rt></ruby>と カラオケに <ruby><rb>行</rb><rt>い</rt></ruby>きます。</td><td class="cn-col">和朋友去唱KTV。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('かぶき')"><ruby><rb>歌舞伎</rb><rt>かぶき</rt></ruby></td><td class="cn-col">歌舞伎</td><td class="jp jp-col" onclick="speakJP('かぶきを みたことが あります。')"><ruby><rb>歌舞伎</rb><rt>かぶき</rt></ruby>を <ruby><rb>見</rb><rt>み</rt></ruby>たことが あります。</td><td class="cn-col">看過歌舞伎。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('え')"><ruby><rb>絵</rb><rt>え</rt></ruby></td><td class="cn-col">畫</td><td class="jp jp-col" onclick="speakJP('えを かくのが すきです。')"><ruby><rb>絵</rb><rt>え</rt></ruby>を <ruby><rb>描</rb><rt>か</rt></ruby>くのが <ruby><rb>好</rb><rt>す</rt></ruby>きです。</td><td class="cn-col">我喜歡畫畫。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('じ')"><ruby><rb>字</rb><rt>じ</rt></ruby></td><td class="cn-col">字</td><td class="jp jp-col" onclick="speakJP('じが きれいです。')"><ruby><rb>字</rb><rt>じ</rt></ruby>が きれいです。</td><td class="cn-col">字寫得很漂亮。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('かんじ')"><ruby><rb>漢字</rb><rt>かんじ</rt></ruby></td><td class="cn-col">漢字</td><td class="jp jp-col" onclick="speakJP('かんじを おぼえます。')"><ruby><rb>漢字</rb><rt>かんじ</rt></ruby>を <ruby><rb>覚</rb><rt>おぼ</rt></ruby>えます。</td><td class="cn-col">記漢字。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('ひらがな')"><ruby><rb>平仮名</rb><rt>ひらがな</rt></ruby></td><td class="cn-col">平假名</td><td class="jp jp-col" onclick="speakJP('ひらがなは かんたんです。')"><ruby><rb>平仮名</rb><rt>ひらがな</rt></ruby>は <ruby><rb>簡単</rb><rt>かんたん</rt></ruby>です。</td><td class="cn-col">平假名很簡單。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('かたかな')"><ruby><rb>片仮名</rb><rt>かたかな</rt></ruby></td><td class="cn-col">片假名</td><td class="jp jp-col" onclick="speakJP('かたかなは むずかしいです。')"><ruby><rb>片仮名</rb><rt>かたかな</rt></ruby>は <ruby><rb>難</rb><rt>むずか</rt></ruby>しいです。</td><td class="cn-col">片假名很難。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('ローマじ')">ローマ<ruby><rb>字</rb><rt>じ</rt></ruby></td><td class="cn-col">羅馬字母</td><td class="jp jp-col" onclick="speakJP('ローマじで かきます。')">ローマ<ruby><rb>字</rb><rt>じ</rt></ruby>で <ruby><rb>書</rb><rt>か</rt></ruby>きます。</td><td class="cn-col">用羅馬字寫。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('てーぶるの うえに ざっしが あります。')">テーブル</td><td class="cn-col">餐桌、桌子</td><td class="jp jp-col" onclick="speakJP('てーぶるの うえに ざっしが あります。')">テーブルの <ruby><rb>上</rb><rt>うえ</rt></ruby>に <ruby><rb>雑誌</rb><rt>ざっし</rt></ruby>が あります。</td><td class="cn-col">桌上有雜誌。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('べっどで ねます。')">ベッド</td><td class="cn-col">床</td><td class="jp jp-col" onclick="speakJP('べっどで ねます。')">ベッドで ねます。</td><td class="cn-col">在床上睡覺。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('たなの なかに ほんが あります。')"><ruby><rb>棚</rb><rt>たな</rt></ruby></td><td class="cn-col">架子</td><td class="jp jp-col" onclick="speakJP('たなの なかに ほんが あります。')"><ruby><rb>棚</rb><rt>たな</rt></ruby>の <ruby><rb>中</rb><rt>なか</rt></ruby>に <ruby><rb>本</rb><rt>ほん</rt></ruby>が あります。</td><td class="cn-col">架子裡有書。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('どあを しめてください。')">ドア</td><td class="cn-col">門</td><td class="jp jp-col" onclick="speakJP('どあを しめてください。')">ドアを <ruby><rb>閉</rb><rt>し</rt></ruby>めて ください。</td><td class="cn-col">請把門關上。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('まどを あけます。')"><ruby><rb>窓</rb><rt>まど</rt></ruby></td><td class="cn-col">窗戶</td><td class="jp jp-col" onclick="speakJP('まどを あけます。')"><ruby><rb>窓</rb><rt>まど</rt></ruby>を <ruby><rb>開</rb><rt>あ</rt></ruby>けます。</td><td class="cn-col">打開窗戶。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('ぽすとに てがみを いれます。')">ポスト</td><td class="cn-col">郵筒、信箱</td><td class="jp jp-col" onclick="speakJP('ぽすとに てがみを いれます。')">ポストに <ruby><rb>手紙</rb><rt>てがみ</rt></ruby>を いれます。</td><td class="cn-col">把信放進郵筒。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('あの びるは とても たかいです。')">ビル</td><td class="cn-col">大樓</td><td class="jp jp-col" onclick="speakJP('あの びるは とても たかいです。')">あの ビルは とても <ruby><rb>高</rb><rt>たか</rt></ruby>いです。</td><td class="cn-col">那棟大樓很高。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('こんびにに えーてぃーえむが あります。')">エーティーエム（ATM）</td><td class="cn-col">自動提款機</td><td class="jp jp-col" onclick="speakJP('こんびにに えーてぃーえむが あります。')">コンビニに ATMが あります。</td><td class="cn-col">超商裡有提款機。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('まいにち こんびにに いきます。')">コンビニ</td><td class="cn-col">便利商店</td><td class="jp jp-col" onclick="speakJP('まいにち こんびにに いきます。')"><ruby><rb>毎日</rb><rt>まいにち</rt></ruby> コンビニに <ruby><rb>行</rb><rt>い</rt></ruby>きます。</td><td class="cn-col">每天去便利商店。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('こうえんで さんぽします。')"><ruby><rb>公園</rb><rt>こうえん</rt></ruby></td><td class="cn-col">公園</td><td class="jp jp-col" onclick="speakJP('こうえんで さんぽします。')"><ruby><rb>公園</rb><rt>こうえん</rt></ruby>で <ruby><rb>散歩</rb><rt>さんぽ</rt></ruby>します。</td><td class="cn-col">在公園散步。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('きっさてんで こーひーを のみます。')"><ruby><rb>喫茶店</rb><rt>きっさてん</rt></ruby></td><td class="cn-col">咖啡店</td><td class="jp jp-col" onclick="speakJP('きっさてんで こーひーを のみます。')"><ruby><rb>喫茶店</rb><rt>きっさてん</rt></ruby>で コーヒーを のみます。</td><td class="cn-col">在咖啡店喝咖啡。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('ぱんやで ぱんを かいます。')">〜<ruby><rb>屋</rb><rt>や</rt></ruby></td><td class="cn-col">〜店</td><td class="jp jp-col" onclick="speakJP('ぱんやで ぱんを かいます。')">パン<ruby><rb>屋</rb><rt>や</rt></ruby>で パンを <ruby><rb>買</rb><rt>か</rt></ruby>います。</td><td class="cn-col">在麵包店買麵包。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('たくしー のりばは どこですか。')"><ruby><rb>乗</rb><rt>の</rt></ruby>り<ruby><rb>場</rb><rt>ば</rt></ruby></td><td class="cn-col">乘車處</td><td class="jp jp-col" onclick="speakJP('たくしー のりばは どこですか。')">タクシー<ruby><rb>乗り場</rb><rt>のりば</rt></ruby>は どこですか。</td><td class="cn-col">請問計程車搭乘處在哪？</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('かながわけんに すんでいます。')"><ruby><rb>県</rb><rt>けん</rt></ruby></td><td class="cn-col">縣</td><td class="jp jp-col" onclick="speakJP('かながわけんに すんでいます。')">かながわ<ruby><rb>県</rb><rt>けん</rt></ruby>に <ruby><rb>住</rb><rt>す</rt></ruby>んでいます。</td><td class="cn-col">住在神奈川縣。</td></tr>
 
-    <tr><td class="jp jp-col" onclick="speakJP('こまかい おかね')"><ruby><rb>細</rb><rt>こま</rt></ruby>かい <ruby><rb>お金</rb><rt>おかね</rt></ruby></td><td class="cn-col">零錢</td><td class="jp jp-col" onclick="speakJP('こまかい おかねが ありません。')"><ruby><rb>細</rb><rt>こま</rt></ruby>かい <ruby><rb>お金</rb><rt>おかね</rt></ruby>が ありません。</td><td class="cn-col">我沒有零錢。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('チケット')">チケット</td><td class="cn-col">票</td><td class="jp jp-col" onclick="speakJP('コンサートの チケットを かいました。')">コンサートの チケットを <ruby><rb>買</rb><rt>か</rt></ruby>いました。</td><td class="cn-col">買了演唱會的票。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('じかん')"><ruby><rb>時間</rb><rt>じかん</rt></ruby></td><td class="cn-col">時間</td><td class="jp jp-col" onclick="speakJP('じかんが ありません。')"><ruby><rb>時間</rb><rt>じかん</rt></ruby>が ありません。</td><td class="cn-col">沒有時間。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('ようじ')"><ruby><rb>用事</rb><rt>ようじ</rt></ruby></td><td class="cn-col">事情</td><td class="jp jp-col" onclick="speakJP('きょうは ようじが あります。')"><ruby><rb>今日</rb><rt>きょう</rt></ruby>は <ruby><rb>用事</rb><rt>ようじ</rt></ruby>が あります。</td><td class="cn-col">今天有事。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('やくそく')"><ruby><rb>約束</rb><rt>やくそく</rt></ruby></td><td class="cn-col">約定</td><td class="jp jp-col" onclick="speakJP('ともだちと やくそくが あります。')"><ruby><rb>友達</rb><rt>ともだち</rt></ruby>と <ruby><rb>約束</rb><rt>やくそく</rt></ruby>が あります。</td><td class="cn-col">和朋友有約。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('アルバイト')">アルバイト</td><td class="cn-col">打工</td><td class="jp jp-col" onclick="speakJP('コンビニで アルバイトを します。')">コンビニで アルバイトを します。</td><td class="cn-col">在便利店打工。</td></tr>
-
-    <tr><td class="jp jp-col" onclick="speakJP('ごしゅじん')"><ruby><rb>ご主人</rb><rt>ごしゅじん</rt></ruby></td><td class="cn-col">(別人的)丈夫</td><td class="jp jp-col" onclick="speakJP('たなかさんの ごしゅじんです。')">たなかさんの <ruby><rb>ご主人</rb><rt>ごしゅじん</rt></ruby>です。</td><td class="cn-col">田中先生的丈夫。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('おっと')"><ruby><rb>夫</rb><rt>おっと</rt></ruby>／<ruby><rb>主人</rb><rt>しゅじん</rt></ruby></td><td class="cn-col">(自己的)丈夫</td><td class="jp jp-col" onclick="speakJP('おっとは いしゃです。')"><ruby><rb>夫</rb><rt>おっと</rt></ruby>は <ruby><rb>医者</rb><rt>いしゃ</rt></ruby>です。</td><td class="cn-col">我丈夫是醫生。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('おくさん')"><ruby><rb>奥</rb><rt>おく</rt></ruby>さん</td><td class="cn-col">(別人的)妻子</td><td class="jp jp-col" onclick="speakJP('たなかさんの おくさんです。')">たなかさんの <ruby><rb>奥</rb><rt>おく</rt></ruby>さんです。</td><td class="cn-col">田中先生的妻子。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('つま')"><ruby><rb>妻</rb><rt>つま</rt></ruby>／<ruby><rb>家内</rb><rt>かない</rt></ruby></td><td class="cn-col">(自己的)妻子</td><td class="jp jp-col" onclick="speakJP('つまは かいしゃいんです。')"><ruby><rb>妻</rb><rt>つま</rt></ruby>は <ruby><rb>会社員</rb><rt>かいしゃいん</rt></ruby>です。</td><td class="cn-col">我太太是上班族。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('こども')"><ruby><rb>子</rb><rt>こ</rt></ruby>ども</td><td class="cn-col">小孩</td><td class="jp jp-col" onclick="speakJP('こどもが ふたり います。')"><ruby><rb>子供</rb><rt>こども</rt></ruby>が <ruby><rb>二人</rb><rt>ふたり</rt></ruby> います。</td><td class="cn-col">我有兩個孩子。</td></tr>
-
-    <tr><td class="jp jp-col" onclick="speakJP('よく')"><ruby><rb>良</rb><rt>よ</rt></ruby>く</td><td class="cn-col">很、非常／常常</td><td class="jp jp-col" onclick="speakJP('よく テレビを みます。')"><ruby><rb>良</rb><rt>よ</rt></ruby>く テレビを <ruby><rb>見</rb><rt>み</rt></ruby>ます。</td><td class="cn-col">我常看電視。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('だいたい')"><ruby><rb>大体</rb><rt>だいたい</rt></ruby></td><td class="cn-col">大致、大概</td><td class="jp jp-col" onclick="speakJP('だいたい わかりました。')"><ruby><rb>大体</rb><rt>だいたい</rt></ruby> <ruby><rb>分</rb><rt>わ</rt></ruby>かりました。</td><td class="cn-col">大致明白了。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('たくさん')"><ruby><rb>沢山</rb><rt>たくさん</rt></ruby></td><td class="cn-col">很多</td><td class="jp jp-col" onclick="speakJP('たくさん たべました。')"><ruby><rb>沢山</rb><rt>たくさん</rt></ruby> <ruby><rb>食</rb><rt>た</rt></ruby>べました。</td><td class="cn-col">吃了很多。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('すこし')"><ruby><rb>少</rb><rt>すこ</rt></ruby>し</td><td class="cn-col">一些、一點</td><td class="jp jp-col" onclick="speakJP('すこし できます。')"><ruby><rb>少</rb><rt>すこ</rt></ruby>し できます。</td><td class="cn-col">會一點點。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('ぜんぜん')"><ruby><rb>全然</rb><rt>ぜんぜん</rt></ruby></td><td class="cn-col">完全（接否定）</td><td class="jp jp-col" onclick="speakJP('ぜんぜん わかりません。')"><ruby><rb>全然</rb><rt>ぜんぜん</rt></ruby> <ruby><rb>分</rb><rt>わ</rt></ruby>かりません。</td><td class="cn-col">完全不懂。</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('はやく')"><ruby><rb>早</rb><rt>はや</rt></ruby>く／<ruby><rb>速</rb><rt>はや</rt></ruby>く</td><td class="cn-col">早、快</td><td class="jp jp-col" onclick="speakJP('もう すこし はやく はなしてください。')"><ruby><rb>もう少</rb><rt>もうすこ</rt></ruby>し <ruby><rb>速</rb><rt>はや</rt></ruby>く <ruby><rb>話</rb><rt>はな</rt></ruby>して ください。</td><td class="cn-col">請再講快一點。</td></tr>
-
-    <tr><td class="jp jp-col" onclick="speakJP('〜から')">〜から</td><td class="cn-col">因為〜</td><td class="jp jp-col" onclick="speakJP('あした やすみですから、どこか いきましょう。')"><ruby><rb>明日</rb><rt>あした</rt></ruby> <ruby><rb>休</rb><rt>やす</rt></ruby>みですから、どこか <ruby><rb>行</rb><rt>い</rt></ruby>きましょう。</td><td class="cn-col">因為明天放假，我們去某個地方吧！</td></tr>
-    <tr><td class="jp jp-col" onclick="speakJP('どうして')">どうして</td><td class="cn-col">為什麼</td><td class="jp jp-col" onclick="speakJP('どうして きのう こなかったんですか。')">どうして <ruby><rb>昨日</rb><rt>きのう</rt></ruby> <ruby><rb>来</rb><rt>こ</rt></ruby>なかったんですか。</td><td class="cn-col">你昨天為什麼沒來？</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('ほんは てーぶるの うえに あります。')"><ruby><rb>上</rb><rt>うえ</rt></ruby></td><td class="cn-col">上</td><td class="jp jp-col" onclick="speakJP('ほんは てーぶるの うえに あります。')"><ruby><rb>本</rb><rt>ほん</rt></ruby>は テーブルの <ruby><rb>上</rb><rt>うえ</rt></ruby>に あります。</td><td class="cn-col">書在桌上。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('つくえの したに いぬが います。')"><ruby><rb>下</rb><rt>した</rt></ruby></td><td class="cn-col">下</td><td class="jp jp-col" onclick="speakJP('つくえの したに いぬが います。')"><ruby><rb>机</rb><rt>つくえ</rt></ruby>の <ruby><rb>下</rb><rt>した</rt></ruby>に <ruby><rb>犬</rb><rt>いぬ</rt></ruby>が います。</td><td class="cn-col">桌子下有隻狗。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('すーぱーの まえに ばすていが あります。')"><ruby><rb>前</rb><rt>まえ</rt></ruby></td><td class="cn-col">前</td><td class="jp jp-col" onclick="speakJP('すーぱーの まえに ばすていが あります。')">スーパーの <ruby><rb>前</rb><rt>まえ</rt></ruby>に <ruby><rb>バス停</rb><rt>ばすてい</rt></ruby>が あります。</td><td class="cn-col">超市前有公車站。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('がっこうの うしろに こうえんが あります。')"><ruby><rb>後</rb><rt>うし</rt></ruby>ろ</td><td class="cn-col">後</td><td class="jp jp-col" onclick="speakJP('がっこうの うしろに こうえんが あります。')"><ruby><rb>学校</rb><rt>がっこう</rt></ruby>の <ruby><rb>後</rb><rt>うし</rt></ruby>ろに <ruby><rb>公園</rb><rt>こうえん</rt></ruby>が あります。</td><td class="cn-col">學校後面有公園。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('みぎに まがってください。')"><ruby><rb>右</rb><rt>みぎ</rt></ruby></td><td class="cn-col">右</td><td class="jp jp-col" onclick="speakJP('みぎに まがってください。')"><ruby><rb>右</rb><rt>みぎ</rt></ruby>に まがって ください。</td><td class="cn-col">請向右轉。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('ひだりに ぱんやが あります。')"><ruby><rb>左</rb><rt>ひだり</rt></ruby></td><td class="cn-col">左</td><td class="jp jp-col" onclick="speakJP('ひだりに ぱんやが あります。')"><ruby><rb>左</rb><rt>ひだり</rt></ruby>に パン<ruby><rb>屋</rb><rt>や</rt></ruby>が あります。</td><td class="cn-col">左邊有麵包店。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('はこの なかに ぼーるが あります。')"><ruby><rb>中</rb><rt>なか</rt></ruby></td><td class="cn-col">裡面、中間</td><td class="jp jp-col" onclick="speakJP('はこの なかに ぼーるが あります。')"><ruby><rb>箱</rb><rt>はこ</rt></ruby>の <ruby><rb>中</rb><rt>なか</rt></ruby>に ボールが あります。</td><td class="cn-col">箱子裡有球。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('そとに くるまが あります。')"><ruby><rb>外</rb><rt>そと</rt></ruby></td><td class="cn-col">外面</td><td class="jp jp-col" onclick="speakJP('そとに くるまが あります。')"><ruby><rb>外</rb><rt>そと</rt></ruby>に くるまが あります。</td><td class="cn-col">外面有車。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('わたしの となりに たなかさんが います。')"><ruby><rb>隣</rb><rt>となり</rt></ruby></td><td class="cn-col">旁邊</td><td class="jp jp-col" onclick="speakJP('わたしの となりに たなかさんが います。')">わたしの <ruby><rb>隣</rb><rt>となり</rt></ruby>に たなかさんが います。</td><td class="cn-col">田中先生坐我旁邊。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('えきの ちかくに こんびにが あります。')"><ruby><rb>近</rb><rt>ちか</rt></ruby>く</td><td class="cn-col">附近</td><td class="jp jp-col" onclick="speakJP('えきの ちかくに こんびにが あります。')"><ruby><rb>駅</rb><rt>えき</rt></ruby>の <ruby><rb>近</rb><rt>ちか</rt></ruby>くに コンビニが あります。</td><td class="cn-col">車站附近有便利商店。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('ぎんこうと ゆうびんきょくの あいだに みせが あります。')"><ruby><rb>間</rb><rt>あいだ</rt></ruby></td><td class="cn-col">之間</td><td class="jp jp-col" onclick="speakJP('ぎんこうと ゆうびんきょくの あいだに みせが あります。')"><ruby><rb>銀行</rb><rt>ぎんこう</rt></ruby>と <ruby><rb>郵便局</rb><rt>ゆうびんきょく</rt></ruby>の <ruby><rb>間</rb><rt>あいだ</rt></ruby>に みせが あります。</td><td class="cn-col">銀行和郵局之間有家店。</td></tr>
+    <tr><td class="jp jp-col" onclick="speakJP('つくえの うえに ほんや ざっし などが あります。')">〜や〜[<ruby><rb>等</rb><rt>など</rt></ruby>]</td><td class="cn-col">～和～等</td><td class="jp jp-col" onclick="speakJP('つくえの うえに ほんや ざっし などが あります。')"><ruby><rb>机</rb><rt>つくえ</rt></ruby>の <ruby><rb>上</rb><rt>うえ</rt></ruby>に <ruby><rb>本</rb><rt>ほん</rt></ruby>や <ruby><rb>雑誌</rb><rt>ざっし</rt></ruby>［<ruby><rb>等</rb><rt>など</rt></ruby>］が あります。</td><td class="cn-col">桌上有書、雜誌等等。</td></tr>
   </table>
 
   <div class="button-home">
@@ -143,12 +132,10 @@
 
   <script>
     let voicesLoaded = false;
-
-    // 偏好 key
     const KANA_KEY = 'showKana';
     const RATE_KEY = 'ttsRate';
     const VOL_KEY  = 'ttsVolume';
-    const MODE_KEY = 'practiceMode'; // 'both' | 'cn' | 'jp'
+    const MODE_KEY = 'practiceMode';
 
     function getRate(){ const r=parseFloat(localStorage.getItem(RATE_KEY) ?? '1'); return isNaN(r)?1:r; }
     function getVolume(){ const v=parseFloat(localStorage.getItem(VOL_KEY) ?? '1'); return isNaN(v)?1:v; }
@@ -168,13 +155,11 @@
       speechSynthesis.speak(u);
     }
 
-    // 假名切換
     function applyKanaPreference(show){
       document.body.classList.toggle('hide-kana', !show);
       const t=document.getElementById('kanaToggle'); if(t) t.checked = show;
     }
 
-    // 單向練習模式
     function applyPracticeMode(mode){
       document.body.classList.remove('mode-cn','mode-jp');
       if(mode==='cn') document.body.classList.add('mode-cn');
@@ -186,7 +171,6 @@
       });
     }
 
-    // 搜尋
     function setupSearch(){
       const input = document.getElementById('searchInput');
       const rows = Array.from(document.querySelectorAll('#vocabTable tr')).slice(1);
@@ -200,13 +184,11 @@
     }
 
     document.addEventListener('DOMContentLoaded', ()=>{
-      // 語音初始化
       const check = ()=>{
         if(speechSynthesis.getVoices().length>0){ voicesLoaded=true; }
         else setTimeout(check, 120);
       }; check();
 
-      // 假名開關
       const saved = localStorage.getItem(KANA_KEY);
       const initial = saved===null ? true : saved==='true';
       applyKanaPreference(initial);
@@ -216,7 +198,6 @@
         localStorage.setItem(KANA_KEY, String(show));
       });
 
-      // 朗讀偏好
       const rateEl = document.getElementById('rate');
       const volEl  = document.getElementById('volume');
       rateEl.value = String(getRate());
@@ -224,7 +205,6 @@
       rateEl.addEventListener('input', ()=>localStorage.setItem(RATE_KEY, rateEl.value));
       volEl.addEventListener('input',  ()=>localStorage.setItem(VOL_KEY,  volEl.value));
 
-      // 練習模式
       const savedMode = localStorage.getItem(MODE_KEY) ?? 'both';
       applyPracticeMode(savedMode);
       document.querySelectorAll('#modeSeg button').forEach(btn=>{
@@ -235,7 +215,6 @@
         });
       });
 
-      // 搜尋
       setupSearch();
     });
   </script>
