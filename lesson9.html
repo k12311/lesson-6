@@ -5,68 +5,83 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>第9課：單字朗讀練習</title>
   <style>
-    body {
-      font-family: 'Arial', 'Hiragino Kaku Gothic ProN', sans-serif;
-      background-color: #fff0f5;
-      color: #333;
-      padding: 2rem;
-    }
-    h1 {
-      text-align: center;
-      color: #d26fa0;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 0 12px #e3a5c7;
-    }
-    th, td {
-      padding: 0.8rem;
-      text-align: left;
-      border-bottom: 1px solid #f0cde3;
-    }
-    th {
-      background-color: #f8d8e9;
-      color: #c04583;
-    }
-    td.jp:hover {
-      cursor: pointer;
-      background-color: #ffeaf5;
-    }
-    .button-home {
-      margin-top: 2rem;
-      display: block;
-      text-align: center;
-    }
-    .button-home a {
-      background-color: #ffaad4;
-      color: white;
-      padding: 0.8rem 1.5rem;
-      text-decoration: none;
-      border-radius: 20px;
-      font-weight: bold;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    .button-home a:hover {
-      background-color: #f98fc3;
-    }
+    body { font-family:'Arial','Hiragino Kaku Gothic ProN','游ゴシック',sans-serif; background:#fff0f5; color:#333; padding:2rem; }
+    header { display:grid; grid-template-columns: 1fr auto; gap:1rem; align-items:center; margin-bottom:.8rem; }
+    h1 { color:#d26fa0; font-size:2rem; margin:0; }
+    .controls { display:flex; flex-wrap:wrap; gap:.6rem .8rem; align-items:center; justify-content:flex-end; }
+
+    .pill,.seg { background:#fff; border:1px solid #f0cde3; box-shadow:0 0 8px #e3a5c7; color:#c04583; }
+    .pill { display:inline-flex; align-items:center; gap:.5rem; border-radius:999px; padding:.35rem .7rem; font-size:.95rem; user-select:none; }
+    .pill input[type="checkbox"]{ width:46px; height:24px; appearance:none; outline:none; background:#f8d8e9; border-radius:999px; position:relative; cursor:pointer; transition:background .2s; }
+    .pill input[type="checkbox"]::after{ content:""; position:absolute; width:20px; height:20px; top:2px; left:2px; background:#fff; border-radius:50%; box-shadow:0 1px 4px rgba(0,0,0,.2); transition:left .2s; }
+    .pill input[type="checkbox"]:checked{ background:#ffaad4; }
+    .pill input[type="checkbox"]:checked::after{ left:24px; }
+
+    .search { border-radius:999px; padding:.4rem .8rem; display:inline-flex; align-items:center; gap:.5rem; }
+    .search input { border:none; outline:none; background:transparent; min-width:12rem; color:#333; }
+
+    .sliders { display:inline-flex; gap:.8rem; align-items:center; flex-wrap:wrap; border-radius:999px; padding:.4rem .8rem; font-size:.95rem; }
+    .sliders label{ display:flex; align-items:center; gap:.4rem; }
+    .sliders input[type="range"]{ width:120px; }
+
+    .seg{ display:inline-flex; border-radius:999px; overflow:hidden; }
+    .seg button{ border:none; background:transparent; padding:.45rem .9rem; cursor:pointer; color:#c04583; font-weight:600; }
+    .seg button+button{ border-left:1px solid #f0cde3; }
+    .seg button.active{ background:#ffaad4; color:#fff; }
+
+    table { width:100%; border-collapse:collapse; background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 0 12px #e3a5c7; }
+    th, td { padding:0.8rem; text-align:left; border-bottom:1px solid #f0cde3; vertical-align:top; }
+    th { background:#f8d8e9; color:#c04583; }
+    td.jp:hover { cursor:pointer; background:#ffeaf5; }
+
+    /* 假名顯示切換（需在字詞用 ruby 包 rt 才會受影響） */
+    .hide-kana rt { display:none; }
+    ruby{ ruby-position:under; }
+
+    /* 單向練習模式（隱藏整欄） */
+    /* 日→中（先看日文：隱中文第2/4欄） */
+    .mode-cn th:nth-child(2), .mode-cn td:nth-child(2),
+    .mode-cn th:nth-child(4), .mode-cn td:nth-child(4){ display:none; }
+    /* 中→日（先看中文：隱日文第1/3欄） */
+    .mode-jp th:nth-child(1), .mode-jp td:nth-child(1),
+    .mode-jp th:nth-child(3), .mode-jp td:nth-child(3){ display:none; }
+
+    .button-home { margin-top:2rem; text-align:center; }
+    .button-home a { background:#ffaad4; color:#fff; padding:.8rem 1.5rem; text-decoration:none; border-radius:20px; font-weight:bold; box-shadow:0 4px 8px rgba(0,0,0,.1); }
+    .button-home a:hover { background:#f98fc3; }
   </style>
 </head>
 <body>
-  <h1>📘 第9課：單字＋例句朗讀練習</h1>
-  <table>
+  <header>
+    <h1>📘 第9課：單字＋例句朗讀練習</h1>
+    <div class="controls">
+      <label class="search pill" title="輸入以即時篩選（日/中皆可）">
+        🔎 <input id="searchInput" type="text" placeholder="搜尋單字/意思/例句…"/>
+      </label>
+      <label class="pill" title="切換顯示/隱藏假名（ふりがな）">
+        假名 <input id="kanaToggle" type="checkbox"/>
+      </label>
+      <div class="sliders pill" title="調整朗讀速度與音量（會記住偏好）">
+        <label>速度 <input id="rate" type="range" min="0.6" max="1.6" step="0.1" value="1"/></label>
+        <label>音量 <input id="volume" type="range" min="0" max="1" step="0.05" value="1"/></label>
+      </div>
+      <div class="seg" id="modeSeg" role="tablist" aria-label="練習模式">
+        <button type="button" data-mode="both" class="active" aria-selected="true">顯示全部</button>
+        <button type="button" data-mode="cn" aria-selected="false">日→中（隱中文）</button>
+        <button type="button" data-mode="jp" aria-selected="false">中→日（隱日文）</button>
+      </div>
+    </div>
+  </header>
+
+  <table id="vocabTable">
     <tr>
       <th>單字（日文）</th>
       <th>中文意思</th>
       <th>例句（日文）</th>
       <th>中文翻譯</th>
     </tr>
-      <tr><td class="jp" onclick="speakJP('わかります')">わかります</td><td>懂、明白</td><td class="jp" onclick="speakJP('にほんごが わかります。')">にほんごが わかります。</td><td>我懂日文。</td></tr>
+    <!-- 你的第9課資料（原封保留） -->
+    <tr><td class="jp" onclick="speakJP('わかります')">わかります</td><td>懂、明白</td><td class="jp" onclick="speakJP('にほんごが わかります。')">にほんごが わかります。</td><td>我懂日文。</td></tr>
     <tr><td class="jp" onclick="speakJP('あります')">あります</td><td>有（非生物）</td><td class="jp" onclick="speakJP('じかんが あります。')">じかんが あります。</td><td>我有時間。</td></tr>
     <tr><td class="jp" onclick="speakJP('すき')">すき（好き[な]）</td><td>喜歡</td><td class="jp" onclick="speakJP('おちゃが すきです。')">おちゃが すきです。</td><td>我喜歡茶。</td></tr>
     <tr><td class="jp" onclick="speakJP('きらい')">きらい（嫌い[な]）</td><td>不喜歡</td><td class="jp" onclick="speakJP('さかなが きらいです。')">さかなが きらいです。</td><td>我不喜歡魚。</td></tr>
@@ -110,53 +125,122 @@
     <tr><td class="jp" onclick="speakJP('はやく')">はやく（早く／速く）</td><td>早、快</td><td class="jp" onclick="speakJP('もう すこし はやく はなしてください。')">もう すこし はやく はなしてください。</td><td>請再講快一點。</td></tr>
     <tr><td class="jp" onclick="speakJP('〜から')">〜から</td><td>因為〜</td><td class="jp" onclick="speakJP('あした やすみですから、どこか いきましょう。')">あした やすみですから、どこか いきましょう。</td><td>因為明天放假，我們去某個地方吧！</td></tr>
     <tr><td class="jp" onclick="speakJP('どうして')">どうして</td><td>為什麼</td><td class="jp" onclick="speakJP('どうして きのう こなかったんですか。')">どうして きのう こなかったんですか。</td><td>你昨天為什麼沒來？</td></tr>
+  </table>
 
-   </table>
   <div class="button-home">
     <a href="index.html">回首頁 🏠</a>
   </div>
- <script>
-  let voicesLoaded = false;
 
-  function speakJP(text) {
-    // 若語音尚未載入，延遲執行
-    if (!voicesLoaded) {
-      window.speechSynthesis.onvoiceschanged = () => {
-        voicesLoaded = true;
-        speakJP(text); // 再次嘗試朗讀
-      };
-      speechSynthesis.getVoices(); // 觸發載入
-      return;
-    }
+  <script>
+    let voicesLoaded = false;
 
-    // 清除前一段朗讀（防止重複或無聲）
-    speechSynthesis.cancel();
+    // 偏好 keys（與第1課一致，跨頁共用設定）
+    const KANA_KEY = 'showKana';
+    const RATE_KEY = 'ttsRate';
+    const VOL_KEY  = 'ttsVolume';
+    const MODE_KEY = 'practiceMode';
 
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'ja-JP';
+    function getRate(){ const r=parseFloat(localStorage.getItem(RATE_KEY) ?? '1'); return isNaN(r)?1:r; }
+    function getVolume(){ const v=parseFloat(localStorage.getItem(VOL_KEY) ?? '1'); return isNaN(v)?1:v; }
 
-    const voices = speechSynthesis.getVoices();
-    const jpVoice = voices.find(voice => voice.lang === 'ja-JP');
-    if (jpVoice) {
-      utterance.voice = jpVoice;
-    }
-
-    speechSynthesis.speak(utterance);
-  }
-
-  // 頁面載入時初始化語音清單
-  document.addEventListener('DOMContentLoaded', () => {
-    const checkVoices = () => {
-      if (speechSynthesis.getVoices().length > 0) {
-        voicesLoaded = true;
-      } else {
-        setTimeout(checkVoices, 100);
+    function speakJP(text){
+      if(!voicesLoaded){
+        window.speechSynthesis.onvoiceschanged = ()=>{ voicesLoaded = true; speakJP(text); };
+        speechSynthesis.getVoices(); return;
       }
-    };
-    checkVoices();
-  });
-</script>
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'ja-JP';
+      u.rate = getRate();
+      u.volume = getVolume();
+      const v = speechSynthesis.getVoices().find(v=>v.lang==='ja-JP');
+      if(v) u.voice = v;
+      speechSynthesis.speak(u);
+    }
 
+    function applyKanaPreference(show){
+      document.body.classList.toggle('hide-kana', !show);
+      const t=document.getElementById('kanaToggle'); if(t) t.checked = show;
+    }
+
+    function applyPracticeMode(mode){
+      document.body.classList.remove('mode-cn','mode-jp');
+      if(mode==='cn') document.body.classList.add('mode-cn');
+      if(mode==='jp') document.body.classList.add('mode-jp');
+      document.querySelectorAll('#modeSeg button').forEach(btn=>{
+        const active = btn.dataset.mode===mode;
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-selected', String(active));
+      });
+    }
+
+    function setupSearch(){
+      const input = document.getElementById('searchInput');
+      const rows = Array.from(document.querySelectorAll('#vocabTable tr')).slice(1);
+      input.addEventListener('input', ()=>{
+        const q = input.value.trim().toLowerCase();
+        rows.forEach(tr=>{
+          const hit = tr.textContent.toLowerCase().includes(q);
+          tr.style.display = hit ? '' : 'none';
+        });
+      });
+    }
+
+    // 代理點擊朗讀（所有 td.jp）
+    function delegateSpeak(){
+      document.addEventListener('click', e=>{
+        const cell = e.target.closest('td.jp');
+        if(!cell) return;
+        const txt = cell.innerText.replace(/[（）\[\]]/g,'').trim();
+        if(txt){
+          speechSynthesis.cancel();
+          setTimeout(()=>speakJP(txt), 80);
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+      // 語音初始化
+      const check = ()=>{
+        if(speechSynthesis.getVoices().length>0) voicesLoaded=true;
+        else setTimeout(check,120);
+      }; check();
+
+      // 假名偏好
+      const savedKana = localStorage.getItem(KANA_KEY);
+      const showKana = savedKana===null ? true : savedKana==='true';
+      applyKanaPreference(showKana);
+      document.getElementById('kanaToggle').addEventListener('change', e=>{
+        const show = e.target.checked;
+        applyKanaPreference(show);
+        localStorage.setItem(KANA_KEY, String(show));
+      });
+
+      // TTS 偏好
+      const rateEl = document.getElementById('rate');
+      const volEl  = document.getElementById('volume');
+      rateEl.value = String(getRate());
+      volEl.value  = String(getVolume());
+      rateEl.addEventListener('input', ()=> localStorage.setItem(RATE_KEY, rateEl.value));
+      volEl.addEventListener('input',  ()=> localStorage.setItem(VOL_KEY,  volEl.value));
+
+      // 練習模式
+      const savedMode = localStorage.getItem(MODE_KEY) ?? 'both';
+      applyPracticeMode(savedMode);
+      document.querySelectorAll('#modeSeg button').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          const mode = btn.dataset.mode;
+          applyPracticeMode(mode);
+          localStorage.setItem(MODE_KEY, mode);
+        });
+      });
+
+      // 搜尋與點擊朗讀
+      setupSearch();
+      delegateSpeak();
+    });
+  </script>
 </body>
 </html>
+
 
